@@ -13,9 +13,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin:
-            pattern: ^/admin
-            anonymous: true
-            http_basic: true
+           pattern: ^/admin
+           anonymous: true
+           http_basic: true
         main:
             anonymous: true
             form_login:
@@ -25,6 +25,6 @@ security:
             http_basic: ~
             provider: our_db_provider
 
-    access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER }
+#    access_control:
+#        - { path: ^/admin, roles: ROLE_ADMIN }
+#        - { path: ^/profile, roles: ROLE_USER }
