@@ -1,12 +1,12 @@
-{% if soiree is defined %}
-    <h3>Vue de la soirée : {{ soiree.nomSoiree }} id : {{ soiree.id }}</h3>
-    <img src="{{ soiree.banner }}" alt="{{ soiree.nomSoiree }}">
-    <p>Lieu  : {{ soiree.localisation }}</p>
-    <p>Elle aura lieu le {{ soiree.dateEvent|date('d-m-Y H:m') }}</p>
-    <p>Prévoir {{ soiree.prix }} euros pour l'entrée</p>
+{% if weekend is defined %}
+    <h3>Vue du weekend : {{ weekend.nom }} id : {{ weekend.id }}</h3>
+    <img src="{{ weekend.banner }}" alt="{{ weekend.nom }}">
+    <p>Lieu  : {{ weekend.localisation }}</p>
+    <p>Elle aura lieu du {{ weekend.dateDebut|date('d-m-Y H:m') }} au {{ weekend.dateFin|date('d-m-Y H:m') }}</p>
+    <p>Prévoir {{ weekend.prix }} euros pour le weekend</p>
     <h4>Plus d'info ci-dessous  :</h4>
-    <p>{{ soiree.details }}</p>
+    <p>{{ weekend.details }}</p>
 {% else %}
     Erreur :/ :(
 {% endif %}
-<a href="/soirees">Retour</a>
+<a href="/weekends">Retour</a>
