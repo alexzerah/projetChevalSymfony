@@ -27,9 +27,9 @@ class Exposition
     private $localisation;
 
     /**
-     * @ORM\Column(name="dateEvent", type="datetime")
+     * @ORM\Column(name="date", type="datetime")
      */
-    private $dateEvent;
+    private $date;
 
     /**
      * @ORM\Column(name="prix", type="decimal")
@@ -48,7 +48,7 @@ class Exposition
 
     public function __construct()
     {
-        $this->dateEvent = new \DateTime();
+        $this->date = new \DateTime();
     }
 
     /**
@@ -102,22 +102,6 @@ class Exposition
     /**
      * @return mixed
      */
-    public function getDateEvent()
-    {
-        return $this->dateEvent;
-    }
-
-    /**
-     * @param mixed $dateEvent
-     */
-    public function setDateEvent($dateEvent)
-    {
-        $this->dateEvent = $dateEvent;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPrix()
     {
         return $this->prix;
@@ -137,6 +121,22 @@ class Exposition
     public function getDetails()
     {
         return $this->details;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
     }
 
     /**
