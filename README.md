@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 What's next?
 
   * Run your application:
@@ -14,3 +15,7 @@ What's next?
        Run composer require server --dev for a better web server.
 
   * Read the documentation at https://symfony.com/doc
+=======
+# projetChevalSymfony
+Projet Symfony B3D IESA
+>>>>>>> bbb6718c2f4ae6dcba39239ed9a97ecbaa7d9500
