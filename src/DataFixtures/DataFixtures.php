@@ -20,7 +20,7 @@ class DataFixtures extends Fixture
             $soiree->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
             $soiree->setPrix($i);
             $soiree->setDetails("Description de " . $i);
-            $soiree->setBanner("http://via.placeholder.com/350x150&text=Soiree " . $i);
+            $soiree->setBanner("https://picsum.photos/200/300/?image=" . $i);
 
             $manager->persist($soiree);
 

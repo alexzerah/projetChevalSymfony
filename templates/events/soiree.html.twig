@@ -1,17 +1,12 @@
-<h1>Vue Soiree</h1>
 {% if soiree is defined %}
-    <table>
-            <tr {{ soiree.id }}>
-                <td>{{ soiree.id }}</td>
-                <td>{{ soiree.nomSoiree }}</td>
-                <td>{{ soiree.localisation }}</td>
-                <td>Le {{ soiree.dateEvent|date('d-m-Y H:m') }}</td>
-                <td>{{ soiree.prix }} €</td>
-                <td>{{ soiree.details }}</td>
-                <td><img src="{{ soiree.banner }}" alt="{{ soiree.nomSoiree }}"></td>
-            </tr>
-    </table>
+    <h3>Vue de la soirée : {{ soiree.nomSoiree }} id : {{ soiree.id }}</h3>
+    <img src="{{ soiree.banner }}" alt="{{ soiree.nomSoiree }}">
+    <p>Lieu  : {{ soiree.localisation }}</p>
+    <p>Elle aura lieu le {{ soiree.dateEvent|date('d-m-Y H:m') }}</p>
+    <p>Prévoir {{ soiree.prix }} euros pour l'entrée</p>
+    <h4>Plus d'info ci-dessous  :</h4>
+    <p>{{ soiree.details }}</p>
 {% else %}
-    Pas trouvé de Soiree :(
+    Erreur :/ :(
 {% endif %}
 <a href="/soirees">Retour</a>
