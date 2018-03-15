@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Post;
+use App\Entity\Soiree;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -11,30 +12,17 @@ class DataFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $user = new User();
-        $user->setUsername('admin');
-        $user->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
-        $user->setEmail('test@gmail.com');
-        $user->setIsActive('1');
-
-        $manager->persist($user);
-
-        $manager->flush();
-
-
-    }
-
-
-    public function user(ObjectManager $manager)
-    {
         $i = 1;
-        while($i < 100){
-            $post = new Post();
-            $post->setTitle("Title de l'article n°" . $i);
-            $post->setBody("Contenue de l'article n°" . $i);
-            $post->setisPublished($i%2);
+        while($i < 50){
 
-            $manager->persist($post);
+            $soiree = new Soiree();
+            $soiree->setNomSoiree("Nom Soiree" . $i);
+            $soiree->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
+            $soiree->setPrix($i);
+            $soiree->setDetails("Description de " . $i);
+            $soiree->setBanner("http://via.placeholder.com/350x150&text=Soiree " . $i);
+
+            $manager->persist($soiree);
 
             $i++;
         }
