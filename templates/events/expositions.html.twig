@@ -1,0 +1,16 @@
+<h1>Vue Liste Expositions</h1>
+{% if expositions is defined %}
+    <table>
+        {% for exposition in expositions %}
+            <tr {{ exposition.id }}>
+                <td>{{ exposition.id }}</td>
+                <td>{{ exposition.nom }}</td>
+                <td>Le {{ exposition.dateEvent|date('d-m-Y H:m') }}</td>
+                <td>{{ exposition.prix }} €</td>
+                <td><a href="/exposition/{{ exposition.nom}}">Voir plus</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    Pas trouvé de Soirees :(
+{% endif %}

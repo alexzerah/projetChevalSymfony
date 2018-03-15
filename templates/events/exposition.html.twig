@@ -1,0 +1,12 @@
+{% if exposition is defined %}
+    <h3>Vue de la soirée : {{ exposition.nom }} id : {{ exposition.id }}</h3>
+    <img src="{{ exposition.banner }}" alt="{{ exposition.nom }}">
+    <p>Lieu  : {{ exposition.localisation }}</p>
+    <p>Elle aura lieu le {{ exposition.dateEvent|date('d-m-Y H:m') }}</p>
+    <p>Prévoir {{ exposition.prix }} euros pour l'entrée</p>
+    <h4>Plus d'info ci-dessous  :</h4>
+    <p>{{ exposition.details }}</p>
+{% else %}
+    Erreur :/ :(
+{% endif %}
+<a href="/expositions">Retour</a>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ExpositionRepository;
 use App\Repository\SoireeRepository;
 use App\Repository\WeekendRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,4 +65,36 @@ class EventsController extends Controller
             'weekend' => $weekend
         ]);
     }
+
+     /**
+     * @Route("/expositions", name="events_exposiitons")
+     */
+    public function afficheListeExpositions(ExpositionRepository $expositionRepository)
+    {
+
+        $expositions = $expositionRepository->findAll();
+
+        return $this->render('events\expositions.html.twig', [
+            'controller_name' => 'EventsController',
+            'expositions' => $expositions
+        ]);
+    }
+
+    /**
+     * @Route("/exposition/{nom}", name="events_exposition")
+     */
+    public function afficheExposition(ExpositionRepository $expositionRepository, $nom)
+    {
+
+        $exposition = $expositionRepository->findOneBy(array('nom' => $nom));
+
+        return $this->render('events\exposition.html.twig', [
+            'controller_name' => 'EventsController',
+            'exposition' => $exposition
+        ]);
+    }
+
+
+
+
 }
