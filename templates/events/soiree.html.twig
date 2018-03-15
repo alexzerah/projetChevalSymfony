@@ -1,0 +1,17 @@
+<h1>Vue Soiree</h1>
+{% if soiree is defined %}
+    <table>
+            <tr {{ soiree.id }}>
+                <td>{{ soiree.id }}</td>
+                <td>{{ soiree.nomSoiree }}</td>
+                <td>{{ soiree.localisation }}</td>
+                <td>Le {{ soiree.dateEvent|date('d-m-Y H:m') }}</td>
+                <td>{{ soiree.prix }} €</td>
+                <td>{{ soiree.details }}</td>
+                <td><img src="{{ soiree.banner }}" alt="{{ soiree.nomSoiree }}"></td>
+            </tr>
+    </table>
+{% else %}
+    Pas trouvé de Soiree :(
+{% endif %}
+<a href="/soirees">Retour</a>
