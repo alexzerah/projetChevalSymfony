@@ -1,0 +1,12 @@
+{% if soiree is defined %}
+    <h3>Vue de la soirée : {{ soiree.nomSoiree }} id : {{ soiree.id }}</h3>
+    <img src="{{ soiree.banner }}" alt="{{ soiree.nomSoiree }}">
+    <p>Lieu  : {{ soiree.localisation }}</p>
+    <p>Elle aura lieu le {{ soiree.dateEvent|date('d-m-Y H:m') }}</p>
+    <p>Prévoir {{ soiree.prix }} euros pour l'entrée</p>
+    <h4>Plus d'info ci-dessous  :</h4>
+    <p>{{ soiree.details }}</p>
+{% else %}
+    Erreur :/ :(
+{% endif %}
+<a href="/soirees">Retour</a>

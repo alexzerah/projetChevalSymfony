@@ -9,9 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class EventsController extends Controller
 {
     /**
-     * @Route("/soiree", name="events_soiree")
+     * @Route("/soirees", name="events_soirees")
      */
-    public function soireeAction(SoireeRepository $soireeRepository)
+    public function afficheListeSoirees(SoireeRepository $soireeRepository)
     {
 
         $soirees = $soireeRepository->findAll();
@@ -19,6 +19,20 @@ class EventsController extends Controller
         return $this->render('events\soirees.html.twig', [
             'controller_name' => 'EventsController',
             'soirees' => $soirees
+        ]);
+    }
+
+    /**
+     * @Route("/soiree/{nom}", name="events_soiree")
+     */
+    public function afficheSoiree(SoireeRepository $soireeRepository, $nom)
+    {
+
+        $soiree = $soireeRepository->findOneBy(array('nomSoiree' => $nom));
+
+        return $this->render('events\soiree.html.twig', [
+            'controller_name' => 'EventsController',
+            'soiree' => $soiree
         ]);
     }
 }
