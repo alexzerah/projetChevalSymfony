@@ -23,7 +23,7 @@ class DataFixtures extends Fixture
             $exposition->setBanner("https://picsum.photos/200/300/?image=" . $i);
 
             $soiree = new Soiree();
-            $soiree->setNomSoiree("Nom Soirée " . $i);
+            $soiree->setNom("Nom Soirée " . $i);
             $soiree->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
             $soiree->setPrix($i);
             $soiree->setDetails("Description de " . $i);
