@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BlogController extends Controller
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/test", name="test")
      */
     public function index()
     {
@@ -92,11 +92,87 @@ class BlogController extends Controller
         ]);
     }
 
+
     /**
-     * @Route("profile", name="profile")
+     * @Route("/", name="home")
      */
-    public function profile(Request $request)
+    public function home()
     {
-        return $this->render('profile.html.twig');
+        return $this->render('site/home.html.twig', [
+        ]);
     }
+
+    /**
+     * @Route("/listeEvenements", name="listeEvent")
+     */
+    public function listeEvent()
+    {
+        return $this->render('site/listeEvent.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/event", name="event")
+     */
+    public function event()
+    {
+        return $this->render('site/event.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/equipe", name="equipe")
+     */
+    public function equipe()
+    {
+        return $this->render('site/equipe.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/connexion", name="connexion")
+     */
+    public function connexion()
+    {
+        return $this->render('site/connexion.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/profil", name="profil")
+     */
+    public function profil()
+    {
+        return $this->render('site/profil.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/mot-de-passe-oublie", name="forgotpassword")
+     */
+    public function forgotpassword()
+    {
+        return $this->render('site/forgotpassword.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/404", name="quatrecentquatre")
+     */
+    public function quatrecentquatre()
+    {
+        return $this->render('site/404.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/changer-mon-mot-de-passe", name="changepassword")
+     */
+    public function changepassword()
+    {
+        return $this->render('site/changepassword.html.twig', [
+        ]);
+    }
+
+
 }
