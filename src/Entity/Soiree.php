@@ -17,9 +17,9 @@ class Soiree
     private $id;
 
     /**
-     * @ORM\Column(name="nomSoiree", type="string")
+     * @ORM\Column(name="nom", type="string")
      */
-    private $nomSoiree;
+    private $nom;
 
     /**
      * @ORM\Column(name="localisation", type="string")
@@ -27,9 +27,9 @@ class Soiree
     private $localisation;
 
     /**
-     * @ORM\Column(name="dateEvent", type="datetime")
+     * @ORM\Column(name="date", type="datetime")
      */
-    private $dateEvent;
+    private $date;
 
     /**
      * @ORM\Column(name="prix", type="decimal")
@@ -48,7 +48,7 @@ class Soiree
 
     public function __construct()
     {
-        $this->dateEvent = new \DateTime();
+        $this->date = new \DateTime();
     }
 
     /**
@@ -70,17 +70,17 @@ class Soiree
     /**
      * @return mixed
      */
-    public function getNomSoiree()
+    public function getNom()
     {
-        return $this->nomSoiree;
+        return $this->nom;
     }
 
     /**
-     * @param mixed $nomSoiree
+     * @param mixed $nom
      */
-    public function setNomSoiree($nomSoiree)
+    public function setNom($nom)
     {
-        $this->nomSoiree = $nomSoiree;
+        $this->nom = $nom;
     }
 
     /**
@@ -102,17 +102,17 @@ class Soiree
     /**
      * @return mixed
      */
-    public function getDateEvent()
+    public function getDate()
     {
-        return $this->dateEvent;
+        return $this->date;
     }
 
     /**
-     * @param mixed $dateEvent
+     * @param mixed $date
      */
-    public function setDateEvent($dateEvent)
+    public function setDateEvent($date)
     {
-        $this->dateEvent = $dateEvent;
+        $this->date = $date;
     }
 
     /**

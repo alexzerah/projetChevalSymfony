@@ -30,7 +30,7 @@ class EventsController extends Controller
     public function afficheSoiree(SoireeRepository $soireeRepository, $nom)
     {
 
-        $soiree = $soireeRepository->findOneBy(array('nomSoiree' => $nom));
+        $soiree = $soireeRepository->findOneBy(array('nom' => $nom));
 
         return $this->render('events\soiree.html.twig', [
             'controller_name' => 'EventsController',
