@@ -25,6 +25,6 @@ security:
             provider: our_db_provider
 
     access_control:
-        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/profil, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
 #        - { path: ^/profile, roles: ROLE_USER }
