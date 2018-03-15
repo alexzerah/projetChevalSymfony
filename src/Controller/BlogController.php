@@ -91,4 +91,12 @@ class BlogController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("profile", name="profile")
+     */
+    public function profile(Request $request)
+    {
+        return $this->render('profile.html.twig');
+    }
 }
