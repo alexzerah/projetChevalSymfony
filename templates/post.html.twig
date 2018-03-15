@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My posts</title>
+{#
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+#}
+</head>
+<body>
+
+    <h1 style="text-align: center;font-family: sans-serif;padding-top: 50px;">List of posts!</h1>
+
+
+    <table class="table table-striped table-dark" style="width: 900px;margin: 0 auto;margin-top: 30px;">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Body</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr {{ post.id is odd ? 'style="background-color:grey;"' }}>
+                <th {% if not post.isPublished %}style="color:red;"{% endif %}>{{ post.id }}</th>
+                <td {% if not post.isPublished %}style="color:red;"{% endif %}>{{ post.title }}</td>
+                <td {% if not post.isPublished %}style="color:red;"{% endif %}>{{ post.body }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
