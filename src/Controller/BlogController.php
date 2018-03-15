@@ -13,18 +13,37 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller
 {
+
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="homepage")
      */
     public function index()
     {
-        return new Response('
-           <html>
-            <body>
-                <h1 style="text-align: center;font-family: sans-serif;padding-top: 150px;">Welcome to the HomePage!</h1>
-            </body>
-           </html>');
+        return $this->render('homepage.html.twig');
     }
+
+    /**
+     * @Route("profile", name="profile")
+     */
+    public function profile(Request $request)
+    {
+        return $this->render('profile.html.twig');
+    }
+
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin()
+    {
+        return $this->render('admin.html.twig');
+    }
+
+
+
+
+
+
 
     /**
      * @Route("/blog", name="blog")
@@ -92,11 +111,5 @@ class BlogController extends Controller
         ]);
     }
 
-    /**
-     * @Route("profile", name="profile")
-     */
-    public function profile(Request $request)
-    {
-        return $this->render('profile.html.twig');
-    }
+
 }
