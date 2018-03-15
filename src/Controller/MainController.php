@@ -93,6 +93,4 @@ class MainController extends Controller
         return $this->render('site/changepassword.html.twig', [
         ]);
     }
-
-
 }
