@@ -82,11 +82,18 @@ class DataFixtures extends Fixture
         $user = new User();
         $user->setUsername('admin');
         $user->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
-        $user->setEmail('test@gmail.com');
+        $user->setEmail('admin@gmail.com');
         $user->setRoles(array('ROLE_ADMIN'));
         $user->setIsActive('1');
-
         $manager->persist($user);
+
+        $userTwo = new User();
+        $userTwo->setUsername('user');
+        $userTwo->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userTwo->setEmail('user@gmail.com');
+        $userTwo->setRoles(array('ROLE_USER'));
+        $userTwo->setIsActive('1');
+        $manager->persist($userTwo);
 
 
         $manager->flush();
