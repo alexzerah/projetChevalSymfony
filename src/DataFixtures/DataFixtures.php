@@ -15,6 +15,7 @@ class DataFixtures extends Fixture
         $user->setUsername('admin');
         $user->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $user->setEmail('test@gmail.com');
+        $user->setRoles(array('ROLE_ADMIN'));
         $user->setIsActive('1');
 
         $manager->persist($user);
