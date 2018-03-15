@@ -13,37 +13,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller
 {
-
     /**
-     * @Route("/", name="homepage")
+     * @Route("/test", name="test")
      */
     public function index()
     {
-        return $this->render('homepage.html.twig');
+        return new Response('
+           <html>
+            <body>
+                <h1 style="text-align: center;font-family: sans-serif;padding-top: 150px;">Welcome to the HomePage!</h1>
+            </body>
+           </html>');
     }
-
-    /**
-     * @Route("profile", name="profile")
-     */
-    public function profile(Request $request)
-    {
-        return $this->render('profile.html.twig');
-    }
-
-
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function admin()
-    {
-        return $this->render('admin.html.twig');
-    }
-
-
-
-
-
-
 
     /**
      * @Route("/blog", name="blog")
@@ -108,6 +89,88 @@ class BlogController extends Controller
 
         return $this->render('new_blog_post.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function home()
+    {
+        return $this->render('site/home.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/listeEvenements", name="listeEvent")
+     */
+    public function listeEvent()
+    {
+        return $this->render('site/listeEvent.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/event", name="event")
+     */
+    public function event()
+    {
+        return $this->render('site/event.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/equipe", name="equipe")
+     */
+    public function equipe()
+    {
+        return $this->render('site/equipe.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/connexion", name="connexion")
+     */
+    public function connexion()
+    {
+        return $this->render('site/connexion.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/profil", name="profil")
+     */
+    public function profil()
+    {
+        return $this->render('site/profil.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/mot-de-passe-oublie", name="forgotpassword")
+     */
+    public function forgotpassword()
+    {
+        return $this->render('site/forgotpassword.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/404", name="quatrecentquatre")
+     */
+    public function quatrecentquatre()
+    {
+        return $this->render('site/404.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/changer-mon-mot-de-passe", name="changepassword")
+     */
+    public function changepassword()
+    {
+        return $this->render('site/changepassword.html.twig', [
         ]);
     }
 
