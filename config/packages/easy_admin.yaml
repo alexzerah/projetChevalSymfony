@@ -1,12 +1,18 @@
 easy_admin:
-   entities:
-       User:
-           class: App\Entity\User
-#           list:
-#               fields: ['username', 'email', 'is_active']
-       Exhibit:
-           class: App\Entity\Exhibit
-       Party:
-           class: App\Entity\Party
-       Weekend:
-           class: App\Entity\Weekend
+  entities:
+    User:
+      class: App\Entity\User
+    Exhibit:
+      class: App\Entity\Exhibit
+    Party:
+      class: App\Entity\Party
+      form:
+        fields:
+          - { property: name, type: 'text' }
+          - { property: location, type: 'text' }
+          - { property: date, type: 'datetime', type_options: { widget: 'single_text' } }
+          - { property: price }
+          - { property: details, type: 'textarea' }
+          - { property: bannerFile, type: 'vich_image' }
+    Weekend:
+      class: App\Entity\Weekend

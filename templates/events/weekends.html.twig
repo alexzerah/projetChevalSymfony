@@ -1,0 +1,16 @@
+<h1>Vue Liste Weekends</h1>
+{% if weekends is defined %}
+    <table>
+        {% for weekend in weekends %}
+            <tr {{ weekend.id }}>
+                <td>{{ weekend.id }}</td>
+                <td>{{ weekend.nom }}</td>
+                <td>Le weekend commencera le {{ weekend.dateDebut|date('d-m-Y H:m') }} et finira le {{ weekend.dateFin|date('d-m-Y H:m') }}</td>
+                <td>{{ weekend.prix }} €</td>
+                <td><a href="/weekend/{{ weekend.nom }}">Voir plus</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    Pas trouvé de weekend :(
+{% endif %}

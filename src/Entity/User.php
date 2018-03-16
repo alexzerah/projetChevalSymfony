@@ -87,11 +87,10 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $isActive;
 
-
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(name="is_admin", type="boolean")
      */
-    private $roles = array();
+    private $isAdmin;
 
     public function __construct()
     {
@@ -119,15 +118,19 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getRoles()
     {
-        $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
+        $roles = $this->isAdmin;
+        $roles = array('ROLE_USER');
 
-        return array_unique($roles);
+        if ($this->isAdmin == true) {
+            $roles = array('ROLE_ADMIN');
+        }
+
+        return $roles;
     }
 
     public function setRoles(array $roles)
     {
-        $this->roles = $roles;
+        $this->isAdmin = $roles;
 
         // allows for chaining
         return $this;
@@ -198,6 +201,26 @@ class User implements AdvancedUserInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisAdmin()
+    {
+        if ($this->isAdmin == true) {
+            return true;
+    } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param mixed $isAdmin
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
     }
 }
 

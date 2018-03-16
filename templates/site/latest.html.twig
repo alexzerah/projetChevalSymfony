@@ -9,19 +9,8 @@
                     <header class="major">
                         <h1>Prochains Events</h1>
                     </header>
-                    {% set e = [] %}
-                    {% for t in latestWeekends %}
-                        {% set e = e|merge([t]) %}
-                    {% endfor %}
-                    {% for t in latestParties %}
-                        {% set e = e|merge([t]) %}
-                    {% endfor %}
-                    {% for t in latestExhibits %}
-                        {% set e = e|merge([t]) %}
-                    {% endfor %}
-
-                    {% for event in e|sortbyfield('date') %}
-                    <p>{{ event.nom }} &mdash; Date : {{ event.date|date('d-m-Y') }}</p>
+                    {% for event in fetch %}
+                        {{ event.nom }}
                     {% endfor %}
                 </div>
             </section>
