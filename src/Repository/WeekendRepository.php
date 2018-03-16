@@ -19,16 +19,15 @@ class WeekendRepository extends ServiceEntityRepository
         parent::__construct($registry, Weekend::class);
     }
 
-    /*
-    public function findBySomething($value)
+
+    public function getLatestEvents()
     {
         return $this->createQueryBuilder('w')
-            ->where('w.something = :value')->setParameter('value', $value)
-            ->orderBy('w.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('w.date', 'ASC')
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 }

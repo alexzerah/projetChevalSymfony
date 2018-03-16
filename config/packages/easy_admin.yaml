@@ -2,6 +2,6 @@ easy_admin:
    entities:
        # List the entity class name you want to manage
        - App\Entity\User
-       - App\Entity\Exposition
-       - App\Entity\Soiree
+       - App\Entity\Exhibit
+       - App\Entity\Party
        - App\Entity\Weekend

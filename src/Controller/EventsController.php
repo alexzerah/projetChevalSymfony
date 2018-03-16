@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\ExpositionRepository;
-use App\Repository\SoireeRepository;
+use App\Repository\ExhibitRepository;
+use App\Repository\PartyRepository;
 use App\Repository\WeekendRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,7 +13,7 @@ class EventsController extends Controller
     /**
      * @Route("/soirees", name="events_soirees")
      */
-    public function afficheListeSoirees(SoireeRepository $soireeRepository)
+    public function afficheListeSoirees(PartyRepository $soireeRepository)
     {
 
         $soirees = $soireeRepository->findAll();
@@ -27,7 +27,7 @@ class EventsController extends Controller
     /**
      * @Route("/soiree/{nom}", name="events_soiree")
      */
-    public function afficheSoiree(SoireeRepository $soireeRepository, $nom)
+    public function afficheSoiree(PartyRepository $soireeRepository, $nom)
     {
 
         $soiree = $soireeRepository->findOneBy(array('nom' => $nom));
@@ -69,7 +69,7 @@ class EventsController extends Controller
      /**
      * @Route("/expositions", name="events_exposiitons")
      */
-    public function afficheListeExpositions(ExpositionRepository $expositionRepository)
+    public function afficheListeExpositions(ExhibitRepository $expositionRepository)
     {
 
         $expositions = $expositionRepository->findAll();
@@ -83,7 +83,7 @@ class EventsController extends Controller
     /**
      * @Route("/exposition/{nom}", name="events_exposition")
      */
-    public function afficheExposition(ExpositionRepository $expositionRepository, $nom)
+    public function afficheExposition(ExhibitRepository $expositionRepository, $nom)
     {
 
         $exposition = $expositionRepository->findOneBy(array('nom' => $nom));
