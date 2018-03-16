@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+    {% block content %}
+        <!-- Main -->
+        <div id="main" class="alt">
+            <!-- One -->
+            <section id="one">
+                <div class="inner">
+                    <header class="major">
+                        <h1>Latest</h1>
+                    </header>
+                    {% for event in latest %}
+                    <p>{{ event.id }}</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    {% endblock %}
