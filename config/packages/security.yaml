@@ -9,6 +9,7 @@ security:
         App\Entity\User:
             algorithm: bcrypt
     firewalls:
+#        csrf_protection: true
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -17,6 +18,8 @@ security:
             form_login:
                login_path: login
                check_path: login
+               csrf_parameter: _csrf_security_token
+               csrf_token_id: a_private_string
             logout:
                 path: /logout
                 target: /
