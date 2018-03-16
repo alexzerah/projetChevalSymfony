@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Exposition;
-use App\Entity\Post;
 use App\Entity\Soiree;
 use App\Entity\User;
 use App\Entity\Weekend;
@@ -28,28 +27,10 @@ class DataFixtures extends Fixture
 
     }
 
-
-    public function article(ObjectManager $manager)
-    {
-        $i = 1;
-        while($i < 100){
-            $post = new Post();
-            $post->setTitle("Title de l'article n°" . $i);
-            $post->setBody("Contenue de l'article n°" . $i);
-            $post->setisPublished($i%2);
-
-            $manager->persist($post);
-
-            $i++;
-        }
-        $manager->flush();
-    }
-
-
     public function load(ObjectManager $manager)
     {
         $i = 1;
-        while($i < 50){
+        while ($i <= 10) {
 
             $exposition = new Exposition();
             $exposition->setNom("Nom Expo " . $i);
