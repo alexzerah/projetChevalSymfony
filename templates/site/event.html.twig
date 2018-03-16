@@ -8,24 +8,30 @@
                 <div class="inner">
                     {% if party %}
                     <header class="major">
-                        <h1>{{ party.nom }} - {{ party.prix }}</h1>
+                        <h1>{{ party.nom }}</h1>
+                        <h2>{{ party.date|date('d-m-Y à H:m') }}</h2>
                     </header>
                     <span class="image main"><img src="{{ asset(party.banner) }}" alt="" /></span>
-                    <p>Contenu de l'event</p>
+                        <h3>Prix : {{ party.prix }}€ - Lieu : {{ party.localisation }}</h3>
+                    <h3>Contenu de l'event</h3>
                     <p>{{ party.details }}</p>
                     {% elseif weekend %}
                     <header class="major">
-                        <h1>{{ weekend.nom }} - {{ weekend.prix }}</h1>
+                        <h1>{{ weekend.nom }}</h1>
+                        <h2>Du {{ weekend.date|date('d-m-Y') }} au <p>{{ weekend.dateFin|date('d-m-Y') }}</p></p>
                     </header>
                     <span class="image main"><img src="{{ asset(weekend.banner) }}" alt="" /></span>
-                    <p>Contenu de l'event</p>
+                        <h3>Prix : {{ weekend.prix }}€ - Lieu : {{ weekend.localisation }}</h3>
+                    <h3>Contenu de l'event</h3>
                     <p>{{ weekend.details }}</p>
                     {% else %}
                     <header class="major">
-                        <h1>{{ exhibit.nom }} - {{ exhibit.prix }}</h1>
+                        <h1>{{ exhibit.nom }}</h1>
+                        <h2>Le {{ exhibit.date|date('d-m-Y à H:m') }}</h2>
                     </header>
                     <span class="image main"><img src="{{ asset(exhibit.banner) }}" alt="" /></span>
-                    <p>Contenu de l'event</p>
+                        <h3>Prix : {{ exhibit.prix }}€ - Lieu : {{ exhibit.localisation }}</h3>
+                    <h3>Contenu de l'event</h3>
                     <p>{{ exhibit.details }}</p>
                     {% endif %}
                 </div>
