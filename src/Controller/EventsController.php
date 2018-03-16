@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ExhibitRepository;
+use App\Repository\LatestRepository;
 use App\Repository\PartyRepository;
 use App\Repository\WeekendRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -94,7 +95,18 @@ class EventsController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/fetch/", name="events_fetch")
+     */
+    public function getLatestEvents(LatestRepository $latestRepository)
+    {
 
+        $latest = $latestRepository->getLatestEvents();
 
+        return $this->render('site\latest.html.twig', [
+            'controller_name' => 'EventsController',
+            'latest' => $latest
+        ]);
+    }
 
 }
