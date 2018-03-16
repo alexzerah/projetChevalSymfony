@@ -21,16 +21,4 @@ class LatestRepository extends ServiceEntityRepository
         parent::__construct($registry, Weekend::class);
     }
 
-
-    public function getLatestEvents()
-    {
-        return $this->createQueryBuilder('w')
-            ->orderBy('w.date', 'ASC')
-            ->where('w.date >= :today')
-            ->setParameter('today', new \DateTime())
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
 }
