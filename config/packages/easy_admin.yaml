@@ -1,7 +1,12 @@
 easy_admin:
    entities:
-       # List the entity class name you want to manage
-       - App\Entity\User
-       - App\Entity\Exhibit
-       - App\Entity\Party
-       - App\Entity\Weekend
+       User:
+           class: App\Entity\User
+#           list:
+#               fields: ['username', 'email', 'is_active']
+       Exhibit:
+           class: App\Entity\Exhibit
+       Party:
+           class: App\Entity\Party
+       Weekend:
+           class: App\Entity\Weekend
