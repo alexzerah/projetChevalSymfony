@@ -5,21 +5,21 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\WeekendRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SoireeRepository")
  */
-class Weekend
+class Soiree
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(name="nom", type="string")
+     * @ORM\Column(name="nomSoiree", type="string")
      */
-    private $nom;
+    private $nomSoiree;
 
     /**
      * @ORM\Column(name="localisation", type="string")
@@ -27,14 +27,9 @@ class Weekend
     private $localisation;
 
     /**
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="dateEvent", type="datetime")
      */
-    private $date;
-
-    /**
-     * @ORM\Column(name="dateFin", type="datetime")
-     */
-    private $dateFin;
+    private $dateEvent;
 
     /**
      * @ORM\Column(name="prix", type="decimal")
@@ -50,6 +45,11 @@ class Weekend
      * @ORM\Column(name="banner", type="string")
      */
     private $banner;
+
+    public function __construct()
+    {
+        $this->dateEvent = new \DateTime();
+    }
 
     /**
      * @return mixed
@@ -70,17 +70,17 @@ class Weekend
     /**
      * @return mixed
      */
-    public function getNom()
+    public function getNomSoiree()
     {
-        return $this->nom;
+        return $this->nomSoiree;
     }
 
     /**
-     * @param mixed $nom
+     * @param mixed $nomSoiree
      */
-    public function setNom($nom)
+    public function setNomSoiree($nomSoiree)
     {
-        $this->nom = $nom;
+        $this->nomSoiree = $nomSoiree;
     }
 
     /**
@@ -102,33 +102,17 @@ class Weekend
     /**
      * @return mixed
      */
-    public function getDate()
+    public function getDateEvent()
     {
-        return $this->date;
+        return $this->dateEvent;
     }
 
     /**
-     * @param mixed $date
+     * @param mixed $dateEvent
      */
-    public function setDate($date)
+    public function setDateEvent($dateEvent)
     {
-        $this->date = $date;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateFin()
-    {
-        return $this->dateFin;
-    }
-
-    /**
-     * @param mixed $dateFin
-     */
-    public function setDateFin($dateFin)
-    {
-        $this->dateFin = $dateFin;
+        $this->dateEvent = $dateEvent;
     }
 
     /**
@@ -177,12 +161,6 @@ class Weekend
     public function setBanner($banner)
     {
         $this->banner = $banner;
-    }
-
-    public function __construct()
-    {
-        $this->date = new \DateTime();
-        $this->dateFin = new \DateTime();
     }
 
 }
