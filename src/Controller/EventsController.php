@@ -98,14 +98,19 @@ class EventsController extends Controller
     /**
      * @Route("/fetch/", name="events_fetch")
      */
-    public function getLatestEvents(LatestRepository $latestRepository)
+    public function getLatestEvents(WeekendRepository $weekendRepository,
+                                      PartyRepository $partyRepository,
+                                        ExhibitRepository $exhibitRepository)
     {
-
-        $latest = $latestRepository->getLatestEvents();
+        $latestWeekends = $weekendRepository->getLatestWeekends();
+        $latestParties = $partyRepository->getLatestParties();
+        $latestExhibits = $exhibitRepository->getLatestExhibits();
 
         return $this->render('site\latest.html.twig', [
             'controller_name' => 'EventsController',
-            'latest' => $latest
+            'latestWeekends' => $latestWeekends,
+            'latestParties' => $latestParties,
+            'latestExhibits' => $latestExhibits
         ]);
     }
 
