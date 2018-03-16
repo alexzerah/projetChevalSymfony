@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ExhibitRepository;
+use App\Repository\LatestRepository;
 use App\Repository\PartyRepository;
 use App\Repository\WeekendRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,9 +20,9 @@ class EventsController extends Controller
                               $name)
     {
 
-        $party = $partyRepository->findOneBy(array('nom' => $name));
-        $weekend = $weekendRepository->findOneBy(array('nom' => $name));
-        $exhibit = $exhibitRepository->findOneBy(array('nom' => $name));
+        $party = $partyRepository->findOneBy(array('name' => $name));
+        $weekend = $weekendRepository->findOneBy(array('name' => $name));
+        $exhibit = $exhibitRepository->findOneBy(array('name' => $name));
 
         return $this->render('site\event.html.twig', [
             'controller_name' => 'EventsController',
@@ -66,6 +67,20 @@ class EventsController extends Controller
             'oldWeekends' => $oldWeekends,
             'oldParties' => $oldParties,
             'oldExhibits' => $oldExhibits
+        ]);
+    }
+
+    /**
+     * @Route("/fetch", name="events_caca")
+     */
+    public function fetchEvents(LatestRepository $latestRepository)
+    {
+
+        $fetch = $latestRepository->findTest();
+
+        return $this->render('site\latest.html.twig', [
+            'controller_name' => 'EventsController',
+            'fetch' => $fetch
         ]);
     }
 

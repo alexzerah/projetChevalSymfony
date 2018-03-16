@@ -33,23 +33,23 @@ class DataFixtures extends Fixture
         while ($i <= 10) {
 
             $exhibit = new Exhibit();
-            $exhibit->setNom("Nom Expo " . $i);
-            $exhibit->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
-            $exhibit->setPrix($i);
+            $exhibit->setName("Nom Expo " . $i);
+            $exhibit->setLocation($i . " Rue Machin 7500" . $i . " Paris");
+            $exhibit->setPrice($i);
             $exhibit->setDetails("Description de " . $i);
             $exhibit->setBanner("https://picsum.photos/200/300/?image=" . $i);
 
             $party = new Party();
-            $party->setNom("Nom Soirée " . $i);
-            $party->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
-            $party->setPrix($i);
+            $party->setName("Nom Soirée " . $i);
+            $party->setLocation($i . " Rue Machin 7500" . $i . " Paris");
+            $party->setPrice($i);
             $party->setDetails("Description de " . $i);
             $party->setBanner("https://picsum.photos/200/300/?image=" . $i);
 
             $weekend = new Weekend();
-            $weekend->setNom("Nom du weekend " . $i);
-            $weekend->setLocalisation($i . " Rue Truc 7500" . $i . " Paris");
-            $weekend->setPrix($i);
+            $weekend->setName("Nom du weekend " . $i);
+            $weekend->setLocation($i . " Rue Truc 7500" . $i . " Paris");
+            $weekend->setPrice($i);
             $weekend->setDetails("Description de " . $i);
             $weekend->setBanner("https://picsum.photos/200/300/?image=" . $i);
 

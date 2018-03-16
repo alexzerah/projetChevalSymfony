@@ -35,16 +35,16 @@
                 {% for event in e|sortbyfield('date') %}
                 <section>
                     <a href="generic.html" class="image">
-                        <img src="{{ asset(event.banner) }}" alt="{{ event.nom}}" data-position="center center" />
+                        <img src="{{ asset(event.banner) }}" alt="{{ event.name}}" data-position="center center" />
                     </a>
                     <div class="content">
                         <div class="inner">
                             <header class="major">
-                                <h3>{{ event.nom }}</h3>
+                                <h3>{{ event.name }}</h3>
                             </header>
-                            <p>{{ event.date|date('d-m-Y') }} à {{ event.date|date('H:m') }} / {{ event.localisation }}</p>
+                            <p>{{ event.date|date('d-m-Y à H:m') }} / {{ event.location }}</p>
                             <ul class="actions">
-                                <li><a href="event/{{ event.nom }}" class="button">Voir plus</a></li>
+                                <li><a href="event/{{ event.name }}" class="button">Voir plus</a></li>
                             </ul>
                         </div>
                     </div>

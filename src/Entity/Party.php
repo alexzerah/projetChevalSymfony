@@ -17,14 +17,14 @@ class Party
     private $id;
 
     /**
-     * @ORM\Column(name="nom", type="string")
+     * @ORM\Column(name="name", type="string")
      */
-    private $nom;
+    private $name;
 
     /**
-     * @ORM\Column(name="localisation", type="string")
+     * @ORM\Column(name="location", type="string")
      */
-    private $localisation;
+    private $location;
 
     /**
      * @ORM\Column(name="date", type="datetime")
@@ -32,9 +32,9 @@ class Party
     private $date;
 
     /**
-     * @ORM\Column(name="prix", type="decimal")
+     * @ORM\Column(name="price", type="decimal")
      */
-    private $prix;
+    private $price;
 
     /**
      * @ORM\Column(name="details", type="text")
@@ -70,33 +70,33 @@ class Party
     /**
      * @return mixed
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     /**
-     * @param mixed $nom
+     * @param mixed $name
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
     }
 
     /**
      * @return mixed
      */
-    public function getLocalisation()
+    public function getLocation()
     {
-        return $this->localisation;
+        return $this->location;
     }
 
     /**
-     * @param mixed $localisation
+     * @param mixed $location
      */
-    public function setLocalisation($localisation)
+    public function setLocation($location)
     {
-        $this->localisation = $localisation;
+        $this->location = $location;
     }
 
     /**
@@ -118,17 +118,17 @@ class Party
     /**
      * @return mixed
      */
-    public function getPrix()
+    public function getPrice()
     {
-        return $this->prix;
+        return $this->price;
     }
 
     /**
-     * @param mixed $prix
+     * @param mixed $price
      */
-    public function setPrix($prix)
+    public function setPrice($price)
     {
-        $this->prix = $prix;
+        $this->price = $price;
     }
 
     /**

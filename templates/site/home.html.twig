@@ -34,11 +34,11 @@
                 {% for event in e|sortbyfield('date') %}
                 <article>
                     <span class="image">
-                        <img src="{{ asset(event.banner) }}" alt="{{ event.nom }}" />
+                        <img src="{{ asset(event.banner) }}" alt="{{ event.name }}" />
                     </span>
                     <header class="major">
-                        <h3><a href="event/{{ event.nom }}" class="link">{{ event.nom }}</a></h3>
-                        <p>{{ event.date|date('d-m-Y') }} à {{ event.date|date('H:m') }} / {{ event.localisation }}</p>
+                        <h3><a href="event/{{ event.name }}" class="link">{{ event.name }}</a></h3>
+                        <p>{{ event.date|date('d-m-Y à H:m') }} / {{ event.location }}</p>
                     </header>
                 </article>
                 {% endfor %}
