@@ -50,6 +50,10 @@ class Party
      */
     private $banner;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * @Vich\UploadableField(mapping="images", fileNameProperty="banner")
@@ -66,9 +70,6 @@ class Party
     {
         return $this->bannerFile;
     }
-
-
-
 
     public function __construct()
     {

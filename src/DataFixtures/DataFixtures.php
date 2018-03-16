@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Exhibit;
 use App\Entity\Party;
 use App\Entity\User;
@@ -66,6 +67,9 @@ class DataFixtures extends Fixture
         $user->setEmail('admin@gmail.com');
         $user->setIsAdmin(true);
         $user->setIsActive('1');
+        $user->setParty('0');
+        $user->setWeekend('0');
+        $user->setExhibit('0');
         $manager->persist($user);
 
         $userTwo = new User();
@@ -74,8 +78,10 @@ class DataFixtures extends Fixture
         $userTwo->setEmail('user@gmail.com');
         $userTwo->setIsAdmin(false);
         $userTwo->setIsActive('1');
+        $userTwo->setParty('0');
+        $userTwo->setWeekend('0');
+        $userTwo->setExhibit('0');
         $manager->persist($userTwo);
-
 
         $manager->flush();
     }
