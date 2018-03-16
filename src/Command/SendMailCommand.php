@@ -1,6 +1,9 @@
 <?php
 namespace App\Command;
 
+use App\Entity\Exhibit;
+use App\Entity\Party;
+use App\Entity\Weekend;
 use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
 use App\Repository\WeekendRepository;
@@ -34,6 +37,37 @@ class SendMailCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        dump($this->weekendRepository->getNextDayEvents());die;
+        $weekends = $this->weekendRepository->getNextDayWeekends();
+        $exhibits = $this->exhibitRepository->getNextDayExhibits();
+        $parties = $this->partyRepository->getNextDayParties();
+
+        $events = array_merge($weekends, $exhibits, $parties);
+
+        foreach ($events as $event) {
+            // wait for users/events relations to get attendees
+
+            $mailBody = '';
+
+            if ($event instanceof Weekend) {
+                $mailBody = 'Weekend : ' . $event->getNom();
+                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
+                $mailBody .= ' / Date : de ' . $event->getDate()->format('d-m-Y H:i:s') . ' à ' . $event->getDateFin()->format('d-m-Y H:i:s');
+                $mailBody .= ' / Détails : ' . $event->getDetails();
+            } elseif ($event instanceof Exhibit) {
+                $mailBody = 'Weekend : ' . $event->getNom();
+                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
+                $mailBody .= ' / Date : le ' . $event->getDate()->format('d-m-Y H:i:s');
+                $mailBody .= ' / Détails : ' . $event->getDetails();
+            } elseif ($event instanceof Party) {
+                $mailBody = 'Weekend : ' . $event->getNom();
+                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
+                $mailBody .= ' / Date : ' . $event->getDate()->format('d-m-Y H:i:s');
+                $mailBody .= ' / Détails : ' . $event->getDetails();
+            } else {
+                $output->writeln('Event type is unknown');
+            }
+
+            dump($mailBody);die;
+        }
     }
 }

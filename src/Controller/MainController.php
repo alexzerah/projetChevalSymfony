@@ -41,15 +41,6 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/equipe", name="equipe")
-     */
-    public function equipe()
-    {
-        return $this->render('site/equipe.html.twig', [
-        ]);
-    }
-
-    /**
      * @Route("/connexion", name="connexion")
      */
     public function connexion()

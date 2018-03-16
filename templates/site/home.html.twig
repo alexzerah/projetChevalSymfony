@@ -20,60 +20,28 @@
         <div id="main">
             <!-- One -->
             <section id="one" class="tiles">
+                {% set e = [] %}
+                {% for t in latestWeekends %}
+                    {% set e = e|merge([t]) %}
+                {% endfor %}
+                {% for t in latestParties %}
+                    {% set e = e|merge([t]) %}
+                {% endfor %}
+                {% for t in latestExhibits %}
+                    {% set e = e|merge([t]) %}
+                {% endfor %}
+
+                {% for event in e|sortbyfield('date') %}
                 <article>
                     <span class="image">
-                        <img src="{{ asset('asset/images/pic01.jpg') }}" alt="" />
+                        <img src="{{ asset(event.banner) }}" alt="{{ event.nom }}" />
                     </span>
                     <header class="major">
-                        <h3><a href="landing.html" class="link">Nom de l'event</a></h3>
-                        <p>Date / Lieu</p>
+                        <h3><a href="event/{{ event.nom }}" class="link">{{ event.nom }}</a></h3>
+                        <p>{{ event.date|date('d-m-Y') }} à {{ event.date|date('H:m') }} / {{ event.localisation }}</p>
                     </header>
                 </article>
-                <article>
-                    <span class="image">
-                        <img src="images/pic02.jpg" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="landing.html" class="link">Nom de l'event</a></h3>
-                        <p>Date / Lieu</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/pic03.jpg" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="landing.html" class="link">Nom de l'event</a></h3>
-                        <p>Date / Lieu</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/pic04.jpg" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="landing.html" class="link">Nom de l'event</a></h3>
-                        <p>Date / Lieu</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/pic05.jpg" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="landing.html" class="link">Nom de l'event</a></h3>
-                        <p>Date / Lieu</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/pic06.jpg" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="landing.html" class="link">Nom de l'event</a></h3>
-                        <p>Date / Lieu</p>
-                    </header>
-                </article>
+                {% endfor %}
             </section>
             <!-- Two -->
             <section id="two">

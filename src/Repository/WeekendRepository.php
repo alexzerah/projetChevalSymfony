@@ -20,17 +20,29 @@ class WeekendRepository extends ServiceEntityRepository
     }
 
 
-    public function getLatestEvents()
+    public function getLatestWeekends()
     {
         return $this->createQueryBuilder('w')
-            ->orderBy('w.date', 'ASC')
-            ->setMaxResults(5)
+            ->orderBy('w.date')
+            ->where('w.date >= :today')
+            ->setParameter('today', new \DateTime())
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
-    public function getNextDayEvents()
+    public function getOldWeekends()
+    {
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.date')
+            ->where('w.date < :today')
+            ->setParameter('today', new \DateTime())
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getNextDayWeekends()
     {
         $nextDayStart =  new \DateTime();
         $nextDayStart->modify('+ 1 day')->setTime(0,0,1);

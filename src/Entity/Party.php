@@ -110,7 +110,7 @@ class Party
     /**
      * @param mixed $date
      */
-    public function setDateEvent($date)
+    public function setDate($date)
     {
         $this->date = $date;
     }

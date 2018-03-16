@@ -22,10 +22,21 @@
                     <li><a href="{{ path('home') }}">Accueil</a></li>
                     <li><a href="{{ path('listeEvent') }}">anciens événements</a></li>
                     <li><a href="{{ path('equipe') }}">Présentation du BDE</a></li>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('profil') }}">Mon profil</a></li>
+                    {% endif %}
                 </ul>
+
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
                 <ul class="actions vertical">
-                    <li><a href="{{ path('login') }}" class="button special fit">Connection</a></li>
+                    <li><a href="/logout" class="button special fit">Logout</a></li>
                 </ul>
+                {% else %}
+                    <ul class="actions vertical">
+                        <li><a href="{{ path('login') }}" class="button special fit">Connection</a></li>
+                    </ul>
+                {% endif %}
+
             </nav>
             <!-- Contenu -->
             {% block content %}{% endblock %}

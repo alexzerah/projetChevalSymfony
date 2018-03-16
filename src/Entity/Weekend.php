@@ -100,7 +100,7 @@ class Weekend
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -108,7 +108,7 @@ class Weekend
     }
 
     /**
-     * @param mixed $date
+     * @param \DateTime $date
      */
     public function setDate($date)
     {
@@ -116,7 +116,7 @@ class Weekend
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getDateFin()
     {
@@ -124,7 +124,7 @@ class Weekend
     }
 
     /**
-     * @param mixed $dateFin
+     * @param \DateTime $dateFin
      */
     public function setDateFin($dateFin)
     {

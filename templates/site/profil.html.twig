@@ -7,6 +7,11 @@
             <section id="one">
                 <div class="inner">
                     <header class="major">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <ul class="actions vertical">
+                                <li><a href="/admin" class="button special fit">Espace d'administration</a></li>
+                            </ul>
+                        {% endif %}
                         <h1>Mon profil</h1>
                     </header>
                     <form method="post" action="#">

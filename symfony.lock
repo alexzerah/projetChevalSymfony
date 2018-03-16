@@ -134,6 +134,9 @@
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
     },
+    "snilius/twig-sort-by-field": {
+        "version": "v0.1.5"
+    },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
         "recipe": {
