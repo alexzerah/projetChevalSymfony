@@ -50,4 +50,23 @@ class EventsController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/listeEvenements", name="events_oldEvents")
+     */
+    public function getOldEvents(WeekendRepository $weekendRepository,
+                                    PartyRepository $partyRepository,
+                                    ExhibitRepository $exhibitRepository)
+    {
+        $oldWeekends = $weekendRepository->getOldWeekends();
+        $oldParties = $partyRepository->getOldParties();
+        $oldExhibits = $exhibitRepository->getOldExhibits();
+
+        return $this->render('site\listeEvent.html.twig', [
+            'controller_name' => 'EventsController',
+            'oldWeekends' => $oldWeekends,
+            'oldParties' => $oldParties,
+            'oldExhibits' => $oldExhibits
+        ]);
+    }
+
 }

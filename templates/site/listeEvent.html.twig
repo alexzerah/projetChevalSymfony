@@ -21,54 +21,35 @@
         <div id="main">
             <!-- Two -->
             <section id="two" class="spotlights">
+                {% set e = [] %}
+                {% for t in oldWeekends %}
+                    {% set e = e|merge([t]) %}
+                {% endfor %}
+                {% for t in oldParties %}
+                    {% set e = e|merge([t]) %}
+                {% endfor %}
+                {% for t in oldExhibits %}
+                    {% set e = e|merge([t]) %}
+                {% endfor %}
+
+                {% for event in e|sortbyfield('date') %}
                 <section>
                     <a href="generic.html" class="image">
-                        <img src="images/pic08.jpg" alt="" data-position="center center" />
+                        <img src="{{ asset(event.banner) }}" alt="{{ event.nom}}" data-position="center center" />
                     </a>
                     <div class="content">
                         <div class="inner">
                             <header class="major">
-                                <h3>Titre de l'event</h3>
+                                <h3>{{ event.nom }}</h3>
                             </header>
-                            <p>Date / Lieu</p>
+                            <p>{{ event.date|date('d-m-Y') }} à {{ event.date|date('H:m') }} / {{ event.localisation }}</p>
                             <ul class="actions">
-                                <li><a href="generic.html" class="button">Voir plus</a></li>
+                                <li><a href="event/{{ event.nom }}" class="button">Voir plus</a></li>
                             </ul>
                         </div>
                     </div>
                 </section>
-                <section>
-                    <a href="generic.html" class="image">
-                        <img src="images/pic09.jpg" alt="" data-position="top center" />
-                    </a>
-                    <div class="content">
-                        <div class="inner">
-                            <header class="major">
-                                <h3>Titre de l'event</h3>
-                            </header>
-                            <p>Date / Lieu</p>
-                            <ul class="actions">
-                                <li><a href="generic.html" class="button">Voir plus</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <a href="generic.html" class="image">
-                        <img src="images/pic10.jpg" alt="" data-position="25% 25%" />
-                    </a>
-                    <div class="content">
-                        <div class="inner">
-                            <header class="major">
-                                <h3>Titre de l'event</h3>
-                            </header>
-                            <p>Date / Lieu</p>
-                            <ul class="actions">
-                                <li><a href="generic.html" class="button">Voir plus</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
+                {% endfor %}
             </section>
             <!-- Three -->
             <section id="three">
