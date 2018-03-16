@@ -27,7 +27,6 @@ class DataFixtures extends Fixture
 
     }
 
-
     public function load(ObjectManager $manager)
     {
         $i = 1;
