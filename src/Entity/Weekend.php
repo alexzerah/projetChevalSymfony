@@ -184,5 +184,4 @@ class Weekend
         $this->date = new \DateTime();
         $this->endDate = new \DateTime();
     }
-
 }
