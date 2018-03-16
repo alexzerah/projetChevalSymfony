@@ -46,6 +46,11 @@ class Party
      */
     private $banner;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     public function __construct()
     {
         $this->date = new \DateTime();

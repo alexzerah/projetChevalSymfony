@@ -179,6 +179,11 @@ class Weekend
         $this->banner = $banner;
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     public function __construct()
     {
         $this->date = new \DateTime();

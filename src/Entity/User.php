@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * @ORM\Table(name="app_users")
@@ -92,9 +94,54 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $isAdmin;
 
+    /**
+     * @ORM\Column(type="string", type="boolean")
+     */
+    private $Exhibit;
+
+    /**
+     * @ORM\Column(type="string", type="boolean")
+     */
+    private $Party;
+
+    /**
+     * @ORM\Column(type="string", type="boolean")
+     */
+    private $Weekend;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Exhibit")
+     * @ORM\JoinTable(name="user_exhibit",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="exhibit_id", referencedColumnName="id")}
+     *      )
+     */
+    private $exhibitFollow;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Party")
+     * @ORM\JoinTable(name="user_party",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="party_id", referencedColumnName="id")}
+     *      )
+     */
+    private $partyFollow;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Weekend")
+     * @ORM\JoinTable(name="user_weekend",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="weekend_id", referencedColumnName="id")}
+     *      )
+     */
+    private $weekendFollow;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->exhibitFollow = new ArrayCollection();
+        $this->partyFollow = new ArrayCollection();
+        $this->weekendFollow = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -222,5 +269,102 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->isAdmin = $isAdmin;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getExhibit()
+    {
+        return $this->Exhibit;
+    }
+
+    /**
+     * @param mixed $Exhibit
+     */
+    public function setExhibit($Exhibit)
+    {
+        $this->Exhibit = $Exhibit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParty()
+    {
+        return $this->Party;
+    }
+
+    /**
+     * @param mixed $Party
+     */
+    public function setParty($Party)
+    {
+        $this->Party = $Party;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeekend()
+    {
+        return $this->Weekend;
+    }
+
+    /**
+     * @param mixed $Weekend
+     */
+    public function setWeekend($Weekend)
+    {
+        $this->Weekend = $Weekend;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExhibitFollow()
+    {
+        return $this->exhibitFollow;
+    }
+
+    /**
+     * @param mixed $exhibitFollow
+     */
+    public function setExhibitFollow($exhibitFollow)
+    {
+        $this->exhibitFollow = $exhibitFollow;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPartyFollow()
+    {
+        return $this->partyFollow;
+    }
+
+    /**
+     * @param mixed $partyFollow
+     */
+    public function setPartyFollow($partyFollow)
+    {
+        $this->partyFollow = $partyFollow;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeekendFollow()
+    {
+        return $this->weekendFollow;
+    }
+
+    /**
+     * @param mixed $weekendFollow
+     */
+    public function setWeekendFollow($weekendFollow)
+    {
+        $this->weekendFollow = $weekendFollow;
+    }
+
 }
 
