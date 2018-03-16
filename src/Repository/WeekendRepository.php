@@ -31,4 +31,15 @@ class WeekendRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getOldWeekends()
+    {
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.date')
+            ->where('w.date < :today')
+            ->setParameter('today', new \DateTime())
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }
