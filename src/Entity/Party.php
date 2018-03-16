@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PartyRepository")
+ * @Vich\Uploadable
  */
 class Party
 {
@@ -45,6 +49,26 @@ class Party
      * @ORM\Column(name="banner", type="string")
      */
     private $banner;
+
+
+    /**
+     * @Vich\UploadableField(mapping="images", fileNameProperty="banner")
+     * @var File
+     */
+    private $bannerFile;
+
+    public function setBannerFile(File $bannerFile = null)
+    {
+        $this->bannerFile = $bannerFile;
+    }
+
+    public function getBannerFile()
+    {
+        return $this->bannerFile;
+    }
+
+
+
 
     public function __construct()
     {
