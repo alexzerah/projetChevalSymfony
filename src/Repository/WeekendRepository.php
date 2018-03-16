@@ -20,14 +20,15 @@ class WeekendRepository extends ServiceEntityRepository
     }
 
 
-    public function getLatestEvents()
+    public function getLatestWeekends()
     {
         return $this->createQueryBuilder('w')
-            ->orderBy('w.date', 'ASC')
-            ->setMaxResults(5)
+            ->orderBy('w.date')
+            ->where('w.date >= :today')
+            ->setParameter('today', new \DateTime())
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
 }

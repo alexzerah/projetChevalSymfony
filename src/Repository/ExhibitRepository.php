@@ -19,16 +19,15 @@ class ExhibitRepository extends ServiceEntityRepository
         parent::__construct($registry, Exhibit::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function getLatestExhibits()
     {
-        return $this->createQueryBuilder('e')
-            ->where('e.something = :value')->setParameter('value', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.date')
+            ->where('w.date >= :today')
+            ->setParameter('today', new \DateTime())
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
+
 }

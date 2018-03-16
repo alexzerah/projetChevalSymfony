@@ -7,10 +7,21 @@
             <section id="one">
                 <div class="inner">
                     <header class="major">
-                        <h1>Latest</h1>
+                        <h1>Prochains Events</h1>
                     </header>
-                    {% for event in latest %}
-                    <p>{{ event.id }}</p>
+                        {% set e = [] %}
+                        {% for t in latestWeekends %}
+                            {% set e = e|merge([t]) %}
+                        {% endfor %}
+                        {% for t in latestParties %}
+                            {% set e = e|merge([t]) %}
+                        {% endfor %}
+                    {% for t in latestExhibits %}
+                        {% set e = e|merge([t]) %}
+                    {% endfor %}
+                    {% for event in e|sortbyfield('date') %}
+
+                    <p>{{ event.nom }} &mdash; Date : {{ event.date|date('Y-m-d') }}</p>
                     {% endfor %}
                 </div>
             </section>

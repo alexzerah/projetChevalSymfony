@@ -19,16 +19,14 @@ class PartyRepository extends ServiceEntityRepository
         parent::__construct($registry, Party::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function getLatestParties()
     {
-        return $this->createQueryBuilder('s')
-            ->where('s.something = :value')->setParameter('value', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.date')
+            ->where('w.date >= :today')
+            ->setParameter('today', new \DateTime())
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
 }
