@@ -2241,7 +2241,7 @@
 		}
 
 			.image.main img {
-				width: 100%;
+				height: 10em;
 			}
 
 			@media screen and (max-width: 736px) {
