@@ -27,9 +27,9 @@ class Weekend
     private $localisation;
 
     /**
-     * @ORM\Column(name="dateDebut", type="datetime")
+     * @ORM\Column(name="date", type="datetime")
      */
-    private $dateDebut;
+    private $date;
 
     /**
      * @ORM\Column(name="dateFin", type="datetime")
@@ -102,17 +102,17 @@ class Weekend
     /**
      * @return mixed
      */
-    public function getDateDebut()
+    public function getDate()
     {
-        return $this->dateDebut;
+        return $this->date;
     }
 
     /**
-     * @param mixed $dateDebut
+     * @param mixed $date
      */
-    public function setDateDebut($dateDebut)
+    public function setDate($date)
     {
-        $this->dateDebut = $dateDebut;
+        $this->date = $date;
     }
 
     /**
@@ -181,7 +181,7 @@ class Weekend
 
     public function __construct()
     {
-        $this->dateDebut = new \DateTime();
+        $this->date = new \DateTime();
         $this->dateFin = new \DateTime();
     }
 

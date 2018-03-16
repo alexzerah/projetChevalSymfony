@@ -2,9 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Exposition;
-use App\Entity\Post;
-use App\Entity\Soiree;
+use App\Entity\Exhibit;
+use App\Entity\Party;
 use App\Entity\User;
 use App\Entity\Weekend;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -28,42 +27,24 @@ class DataFixtures extends Fixture
 
     }
 
-
-    public function article(ObjectManager $manager)
-    {
-        $i = 1;
-        while($i < 100){
-            $post = new Post();
-            $post->setTitle("Title de l'article n°" . $i);
-            $post->setBody("Contenue de l'article n°" . $i);
-            $post->setisPublished($i%2);
-
-            $manager->persist($post);
-
-            $i++;
-        }
-        $manager->flush();
-    }
-
-
     public function load(ObjectManager $manager)
     {
         $i = 1;
-        while($i < 50){
+        while ($i <= 10) {
 
-            $exposition = new Exposition();
-            $exposition->setNom("Nom Expo " . $i);
-            $exposition->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
-            $exposition->setPrix($i);
-            $exposition->setDetails("Description de " . $i);
-            $exposition->setBanner("https://picsum.photos/200/300/?image=" . $i);
+            $exhibit = new Exhibit();
+            $exhibit->setNom("Nom Expo " . $i);
+            $exhibit->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
+            $exhibit->setPrix($i);
+            $exhibit->setDetails("Description de " . $i);
+            $exhibit->setBanner("https://picsum.photos/200/300/?image=" . $i);
 
-            $soiree = new Soiree();
-            $soiree->setNom("Nom Soirée " . $i);
-            $soiree->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
-            $soiree->setPrix($i);
-            $soiree->setDetails("Description de " . $i);
-            $soiree->setBanner("https://picsum.photos/200/300/?image=" . $i);
+            $party = new Party();
+            $party->setNom("Nom Soirée " . $i);
+            $party->setLocalisation($i . " Rue Machin 7500" . $i . " Paris");
+            $party->setPrix($i);
+            $party->setDetails("Description de " . $i);
+            $party->setBanner("https://picsum.photos/200/300/?image=" . $i);
 
             $weekend = new Weekend();
             $weekend->setNom("Nom du weekend " . $i);
@@ -72,8 +53,8 @@ class DataFixtures extends Fixture
             $weekend->setDetails("Description de " . $i);
             $weekend->setBanner("https://picsum.photos/200/300/?image=" . $i);
 
-            $manager->persist($exposition);
-            $manager->persist($soiree);
+            $manager->persist($exhibit);
+            $manager->persist($party);
             $manager->persist($weekend);
 
             $i++;
