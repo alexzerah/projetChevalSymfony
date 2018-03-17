@@ -21,18 +21,7 @@
         <div id="main">
             <!-- Two -->
             <section id="two" class="spotlights">
-                {% set e = [] %}
-                {% for t in oldWeekends %}
-                    {% set e = e|merge([t]) %}
-                {% endfor %}
-                {% for t in oldParties %}
-                    {% set e = e|merge([t]) %}
-                {% endfor %}
-                {% for t in oldExhibits %}
-                    {% set e = e|merge([t]) %}
-                {% endfor %}
-
-                {% for event in e|sortbyfield('date')|reverse %}
+                {% for event in previousEvents|sortbyfield('date')|reverse %}
                 <section>
                     <a href="{{ url('events_event', {name: event.name}) }}" class="image">
                         <img src="{{ asset(event.banner) }}" alt="{{ event.name}}" data-position="center center" />
