@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ExhibitRepository;
-use App\Repository\LatestRepository;
+use App\Repository\FetchRepository;
 use App\Repository\PartyRepository;
 use App\Repository\WeekendRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,9 +20,9 @@ class EventsController extends Controller
                               $name)
     {
 
-        $party = $partyRepository->findOneBy(array('name' => $name));
-        $weekend = $weekendRepository->findOneBy(array('name' => $name));
-        $exhibit = $exhibitRepository->findOneBy(array('name' => $name));
+        $party = $partyRepository->getTheParty($name);
+        $weekend = $weekendRepository->getTheWeekend($name);
+        $exhibit = $exhibitRepository->getTheExhibit($name);
 
         return $this->render('site\event.html.twig', [
             'controller_name' => 'EventsController',
@@ -39,9 +39,9 @@ class EventsController extends Controller
                                       PartyRepository $partyRepository,
                                         ExhibitRepository $exhibitRepository)
     {
-        $latestWeekends = $weekendRepository->getLatestWeekends();
-        $latestParties = $partyRepository->getLatestParties();
-        $latestExhibits = $exhibitRepository->getLatestExhibits();
+        $latestWeekends = $weekendRepository->getNextWeekends();
+        $latestParties = $partyRepository->getNextParties();
+        $latestExhibits = $exhibitRepository->getNextExhibits();
 
         return $this->render('site\home.html.twig', [
             'controller_name' => 'EventsController',
@@ -58,29 +58,15 @@ class EventsController extends Controller
                                     PartyRepository $partyRepository,
                                     ExhibitRepository $exhibitRepository)
     {
-        $oldWeekends = $weekendRepository->getOldWeekends();
-        $oldParties = $partyRepository->getOldParties();
-        $oldExhibits = $exhibitRepository->getOldExhibits();
+        $oldWeekends = $weekendRepository->getPreviousWeekends();
+        $oldParties = $partyRepository->getPreviousParties();
+        $oldExhibits = $exhibitRepository->getPreviousExhibits();
 
         return $this->render('site\listeEvent.html.twig', [
             'controller_name' => 'EventsController',
             'oldWeekends' => $oldWeekends,
             'oldParties' => $oldParties,
             'oldExhibits' => $oldExhibits
-        ]);
-    }
-
-    /**
-     * @Route("/fetch", name="events_caca")
-     */
-    public function fetchEvents(LatestRepository $latestRepository)
-    {
-
-        $fetch = $latestRepository->findTest();
-
-        return $this->render('site\latest.html.twig', [
-            'controller_name' => 'EventsController',
-            'fetch' => $fetch
         ]);
     }
 

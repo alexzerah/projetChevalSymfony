@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Exhibit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,26 +21,37 @@ class ExhibitRepository extends ServiceEntityRepository
         parent::__construct($registry, Exhibit::class);
     }
 
-    public function getLatestExhibits()
+    public function getTheExhibit($name)
     {
-        return $this->createQueryBuilder('w')
-            ->orderBy('w.date')
-            ->where('w.date >= :today')
-            ->setParameter('today', new \DateTime())
-            ->getQuery()
-            ->getResult()
-            ;
+        try {
+            return $this->createQueryBuilder('e')
+                ->where('e.name = :name')
+                ->setParameter('name', $name)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            return $e;
+        }
     }
 
-    public function getOldExhibits()
+    public function getNextExhibits()
     {
-        return $this->createQueryBuilder('w')
-            ->orderBy('w.date')
-            ->where('w.date < :today')
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.date')
+            ->where('e.date >= :today')
             ->setParameter('today', new \DateTime())
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
+    }
+
+    public function getPreviousExhibits()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.date')
+            ->where('e.date < :today')
+            ->setParameter('today', new \DateTime())
+            ->getQuery()
+            ->getResult();
     }
 
     public function getNextDayExhibits()

@@ -37,7 +37,7 @@
                         <img src="{{ asset(event.banner) }}" alt="{{ event.name }}" />
                     </span>
                     <header class="major">
-                        <h3><a href="event/{{ event.name }}" class="link">{{ event.name }}</a></h3>
+                        <h3><a href="{{ url('events_event', {name: event.name}) }}" class="link">{{ event.name }}</a></h3>
                         <p>{{ event.date|date('d-m-Y à H:m') }} / {{ event.location }}</p>
                     </header>
                 </article>

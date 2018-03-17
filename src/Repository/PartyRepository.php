@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Party;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,26 +21,37 @@ class PartyRepository extends ServiceEntityRepository
         parent::__construct($registry, Party::class);
     }
 
-    public function getLatestParties()
+    public function getTheParty($name)
     {
-        return $this->createQueryBuilder('w')
-            ->orderBy('w.date')
-            ->where('w.date >= :today')
-            ->setParameter('today', new \DateTime())
-            ->getQuery()
-            ->getResult()
-            ;
+        try {
+            return $this->createQueryBuilder('p')
+                ->where('p.name = :name')
+                ->setParameter('name', $name)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            return $e;
+        }
     }
 
-    public function getOldParties()
+    public function getNextParties()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.date')
+            ->where('p.date >= :today')
+            ->setParameter('today', new \DateTime())
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getPreviousParties()
     {
         return $this->createQueryBuilder('w')
             ->orderBy('w.date')
             ->where('w.date < :today')
             ->setParameter('today', new \DateTime())
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
     public function getNextDayParties()
     {

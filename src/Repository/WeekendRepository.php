@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Weekend;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,27 +21,37 @@ class WeekendRepository extends ServiceEntityRepository
         parent::__construct($registry, Weekend::class);
     }
 
+    public function getTheWeekend($name)
+    {
+        try {
+            return $this->createQueryBuilder('w')
+                ->where('w.name = :name')
+                ->setParameter('name', $name)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            return $e;
+        }
+    }
 
-    public function getLatestWeekends()
+    public function getNextWeekends()
     {
         return $this->createQueryBuilder('w')
             ->orderBy('w.date')
             ->where('w.date >= :today')
             ->setParameter('today', new \DateTime())
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
-    public function getOldWeekends()
+    public function getPreviousWeekends()
     {
         return $this->createQueryBuilder('w')
             ->orderBy('w.date')
             ->where('w.date < :today')
             ->setParameter('today', new \DateTime())
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function getNextDayWeekends()
