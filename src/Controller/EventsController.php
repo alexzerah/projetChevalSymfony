@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\ExhibitRepository;
-use App\Repository\FetchRepository;
 use App\Repository\PartyRepository;
 use App\Repository\WeekendRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -19,16 +19,16 @@ class EventsController extends Controller
                               ExhibitRepository $exhibitRepository,
                               $name)
     {
-
-        $party = $partyRepository->getTheParty($name);
-        $weekend = $weekendRepository->getTheWeekend($name);
-        $exhibit = $exhibitRepository->getTheExhibit($name);
+        // Call the function that give us one event based on the name for each entities
+        $theParty = $partyRepository->getTheParty($name);
+        $theWeekend = $weekendRepository->getTheWeekend($name);
+        $theExhibit = $exhibitRepository->getTheExhibit($name);
 
         return $this->render('site\event.html.twig', [
             'controller_name' => 'EventsController',
-            'party' => $party,
-            'weekend' => $weekend,
-            'exhibit' => $exhibit
+            'party' => $theParty,
+            'weekend' => $theWeekend,
+            'exhibit' => $theExhibit,
         ]);
     }
 
@@ -39,15 +39,23 @@ class EventsController extends Controller
                                       PartyRepository $partyRepository,
                                         ExhibitRepository $exhibitRepository)
     {
-        $latestWeekends = $weekendRepository->getNextWeekends();
-        $latestParties = $partyRepository->getNextParties();
-        $latestExhibits = $exhibitRepository->getNextExhibits();
+        // Call the function that give us events when event.date > today for each entities
+        $nextWeekends = $weekendRepository->getNextWeekends();
+        $nextParties = $partyRepository->getNextParties();
+        $nextExhibits = $exhibitRepository->getNextExhibits();
+
+        // Concatenate these arrays into one single array
+        $nextEvents = new ArrayCollection(
+            array_merge(
+                $nextWeekends,
+                $nextParties,
+                $nextExhibits
+            )
+        );
 
         return $this->render('site\home.html.twig', [
             'controller_name' => 'EventsController',
-            'latestWeekends' => $latestWeekends,
-            'latestParties' => $latestParties,
-            'latestExhibits' => $latestExhibits
+            'nextEvents' => $nextEvents,
         ]);
     }
 
@@ -58,15 +66,23 @@ class EventsController extends Controller
                                     PartyRepository $partyRepository,
                                     ExhibitRepository $exhibitRepository)
     {
-        $oldWeekends = $weekendRepository->getPreviousWeekends();
-        $oldParties = $partyRepository->getPreviousParties();
-        $oldExhibits = $exhibitRepository->getPreviousExhibits();
+        // Call the function that give us events when event.date < today for each entities
+        $previousWeekends = $weekendRepository->getPreviousWeekends();
+        $previousParties = $partyRepository->getPreviousParties();
+        $previousExhibits = $exhibitRepository->getPreviousExhibits();
+
+        // Concatenate these arrays into one single array
+        $previousEvents = new ArrayCollection(
+            array_merge(
+                $previousWeekends,
+                $previousParties,
+                $previousExhibits
+            )
+        );
 
         return $this->render('site\listeEvent.html.twig', [
             'controller_name' => 'EventsController',
-            'oldWeekends' => $oldWeekends,
-            'oldParties' => $oldParties,
-            'oldExhibits' => $oldExhibits
+            'previousEvents' => $previousEvents,
         ]);
     }
 

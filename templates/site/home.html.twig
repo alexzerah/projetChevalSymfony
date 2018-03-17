@@ -20,18 +20,7 @@
         <div id="main">
             <!-- One -->
             <section id="one" class="tiles">
-                {% set e = [] %}
-                {% for t in latestWeekends %}
-                    {% set e = e|merge([t]) %}
-                {% endfor %}
-                {% for t in latestParties %}
-                    {% set e = e|merge([t]) %}
-                {% endfor %}
-                {% for t in latestExhibits %}
-                    {% set e = e|merge([t]) %}
-                {% endfor %}
-
-                {% for event in e|sortbyfield('date') %}
+                {% for event in nextEvents|sortbyfield('date') %}
                 <article>
                     <span class="image">
                         <img src="{{ asset(event.banner) }}" alt="{{ event.name }}" />
