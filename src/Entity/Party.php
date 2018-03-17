@@ -1,12 +1,8 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PartyRepository")
  * @Vich\Uploadable
@@ -15,67 +11,55 @@ class Party
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(name="name", type="string")
      */
     private $name;
-
     /**
      * @ORM\Column(name="location", type="string")
      */
     private $location;
-
     /**
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
-
     /**
      * @ORM\Column(name="price", type="decimal")
      */
     private $price;
-
     /**
      * @ORM\Column(name="details", type="text")
      */
     private $details;
-
     /**
      * @ORM\Column(name="banner", type="string")
      */
     private $banner;
-
     public function __toString()
     {
         return $this->getName();
     }
-
     /**
      * @Vich\UploadableField(mapping="images", fileNameProperty="banner")
      * @var File
      */
     private $bannerFile;
-
     public function setBannerFile(File $bannerFile = null)
     {
         $this->bannerFile = $bannerFile;
     }
-
     public function getBannerFile()
     {
         return $this->bannerFile;
     }
-
     public function __construct()
     {
         $this->date = new \DateTime();
     }
-
     /**
      * @return mixed
      */
@@ -83,7 +67,6 @@ class Party
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      */
@@ -91,7 +74,6 @@ class Party
     {
         $this->id = $id;
     }
-
     /**
      * @return mixed
      */
@@ -99,7 +81,6 @@ class Party
     {
         return $this->name;
     }
-
     /**
      * @param mixed $name
      */
@@ -107,7 +88,6 @@ class Party
     {
         $this->name = $name;
     }
-
     /**
      * @return mixed
      */
@@ -115,7 +95,6 @@ class Party
     {
         return $this->location;
     }
-
     /**
      * @param mixed $location
      */
@@ -123,7 +102,6 @@ class Party
     {
         $this->location = $location;
     }
-
     /**
      * @return mixed
      */
@@ -131,7 +109,6 @@ class Party
     {
         return $this->date;
     }
-
     /**
      * @param mixed $date
      */
@@ -139,7 +116,6 @@ class Party
     {
         $this->date = $date;
     }
-
     /**
      * @return mixed
      */
@@ -147,7 +123,6 @@ class Party
     {
         return $this->price;
     }
-
     /**
      * @param mixed $price
      */
@@ -155,7 +130,6 @@ class Party
     {
         $this->price = $price;
     }
-
     /**
      * @return mixed
      */
@@ -163,7 +137,6 @@ class Party
     {
         return $this->details;
     }
-
     /**
      * @param mixed $details
      */
@@ -171,7 +144,6 @@ class Party
     {
         $this->details = $details;
     }
-
     /**
      * @return mixed
      */
@@ -179,7 +151,6 @@ class Party
     {
         return $this->banner;
     }
-
     /**
      * @param mixed $banner
      */
@@ -187,5 +158,4 @@ class Party
     {
         $this->banner = $banner;
     }
-
 }
