@@ -21,6 +21,7 @@ class DataFixtures extends Fixture
         $user->setUsername('admin');
         $user->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $user->setEmail('test@gmail.com');
+        $user->setAvatar('default_avatar.jpg');
         $user->setIsAdmin(true);
         $user->setIsActive('1');
 
@@ -41,21 +42,21 @@ class DataFixtures extends Fixture
             $exhibit->setLocation($i . " Rue Machin 7500" . $i . " Paris");
             $exhibit->setPrice($i);
             $exhibit->setDetails("Description de " . $i);
-            $exhibit->setBanner("https://picsum.photos/200/300/?image=" . $i);
+            $exhibit->setBanner("croissants.png");
 
             $party = new Party();
             $party->setName("Nom Soirée " . $i);
             $party->setLocation($i . " Rue Machin 7500" . $i . " Paris");
             $party->setPrice($i);
             $party->setDetails("Description de " . $i);
-            $party->setBanner("https://picsum.photos/200/300/?image=" . $i);
+            $party->setBanner("croissants.png");
 
             $weekend = new Weekend();
             $weekend->setName("Nom du weekend " . $i);
             $weekend->setLocation($i . " Rue Truc 7500" . $i . " Paris");
             $weekend->setPrice($i);
             $weekend->setDetails("Description de " . $i);
-            $weekend->setBanner("https://picsum.photos/200/300/?image=" . $i);
+            $weekend->setBanner("croissants.png");
 
             $manager->persist($exhibit);
             $manager->persist($party);
@@ -70,11 +71,12 @@ class DataFixtures extends Fixture
         $user->setLastName('Lawper');
         $user->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $user->setEmail('admin@gmail.com');
+        $user->setAvatar('default_avatar.jpg');
         $user->setIsAdmin(true);
         $user->setIsActive('1');
-        $user->setParty('0');
-        $user->setWeekend('0');
-        $user->setExhibit('0');
+        $user->setParty(true);
+        $user->setWeekend(false);
+        $user->setExhibit(true);
         $manager->persist($user);
 
         $userTwo = new User();
@@ -83,11 +85,12 @@ class DataFixtures extends Fixture
         $userTwo->setLastName('Dupont');
         $userTwo->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userTwo->setEmail('user@gmail.com');
+        $userTwo->setAvatar('default_avatar.jpg');
         $userTwo->setIsAdmin(false);
         $userTwo->setIsActive('1');
-        $userTwo->setParty('0');
-        $userTwo->setWeekend('0');
-        $userTwo->setExhibit('0');
+        $userTwo->setParty(false);
+        $userTwo->setWeekend(false);
+        $userTwo->setExhibit(false);
         $manager->persist($userTwo);
 
         $manager->flush();

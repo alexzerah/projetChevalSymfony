@@ -5,46 +5,100 @@ easy_admin:
   entities:
     User:
       class: App\Entity\User
-      label: Utilisateurs
+      label: 'Utilisateurs'
       help: 'Un utilisateur peut être ADMIN ou USER.'
       list:
         title: 'Liste des utilisateurs'
+        fields:
+          - id
+          - { property: firstName, label: 'Prénom' }
+          - { property: lastName, label: 'Nom' }
+          - email
+          - { property: avatar, type: image, base_path: '/media/' }
+          - { property: isActive, label: 'Actif' }
+          - { property: isAdmin, label: 'Admin' }
+          - { property: exhibit, label: 'followExpo', type: boolean }
+          - { property: party, label: 'followSoirées', type: boolean }
+          - { property: weekend, label: 'followWeekends', type: boolean }
+          - { property: exhibitFollow, label: 'Expo' }
+          - { property: partyFollow, label: 'Soirées' }
+          - { property: weekendFollow, label: 'Weekends' }
+      form:
+        fields:
+          - id
+          - { property: firstName, label: 'Prénom' }
+          - { property: lastName, label: 'Nom' }
+          - { property: password, label: 'Mot de passe' }
+          - { property: email, label: 'Adresse email' }
+          - { property: avatarFile, label: 'Photo de profil', type: 'vich_image' }
+          - { property: isActive, label: 'Actif' }
+          - { property: isAdmin, label: 'Admin' }
+          - { property: exhibit, label: 'Abonné aux expositions', type: 'checkbox' }
+          - { property: party, label: 'Abonné aux soirées', type: 'checkbox' }
+          - { property: weekend, label: 'Abonné aux weekends', type: 'checkbox' }
+          - { property: exhibitFollow, label: 'Expo' }
+          - { property: partyFollow, label: 'Soirées' }
+          - { property: weekendFollow, label: 'Weekends' }
     Exhibit:
       class: App\Entity\Exhibit
-      label: Expositions
+      label: 'Expositions'
       list:
         title: 'Liste des expositions'
         fields:
           - id
-          - name
-          - location
+          - { property: name, label: 'Nom' }
+          - { property: location, label: 'Lieu' }
           - date
-          - price
-          - { property: banner, type: image }
+          - { property: price, label: 'Prix' }
+          - { property: banner, label: 'Image', type: image, base_path: '/media/' }
+      form:
+        fields:
+          - { property: name, label: 'Nom' }
+          - { property: location, label: 'Lieu' }
+          - { property: date, label: 'Date et heure' }
+          - { property: price, label: 'Prix' }
+          - { property: details, label: 'Description' }
+          - { property: bannerFile, label: 'Image', type: 'vich_image' }
     Party:
       class: App\Entity\Party
       label: Soirées
       list:
         title: 'Liste des soirées'
+        fields:
+          - id
+          - { property: name, label: 'Nom' }
+          - { property: location, label: 'Lieu' }
+          - date
+          - { property: price, label: 'Prix' }
+          - { property: banner, label: 'Image', type: image, base_path: '/media/' }
       form:
         fields:
-          - { property: name, type: 'text' }
-          - { property: location, type: 'text' }
-          - { property: date, type: 'datetime', type_options: { widget: 'single_text' } }
-          - { property: price }
-          - { property: details, type: 'textarea' }
-          - { property: bannerFile, type: 'vich_image'}
+          - { property: name, label: 'Nom' }
+          - { property: location, label: 'Lieu' }
+          - { property: date, label: 'Date et heure' }
+          - { property: price, label: 'Prix' }
+          - { property: details, label: 'Description' }
+          - { property: bannerFile, label: 'Image', type: 'vich_image' }
     Weekend:
       class: App\Entity\Weekend
-      label: Weekends
+      label: 'Weekends'
       help: 'Un weekend a une date de fin : endDate.'
       list:
         title: 'Liste des weekends'
         fields:
           - id
-          - name
-          - location
+          - { property: name, label: 'Nom' }
+          - { property: location, label: 'Lieu' }
           - date
-          - endDate
-          - price
-          - { property: banner, type: image }
+          - { property: endDate, label: 'Date Fin' }
+          - { property: price, label: 'Prix' }
+          - { property: banner, label: 'Image', type: image, base_path: '/media/' }
+      form:
+        fields:
+          - { property: name, label: 'Nom' }
+          - { property: location, label: 'Lieu' }
+          - { property: date, label: 'Date et heure' }
+          - { property: endDate, label: 'Date de fin' }
+          - { property: price, label: 'Prix' }
+          - { property: details, label: 'Description' }
+          - { property: bannerFile, label: 'Image', type: 'vich_image' }

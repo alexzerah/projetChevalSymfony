@@ -1,5 +1,6 @@
 <?php
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -15,28 +16,34 @@ class Party
      * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
      * @ORM\Column(name="name", type="string")
      */
     private $name;
+
     /**
      * @ORM\Column(name="location", type="string")
      */
     private $location;
+
     /**
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+
     /**
      * @ORM\Column(name="price", type="decimal")
      */
     private $price;
+
     /**
      * @ORM\Column(name="details", type="text")
      */
     private $details;
+
     /**
-     * @ORM\Column(name="banner", type="string")
+     * @ORM\Column(name="banner", type="string", nullable=true)
      */
     private $banner;
 
@@ -50,6 +57,7 @@ class Party
      * @var File
      */
     private $bannerFile;
+
     public function setBannerFile(File $bannerFile = null)
     {
         $this->bannerFile = $bannerFile;
@@ -58,6 +66,7 @@ class Party
     {
         return $this->bannerFile;
     }
+
     public function __construct()
     {
         $this->date = new \DateTime();
