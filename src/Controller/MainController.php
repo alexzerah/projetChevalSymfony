@@ -50,15 +50,6 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/profil", name="profil")
-     */
-    public function profil()
-    {
-        return $this->render('site/profil.html.twig', [
-        ]);
-    }
-
-    /**
      * @Route("/mot-de-passe-oublie", name="forgotpassword")
      */
     public function forgotpassword()

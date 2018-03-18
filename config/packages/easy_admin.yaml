@@ -1,4 +1,14 @@
 easy_admin:
+  site_name: BDE Dashboard
+  design:
+    menu:
+      - User
+      -
+        label: Evénements
+        children:
+          - Party
+          - Exhibit
+          - Weekend
   list:
     title: 'Liste des %%entity_label%%'
     actions: ['show']
