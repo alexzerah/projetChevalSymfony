@@ -16,6 +16,9 @@ class DataFixtures extends Fixture
     {
         $user = new User();
         $user->setUsername('admin');
+        $user->setFirstName('Dave');
+        $user->setLastName('Lawper');
+        $user->setUsername('admin');
         $user->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $user->setEmail('test@gmail.com');
         $user->setIsAdmin(true);
@@ -63,6 +66,8 @@ class DataFixtures extends Fixture
 
         $user = new User();
         $user->setUsername('admin');
+        $user->setFirstName('Dave');
+        $user->setLastName('Lawper');
         $user->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $user->setEmail('admin@gmail.com');
         $user->setIsAdmin(true);
@@ -74,6 +79,8 @@ class DataFixtures extends Fixture
 
         $userTwo = new User();
         $userTwo->setUsername('user');
+        $userTwo->setFirstName('Michel');
+        $userTwo->setLastName('Dupont');
         $userTwo->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userTwo->setEmail('user@gmail.com');
         $userTwo->setIsAdmin(false);

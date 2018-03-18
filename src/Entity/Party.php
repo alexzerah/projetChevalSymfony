@@ -39,10 +39,12 @@ class Party
      * @ORM\Column(name="banner", type="string")
      */
     private $banner;
+
     public function __toString()
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
+
     /**
      * @Vich\UploadableField(mapping="images", fileNameProperty="banner")
      * @var File

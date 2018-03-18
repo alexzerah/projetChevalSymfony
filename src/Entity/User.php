@@ -56,6 +56,38 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getisActive()
     {
         return $this->isActive;
@@ -73,6 +105,16 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=64)
