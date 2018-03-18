@@ -1,11 +1,31 @@
 easy_admin:
+  list:
+    title: 'Liste des %%entity_label%%'
+    actions: ['show']
   entities:
     User:
       class: App\Entity\User
+      label: Utilisateurs
+      help: 'Un utilisateur peut être ADMIN ou USER.'
+      list:
+        title: 'Liste des utilisateurs'
     Exhibit:
       class: App\Entity\Exhibit
+      label: Expositions
+      list:
+        title: 'Liste des expositions'
+        fields:
+          - id
+          - name
+          - location
+          - date
+          - price
+          - { property: banner, type: image }
     Party:
       class: App\Entity\Party
+      label: Soirées
+      list:
+        title: 'Liste des soirées'
       form:
         fields:
           - { property: name, type: 'text' }
@@ -13,6 +33,18 @@ easy_admin:
           - { property: date, type: 'datetime', type_options: { widget: 'single_text' } }
           - { property: price }
           - { property: details, type: 'textarea' }
-          - { property: bannerFile, type: 'vich_image' }
+          - { property: bannerFile, type: 'vich_image'}
     Weekend:
       class: App\Entity\Weekend
+      label: Weekends
+      help: 'Un weekend a une date de fin : endDate.'
+      list:
+        title: 'Liste des weekends'
+        fields:
+          - id
+          - name
+          - location
+          - date
+          - endDate
+          - price
+          - { property: banner, type: image }

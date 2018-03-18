@@ -11,7 +11,9 @@
         <div id="wrapper">
             <!-- Header -->
             <header id="header" class="alt">
-                <a href="{{ path('home') }}" class="logo"><strong>BDE</strong> <span>IESA Multimédia</span></a>
+                <a href="{{ path('home') }}" class="logo"><strong>BDE</strong>
+                    <span>IESA Multimédia {{ is_granted('IS_AUTHENTICATED_FULLY') ? app.user.username : '' }}</span>
+                </a>
                 <nav>
                     <a href="#menu">Menu</a>
                 </nav>
@@ -21,7 +23,7 @@
                 <ul class="links">
                     <li><a href="{{ path('home') }}">Accueil</a></li>
                     <li><a href="{{ path('listeEvent') }}">anciens événements</a></li>
-                    <li><a href="{{ path('equipe') }}">Présentation du BDE</a></li>
+                    <li><a href="{{ path('team') }}">Présentation du BDE</a></li>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
                         <li><a href="{{ path('profil') }}">Mon profil</a></li>
                     {% endif %}
