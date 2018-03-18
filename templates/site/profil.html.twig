@@ -13,19 +13,23 @@
                             </ul>
                         {% endif %}
                         <h1>Mon profil</h1>
+                        <!-- avatar -->
+                        {% if userAvatar is not null and userAvatar is defined %}
+                        <img src="{{ asset_base }}{{ asset(userAvatar) }}" alt="{{ userName }}">
+                        {% endif %}
                     </header>
                     <form method="post" action="#">
                         <p>
                             <label for="name">Nom</label>
-                            <input type="text" title="name" id="name" placeholder="{{ app.user.lastName }}">
+                            <input type="text" title="name" id="name" value="{{ userLastName }}">
                         </p>
                         <p>
                             <label for="prenom">Prénom</label>
-                            <input type="text" title="prenom" id="prenom" placeholder="{{ app.user.firstName }}">
+                            <input type="text" title="prenom" id="prenom" value="{{ userFirstName }}">
                         </p>
                         <p>
                             <label for="mail">Email</label>
-                            <input type="text" id="mail" title="mail" placeholder="{{ app.user.email }}">
+                            <input type="text" id="mail" title="mail" value="{{ userEmail }}">
                         </p>
                         <p>
                             <label for="image">Photo</label>
@@ -35,27 +39,33 @@
                         <h2>Mes abonnements : </h2>
                         <p>M'abonner aux notifications des nouveaux évènements</p>
                         <p>
-                            <input type="checkbox" name="eventWeekEnd" id="eventWeekEnd">
+                            <input type="checkbox" name="eventWeekEnd" id="eventWeekEnd" {{ isUserWeekend ? 'checked' : '' }}>
                             <label for="eventWeekEnd">Evénements sur un week-end</label>
                         </p>
                         <p>
-                            <input type="checkbox" name="eventSoiree" id="eventSoiree">
+                            <input type="checkbox" name="eventSoiree" id="eventSoiree" {{ isUserParty ? 'checked' : '' }}>
                             <label for="eventSoiree">Soirées</label>
                         </p>
                         <p>
-                            <input type="checkbox" name="eventExpo" id="eventExpo">
+                            <input type="checkbox" name="eventExpo" id="eventExpo" {{ isUserExhibit ? 'checked' : '' }}>
                             <label for="eventExpo">Expositions</label>
                         </p>
                         <button>Valider</button>
                         <h2>Mes futurs événements</h2>
                         <ul>
-                            <li><a href="#">Nom de l'event</a></li>
+                            {% for event in userEventsFollow %}
+                                {% if event.date|date('d-m-Y') > "now"|date('d-m-Y') %}
+                                <li><a href="{{ url('events_event', {name: event.name}) }}">{{ event.name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
                         </ul>
                         <h2>Mes anciens événements</h2>
                         <ul>
-                            <li><a href="#">Nom de l'event</a></li>
-                            <li><a href="#">Nom de l'event</a></li>
-                            <li><a href="#">Nom de l'event</a></li>
+                            {% for event in userEventsFollow|sort('date')|reverse %}
+                                {% if event.date|date('d-m-Y') < "now"|date('d-m-Y') %}
+                                    <li><a href="{{ url('events_event', {name: event.name}) }}">{{ event.name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
                         </ul>
                     </form>
                 </div>

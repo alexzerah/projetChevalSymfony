@@ -33,9 +33,9 @@ class EventsController extends Controller
     }
 
     /**
-     * @Route("/", name="events_latestEvents")
+     * @Route("/", name="events_nextEvents")
      */
-    public function getLatestEvents(WeekendRepository $weekendRepository,
+    public function getNextEvents(WeekendRepository $weekendRepository,
                                       PartyRepository $partyRepository,
                                         ExhibitRepository $exhibitRepository)
     {
@@ -60,9 +60,9 @@ class EventsController extends Controller
     }
 
     /**
-     * @Route("/listeEvenements", name="events_oldEvents")
+     * @Route("/listeEvenements", name="events_previousEvents")
      */
-    public function getOldEvents(WeekendRepository $weekendRepository,
+    public function getPreviousEvents(WeekendRepository $weekendRepository,
                                     PartyRepository $partyRepository,
                                     ExhibitRepository $exhibitRepository)
     {
