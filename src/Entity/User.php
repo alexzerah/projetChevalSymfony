@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @Vich\Uploadable
  */
 class User implements AdvancedUserInterface, \Serializable
 {
@@ -127,6 +130,26 @@ class User implements AdvancedUserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\Column(name="avatar", type="string", nullable=true)
+     */
+    private $avatar;
+
+    /**
+     * @Vich\UploadableField(mapping="images", fileNameProperty="avatar")
+     * @var File
+     */
+    private $avatarFile;
+
+    public function setAvatarFile(File $avatarFile = null)
+    {
+        $this->avatarFile = $avatarFile;
+    }
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -137,17 +160,17 @@ class User implements AdvancedUserInterface, \Serializable
     private $isAdmin;
 
     /**
-     * @ORM\Column(type="string", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     private $Exhibit;
 
     /**
-     * @ORM\Column(type="string", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     private $Party;
 
     /**
-     * @ORM\Column(type="string", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     private $Weekend;
 
@@ -406,6 +429,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setWeekendFollow($weekendFollow)
     {
         $this->weekendFollow = $weekendFollow;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
     }
 
 }

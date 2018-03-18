@@ -24,7 +24,7 @@
                 {% for event in previousEvents|sortbyfield('date')|reverse %}
                 <section>
                     <a href="{{ url('events_event', {name: event.name}) }}" class="image">
-                        <img src="{{ asset(event.banner) }}" alt="{{ event.name}}" data-position="center center" />
+                        <img src="{{ asset_base }}{{ asset(event.banner) }}" alt="{{ event.name}}" data-position="center center" />
                     </a>
                     <div class="content">
                         <div class="inner">
@@ -48,7 +48,7 @@
                     </header>
                     <p>Le BDE FURIES est composée de 5 étudiants de l'IESA Multimédia.</p>
                     <ul class="actions">
-                        <li><a href="{{ path('equipe') }}" class="button next">Découvrez les !</a></li>
+                        <li><a href="{{ path('team') }}" class="button next">Découvrez les !</a></li>
                     </ul>
                 </div>
             </section>
