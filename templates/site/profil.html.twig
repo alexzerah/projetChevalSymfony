@@ -13,61 +13,42 @@
                             </ul>
                         {% endif %}
                         <h1>Mon profil</h1>
+                        <!-- Messages d'alerte -->
+                        {% for msg in app.session.flashBag.get('success') %}
+                            <div>
+                                {{ msg }}
+                            </div>
+                        {% endfor %}
                         <!-- avatar -->
-                        {% if userAvatar is not null and userAvatar is defined %}
-                        <img src="{{ asset_base }}{{ asset(userAvatar) }}" alt="{{ userName }}">
-                        {% endif %}
                     </header>
-                    <form method="post" action="#">
-                        <p>
-                            <label for="name">Nom</label>
-                            <input type="text" title="name" id="name" value="{{ userLastName }}">
-                        </p>
-                        <p>
-                            <label for="prenom">Prénom</label>
-                            <input type="text" title="prenom" id="prenom" value="{{ userFirstName }}">
-                        </p>
-                        <p>
-                            <label for="mail">Email</label>
-                            <input type="text" id="mail" title="mail" value="{{ userEmail }}">
-                        </p>
-                        <p>
-                            <label for="image">Photo</label>
-                            <input type="file" id="image" title="image">
-                        </p>
-                        <p><a href="#">Changer de mot de passe</a></p>
+                    {{ form_start(userForm) }}
+                        {{ form_row(userForm.firstName) }}
+                        {{ form_row(userForm.lastName) }}
+                        {{ form_row(userForm.email) }}
                         <h2>Mes abonnements : </h2>
                         <p>M'abonner aux notifications des nouveaux évènements</p>
-                        <p>
-                            <input type="checkbox" name="eventWeekEnd" id="eventWeekEnd" {{ isUserWeekend ? 'checked' : '' }}>
-                            <label for="eventWeekEnd">Evénements sur un week-end</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" name="eventSoiree" id="eventSoiree" {{ isUserParty ? 'checked' : '' }}>
-                            <label for="eventSoiree">Soirées</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" name="eventExpo" id="eventExpo" {{ isUserExhibit ? 'checked' : '' }}>
-                            <label for="eventExpo">Expositions</label>
-                        </p>
-                        <button>Valider</button>
-                        <h2>Mes futurs événements</h2>
-                        <ul>
-                            {% for event in userEventsFollow %}
-                                {% if event.date|date('d-m-Y') > "now"|date('d-m-Y') %}
+                        {{ form_row(userForm.party) }}
+                        {{ form_row(userForm.exhibit) }}
+                        {{ form_row(userForm.weekend) }}
+                        <button type="submit">Enregistrer</button>
+                    {{ form_end(userForm) }}
+                    <p><a href="#">Changer de mot de passe</a></p>
+                    <h2>Mes futurs événements</h2>
+                    <ul>
+                        {% for event in userEventsFollow|sort('date') %}
+                            {% if event.date|date('d-m-Y') > "now"|date('d-m-Y') %}
                                 <li><a href="{{ url('events_event', {name: event.name}) }}">{{ event.name }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                        <h2>Mes anciens événements</h2>
-                        <ul>
-                            {% for event in userEventsFollow|sort('date')|reverse %}
-                                {% if event.date|date('d-m-Y') < "now"|date('d-m-Y') %}
-                                    <li><a href="{{ url('events_event', {name: event.name}) }}">{{ event.name }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </form>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <h2>Mes anciens événements</h2>
+                    <ul>
+                        {% for event in userEventsFollow|sort('date')|reverse %}
+                            {% if event.date|date('d-m-Y') < "now"|date('d-m-Y') %}
+                                <li><a href="{{ url('events_event', {name: event.name}) }}">{{ event.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
                 </div>
             </section>
         </div>

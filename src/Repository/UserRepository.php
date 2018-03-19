@@ -43,4 +43,9 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getQuery()
             ->getResult();
     }
+
+    public function createAlphabeticalQueryBuilder()
+    {
+
+    }
 }
