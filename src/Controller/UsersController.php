@@ -55,10 +55,10 @@ class UsersController extends Controller
         // handles data from POST requests
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $genus = $form->getData();
+            $theUser = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($genus);
+            $em->persist($theUser);
             $em->flush();
 
             $this->addFlash('success', 'Profil mis à jour :)');
