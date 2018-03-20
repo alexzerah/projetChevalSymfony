@@ -4,6 +4,8 @@ namespace App\Form;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -15,15 +17,19 @@ class UserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('avatarFile',FileType::class, array(
+                'label' => 'Ajouter/Modifier',
+                'required' => false
+            ))
             ->add('firstName',TextType::class, array(
-                'label'=>'Prénom')
-            )
+                'label'=>'Prénom'
+            ))
             ->add('lastName',TextType::class, array(
-                    'label'=>'Nom')
-            )
+                    'label'=>'Nom'
+            ))
             ->add('email',EmailType::class, array(
-                    'label'=>'Adresse e-Mail')
-            )
+                    'label'=>'Adresse e-Mail'
+            ))
             ->add('exhibit', CheckboxType::class, array(
                 'required' => false
             ))
