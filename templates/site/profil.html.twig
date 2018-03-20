@@ -22,14 +22,32 @@
                         <!-- avatar -->
                     </header>
                     {{ form_start(userForm) }}
-                        {{ form_row(userForm.firstName) }}
-                        {{ form_row(userForm.lastName) }}
-                        {{ form_row(userForm.email) }}
+                        <p>
+                            {{ form_widget(userForm.firstName) }}
+                            {{ form_label(userForm.firstName) }}
+                        </p>
+                        <p>
+                            {{ form_widget(userForm.lastName) }}
+                            {{ form_label(userForm.lastName) }}
+                        </p>
+                        <p>
+                            {{ form_widget(userForm.email) }}
+                            {{ form_label(userForm.email) }}
+                        </p>
                         <h2>Mes abonnements : </h2>
                         <p>M'abonner aux notifications des nouveaux évènements</p>
-                        {{ form_row(userForm.party) }}
-                        {{ form_row(userForm.exhibit) }}
-                        {{ form_row(userForm.weekend) }}
+                        <p>
+                            {{ form_widget(userForm.party) }}
+                            {{ form_label(userForm.party) }}
+                        </p>
+                        <p>
+                            {{ form_widget(userForm.exhibit) }}
+                            {{ form_label(userForm.exhibit) }}
+                        </p>
+                        <p>
+                            {{ form_widget(userForm.weekend) }}
+                            {{ form_label(userForm.weekend) }}
+                        </p>
                         <button type="submit">Enregistrer</button>
                     {{ form_end(userForm) }}
                     <p><a href="#">Changer de mot de passe</a></p>

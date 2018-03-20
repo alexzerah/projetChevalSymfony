@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\UserSubscribeFormType;
 use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
 use App\Repository\WeekendRepository;
@@ -19,6 +20,14 @@ class EventsController extends Controller
                               ExhibitRepository $exhibitRepository,
                               $name)
     {
+        // Check is a user is logged in
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        // Set the user
+        $user = $this->getUser();
+
+        // user form update
+        $form = $this->createForm(UserSubscribeFormType::class, $user);
+
         // Call the function that give us one event based on the name for each entities
         $theParty = $partyRepository->getTheParty($name);
         $theWeekend = $weekendRepository->getTheWeekend($name);
@@ -29,6 +38,7 @@ class EventsController extends Controller
             'party' => $theParty,
             'weekend' => $theWeekend,
             'exhibit' => $theExhibit,
+            'userSubscribeForm' => $form->createView()
         ]);
     }
 
