@@ -22,17 +22,6 @@ class EventsController extends Controller
                               UserRepository $userRepository,
                               $name)
     {
-        // Check is a user is logged in
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        // Set the user
-        $user = $this->getUser();
-
-        // Get user events follow
-        $userExhibitFollow = $userRepository->getUserFollow();
-
-        // user form update
-        $form = $this->createForm(UserSubscribeFormType::class, $user);
-
         // Call the function that give us one event based on the name for each entities
         $theParty = $partyRepository->getTheParty($name);
         $theWeekend = $weekendRepository->getTheWeekend($name);
@@ -40,11 +29,9 @@ class EventsController extends Controller
 
         return $this->render('site\event.html.twig', [
             'controller_name' => 'EventsController',
-            'userFollow' => $userExhibitFollow,
             'party' => $theParty,
             'weekend' => $theWeekend,
-            'exhibit' => $theExhibit,
-            'userSubscribeForm' => $form->createView()
+            'exhibit' => $theExhibit
         ]);
     }
 
