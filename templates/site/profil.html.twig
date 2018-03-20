@@ -15,13 +15,20 @@
                         <h1>Mon profil</h1>
                         <!-- Messages d'alerte -->
                         {% for msg in app.session.flashBag.get('success') %}
-                            <div>
+                            <div style="padding: 1em; background:green">
                                 {{ msg }}
                             </div>
                         {% endfor %}
                         <!-- avatar -->
                     </header>
                     {{ form_start(userForm) }}
+                        <p>
+                            <img style="height: 200px;" src="{{ asset_base }}{{ app.user.avatar }}" alt="Photo de {{ app.user.username }}">
+                        </p>
+                        <p>
+                            {{ form_widget(userForm.avatarFile) }}
+                            {{ form_label(userForm.avatarFile) }}
+                        </p>
                         <p>
                             {{ form_widget(userForm.firstName) }}
                             {{ form_label(userForm.firstName) }}

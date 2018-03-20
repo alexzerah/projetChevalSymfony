@@ -70,4 +70,5 @@ class ExhibitRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
 }

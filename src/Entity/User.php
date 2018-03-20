@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -207,6 +208,7 @@ class User implements AdvancedUserInterface, \Serializable
         $this->exhibitFollow = new ArrayCollection();
         $this->partyFollow = new ArrayCollection();
         $this->weekendFollow = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -445,6 +447,31 @@ class User implements AdvancedUserInterface, \Serializable
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+
+        if ($avatar instanceof UploadedFile) {
+            $this->setUpdatedAt(new \DateTime());
+        }
+    }
+
+    /**
+     * @ORM\Column(name="updatedAt", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
 }

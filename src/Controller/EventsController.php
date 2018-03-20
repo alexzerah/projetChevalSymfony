@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\UserSubscribeFormType;
 use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
+use App\Repository\UserRepository;
 use App\Repository\WeekendRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,12 +19,16 @@ class EventsController extends Controller
     public function showEvent(WeekendRepository $weekendRepository,
                               PartyRepository $partyRepository,
                               ExhibitRepository $exhibitRepository,
+                              UserRepository $userRepository,
                               $name)
     {
         // Check is a user is logged in
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         // Set the user
         $user = $this->getUser();
+
+        // Get user events follow
+        $userExhibitFollow = $userRepository->getUserFollow();
 
         // user form update
         $form = $this->createForm(UserSubscribeFormType::class, $user);
@@ -35,6 +40,7 @@ class EventsController extends Controller
 
         return $this->render('site\event.html.twig', [
             'controller_name' => 'EventsController',
+            'userFollow' => $userExhibitFollow,
             'party' => $theParty,
             'weekend' => $theWeekend,
             'exhibit' => $theExhibit,

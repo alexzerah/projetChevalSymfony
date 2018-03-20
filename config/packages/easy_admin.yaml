@@ -24,7 +24,7 @@ easy_admin:
           - { property: firstName, label: 'Prénom' }
           - { property: lastName, label: 'Nom' }
           - email
-          - { property: avatar, type: image, base_path: '/media/' }
+          - { property: avatar, label: 'Photo', type: image, base_path: '/media/' }
           - { property: isActive, label: 'Actif' }
           - { property: isAdmin, label: 'Admin' }
           - { property: exhibit, label: 'followExpo', type: boolean }

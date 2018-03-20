@@ -40,6 +40,7 @@ class UsersController extends Controller
         $userExhibitFollow = $user->getExhibitFollow()->toArray();
         $userPartyFollow = $user->getPartyFollow()->toArray();
         $userWeekendFollow = $user->getWeekendFollow()->toArray();
+
         // Concatenate events follow into a single array
         $userEventsFollow = new ArrayCollection(
             array_merge(
@@ -58,6 +59,11 @@ class UsersController extends Controller
             $theUser = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
+
+            // Petit hack pour mettre à jour la photo de profil sans modifier un autre champs
+            // dégueux mais j'ai pas mieux
+            $user->setUpdatedAt(new \DateTime());
+
             $em->persist($theUser);
             $em->flush();
 
