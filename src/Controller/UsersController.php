@@ -55,19 +55,25 @@ class UsersController extends Controller
 
         // handles data from POST requests
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $theUser = $form->getData();
 
-            $em = $this->getDoctrine()->getManager();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $theUser = $form->getData();
 
-            // Petit hack pour mettre à jour la photo de profil sans modifier un autre champs
-            // dégueux mais j'ai pas mieux
-            $user->setUpdatedAt(new \DateTime());
+                $em = $this->getDoctrine()->getManager();
 
-            $em->persist($theUser);
-            $em->flush();
+                // Petit hack pour mettre à jour la photo de profil sans modifier un autre champs
+                // dégueux mais j'ai pas mieux
+                $user->setUpdatedAt(new \DateTime());
 
-            $this->addFlash('success', 'Profil mis à jour :)');
+                $em->persist($theUser);
+                $em->flush();
+
+            } else {
+                return array(
+                    'data' => 'prout'
+                );
+            }
         }
 
         return $this->render('site/profil.html.twig', [
