@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
+use App\Services\Concatenate;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,7 +31,7 @@ class UsersController extends Controller
     /**
      * @Route("/profil", name="profil")
      */
-    public function userProfil(Request $request)
+    public function userProfil(Request $request, Concatenate $concatenate)
     {
         // Check is a user is logged in
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -42,13 +43,11 @@ class UsersController extends Controller
         $userPartyFollow = $user->getPartyFollow()->toArray();
         $userWeekendFollow = $user->getWeekendFollow()->toArray();
 
-        // Concatenate events follow into a single array
-        $userEventsFollow = new ArrayCollection(
-            array_merge(
-                $userExhibitFollow,
-                $userPartyFollow,
-                $userWeekendFollow
-            )
+        // Call concatenate service
+        $userEventsFollow = $concatenate->doConcatenate(
+            $userPartyFollow,
+            $userExhibitFollow,
+            $userWeekendFollow
         );
 
         // user form update

@@ -64,7 +64,7 @@ class MainController extends Controller
      */
     public function quatrecentquatre()
     {
-        return $this->render('site/404.html.twig', [
+        return $this->render('site/error404.html.twig', [
         ]);
     }
 
