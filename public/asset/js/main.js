@@ -348,23 +348,50 @@
 				});
 
 	});
-	/*
+
     $('#updateProfile').submit(function (e) {
         e.preventDefault();
 
         $.ajax({
             type: $(this).attr('method'),
             url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function (response) {
-                location.reload();
-                console.log("editado");
+            data: new FormData(this),
+			processData: false,
+			contentType: false,
+            success: function (data) {
+                $(".vich-image").load(" .vich-image");
+
+                console.log("Profile updated");
+
+                $.toast({
+                    heading: 'Youpi !',
+                    text: 'Votre profil a été mis à jour.',
+                    position: 'bottom-center',
+                    stack: false,
+                    showHideTransition: 'plain',
+                    icon: 'success'
+                });
+
+                $('html, body').animate({scrollTop : 0},{
+                    duration: 500
+                });
             },
-            error: function (response) {
-                console.log("no editado");
+            error: function (data) {
+                $.toast({
+                    heading: 'Oops! Vérifiez que :',
+                    text: [
+                    	'Votre prénom contient au moins 3 caractères',
+						'Votre nom contient au moins 3 caractères',
+						'Votre email est valide'
+					],
+                    hideAfter: 7000,
+                    stack: false,
+                    showHideTransition: 'plain',
+                    icon: 'error'
+                })
             }
         });
     });
-    */
+
 
 })(jQuery);
