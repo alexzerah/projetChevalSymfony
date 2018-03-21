@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Form\PassChangeFormType;
 use App\Form\PostType;
 use App\Repository\FetchRepository;
 use App\Services\Calculator;
@@ -70,9 +71,18 @@ class MainController extends Controller
     /**
      * @Route("/changer-mon-mot-de-passe", name="changepassword")
      */
-    public function changepassword()
+    public function changepassword(Request $request)
     {
+        // Check is a user is logged in
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        // Set the user
+        $user = $this->getUser();
+
+        // user form update
+        $form = $this->createForm(PassChangeFormType::class);
+
         return $this->render('site/changepassword.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
