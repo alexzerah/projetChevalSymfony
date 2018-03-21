@@ -32,10 +32,10 @@ class UserFormType extends AbstractType
                 'label'=>'Prénom'
             ))
             ->add('lastName',TextType::class, array(
-                    'label'=>'Nom'
+                'label'=>'Nom'
             ))
             ->add('email',EmailType::class, array(
-                    'label'=>'Adresse e-Mail'
+                'label'=>'Adresse e-Mail'
             ))
             ->add('exhibit', CheckboxType::class, array(
                 'required' => false
