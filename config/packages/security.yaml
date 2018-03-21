@@ -5,7 +5,6 @@ security:
                 class: App\Entity\User
 
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
         App\Entity\User:
             algorithm: bcrypt
     firewalls:
