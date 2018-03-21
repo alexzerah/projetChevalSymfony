@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -111,12 +112,16 @@ class User implements AdvancedUserInterface, \Serializable
     private $username;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Le prénom ne doit pas être vide")
+     * @Assert\Length(min="3", minMessage="Le prénom doit faire au moins 3 caractères")
+     * @ORM\Column(type="string")
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Le nom ne doit pas être vide")
+     * @Assert\Length(min="3", minMessage="Le nom doit faire au moins 3 caractères")
+     * @ORM\Column(type="string")
      */
     private $lastName;
 
@@ -126,6 +131,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $password;
 
     /**
+     * @Assert\NotBlank(message="L'email ne doit pas être vide")
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
      * @ORM\Column(type="string", length=254, unique=true)
      */
     private $email;
