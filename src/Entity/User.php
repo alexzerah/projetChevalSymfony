@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -168,7 +170,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(name="is_admin", type="boolean")
      */
-    private $isAdmin;
+    private $isAdmin = 0;
 
     /**
      * @ORM\Column(type="boolean")
@@ -242,7 +244,6 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getRoles()
     {
-        $roles = $this->isAdmin;
         $roles = array('ROLE_USER');
 
         if ($this->isAdmin == true) {
