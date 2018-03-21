@@ -21,10 +21,7 @@
                         {% endfor %}
                         <!-- avatar -->
                     </header>
-                    {{ form_start(userForm) }}
-                        <p>
-                            <img style="height: 200px;" src="{{ asset_base }}{{ app.user.avatar }}" alt="Photo de {{ app.user.username }}">
-                        </p>
+                    {{ form_start(userForm, {'attr': {'id': 'updateProfile'}}) }}
                         <p>
                             {{ form_widget(userForm.avatarFile) }}
                             {{ form_label(userForm.avatarFile) }}
