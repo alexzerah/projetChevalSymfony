@@ -11,15 +11,22 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('avatarFile',FileType::class, array(
-                'label' => 'Ajouter/Modifier',
-                'required' => false
+            ->setMethod('POST')
+            ->setAction('profil')
+            ->add('avatarFile',VichImageType::class, array(
+                'label' => 'Photo de profil',
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_link' => false
             ))
             ->add('firstName',TextType::class, array(
                 'label'=>'Prénom'

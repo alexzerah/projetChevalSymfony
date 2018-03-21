@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Form\UserSubscribeFormType;
 use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
 use App\Repository\UserRepository;

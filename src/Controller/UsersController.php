@@ -7,6 +7,7 @@ use App\Form\UserFormType;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -68,8 +69,6 @@ class UsersController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'Profil mis à jour :)');
-
-            return $this->redirectToRoute('profil');
         }
 
         return $this->render('site/profil.html.twig', [
