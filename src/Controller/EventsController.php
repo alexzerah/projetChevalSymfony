@@ -26,12 +26,26 @@ class EventsController extends Controller
         $theWeekend = $weekendRepository->getTheWeekend($name);
         $theExhibit = $exhibitRepository->getTheExhibit($name);
 
+
+        // Check if no wrong event has been provided
+        if (!$theParty && !$theWeekend && !$theExhibit) {
+            throw $this->createNotFoundException('Aucun événement trouvé !');
+        }
+
         return $this->render('site\event.html.twig', [
             'controller_name' => 'EventsController',
             'party' => $theParty,
             'weekend' => $theWeekend,
             'exhibit' => $theExhibit
         ]);
+    }
+
+    /**
+     * @Route("/event", name="event_home"),
+     */
+    public function eventNotFound()
+    {
+        throw $this->createNotFoundException('Aucun événement trouvé !');
     }
 
     /**
