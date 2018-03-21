@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
 use App\Entity\Exhibit;
 use App\Entity\Party;
 use App\Entity\User;

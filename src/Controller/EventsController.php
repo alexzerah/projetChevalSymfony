@@ -6,14 +6,14 @@ use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
 use App\Repository\UserRepository;
 use App\Repository\WeekendRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Services\Concatenate;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class EventsController extends Controller
 {
     /**
-     * @Route("/event/{name}", name="events_event")
+     * @Route("/event/{name}", name="events_event"),
      */
     public function showEvent(WeekendRepository $weekendRepository,
                               PartyRepository $partyRepository,
@@ -39,20 +39,19 @@ class EventsController extends Controller
      */
     public function getNextEvents(WeekendRepository $weekendRepository,
                                       PartyRepository $partyRepository,
-                                        ExhibitRepository $exhibitRepository)
+                                        ExhibitRepository $exhibitRepository,
+                                            Concatenate $concatenate)
     {
         // Call the function that give us events when event.date > today for each entities
         $nextWeekends = $weekendRepository->getNextWeekends();
         $nextParties = $partyRepository->getNextParties();
         $nextExhibits = $exhibitRepository->getNextExhibits();
 
-        // Concatenate these arrays into one single array
-        $nextEvents = new ArrayCollection(
-            array_merge(
-                $nextWeekends,
-                $nextParties,
-                $nextExhibits
-            )
+        // Call concatenate service
+        $nextEvents = $concatenate->doConcatenate(
+            $nextWeekends,
+            $nextParties,
+            $nextExhibits
         );
 
         return $this->render('site\home.html.twig', [
@@ -65,21 +64,20 @@ class EventsController extends Controller
      * @Route("/listeEvenements", name="events_previousEvents")
      */
     public function getPreviousEvents(WeekendRepository $weekendRepository,
-                                    PartyRepository $partyRepository,
-                                    ExhibitRepository $exhibitRepository)
+                                        PartyRepository $partyRepository,
+                                            ExhibitRepository $exhibitRepository,
+                                                Concatenate $concatenate)
     {
         // Call the function that give us events when event.date < today for each entities
         $previousWeekends = $weekendRepository->getPreviousWeekends();
         $previousParties = $partyRepository->getPreviousParties();
         $previousExhibits = $exhibitRepository->getPreviousExhibits();
 
-        // Concatenate these arrays into one single array
-        $previousEvents = new ArrayCollection(
-            array_merge(
-                $previousWeekends,
-                $previousParties,
-                $previousExhibits
-            )
+        // Call concatenate service
+        $previousEvents = $concatenate->doConcatenate(
+            $previousWeekends,
+            $previousParties,
+            $previousExhibits
         );
 
         return $this->render('site\listeEvent.html.twig', [
