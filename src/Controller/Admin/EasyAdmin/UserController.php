@@ -19,8 +19,20 @@ class UserController extends AdminController
     /**
      * @param User $entity
      */
+    protected function prePersistEntity($entity)
+    {
+        $this->encryptAction($entity);
+    }
+
+    /**
+     * @param User $entity
+     */
     protected function preUpdateEntity($entity)
     {
+        $this->encryptAction($entity);
+    }
+
+    protected function encryptAction($entity) {
         if (!$entity instanceof User) {
             return;
         }
