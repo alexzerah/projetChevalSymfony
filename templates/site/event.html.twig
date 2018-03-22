@@ -14,14 +14,12 @@
                         {% endif %}
                     </header>
                     {% if app.user %}
-                        {% if app.user.id == 16 %}
-                            <p>Je suis l'utilisateur {{ app.user.id }}</p>
-                            {% for event in userFollow  %}
-                                <p>{{ dump(userFollow) }}</p>
-                            {% endfor %}
-                            {#<p>{{ userFollow }}</p>#}
-                        {% endif %}
-                        <button>S'abonner</button>
+                            {% if exhibit in app.user.exhibitFollow %}
+                                <a href="">Se désinscrire</a>
+                            {% else %}
+                                <a href="">S'inscrire</a>
+                            {% endif  %}
+                            <p>{{ dump(exhibit.id) }}</p>
                     {% endif %}
                     <span class="image main"><img src="{{ asset_base }}{{ party ? asset(party.banner) : (weekend ? asset(weekend.banner) : asset(exhibit.banner)) }}" alt="{{ party ? party.name : (weekend ? weekend.name : exhibit.name) }}" /></span>
                         <h3>Prix : {{ party ? party.price : (weekend ? weekend.price : exhibit.price) }} € - Lieu : {{ party ? party.location : (weekend ? weekend.location : exhibit.location) }}</h3>
