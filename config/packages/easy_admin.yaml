@@ -15,6 +15,7 @@ easy_admin:
   entities:
     User:
       class: App\Entity\User
+      controller: App\Controller\Admin\EasyAdmin\UserController
       export_path: '%kernel.root_dir/../var/export/user'
       password_encoding: { algorithm: 'bcrypt', cost: 12 }
       label: 'Utilisateurs'
