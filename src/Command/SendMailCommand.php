@@ -51,7 +51,6 @@ class SendMailCommand extends Command
         foreach ($events as $event) {
             // wait for users/events relations to get attendees
 
-
             $mailBody = '';
 
             if ($event instanceof Weekend) {
@@ -72,12 +71,17 @@ class SendMailCommand extends Command
             } else {
                 $output->writeln('Event type is unknown');
             }
-
-            $message = (new Swift_Message('Wonderful Subject'))
-               ->setFrom(['chevalproject@gmail.com' => 'Projet Cheval'])
-               ->setTo(['anjuere.corentin@gmail.com'])
-               ->setBody($mailBody);
-            $r = $this->mailer->send($message);
+            print_r($mailBody);
+            $receivers = [];
+            foreach ($event->getUsers() as $users) {
+                $receivers[] = $users->getEmail();
             }
+            print_r($receivers);
+            $message = (new Swift_Message('Wonderful Subject'))
+                ->setFrom(['chevalproject@gmail.com' => 'Projet Cheval'])
+                ->setTo($receivers)
+                ->setBody($mailBody);
+            $this->mailer->send($message);
+        }
     }
 }

@@ -60,26 +60,27 @@ class Weekend
     private $bannerFile;
 
     /**
-     * Many Groups have Many Users.
+     * Many Weekends have Many Users.
      * @ORM\ManyToMany(targetEntity="User", mappedBy="weekendFollow")
      */
-    private $user;
+    private $users;
 
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getUsers()
     {
-        return $this->user;
+        return $this->users;
     }
 
     /**
-     * @param mixed $user
+     * @param mixed $users
      */
-    public function setUser($user)
+    public function setUsers($users)
     {
-        $this->user = $user;
+        $this->users = $users;
     }
+
 
     public function setBannerFile(File $bannerFile = null)
     {

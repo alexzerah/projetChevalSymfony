@@ -48,25 +48,25 @@ class Party
     private $banner;
 
     /**
-     * Many Groups have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="partyFollow")
+     * Many Parties have Many Users.
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="parties")
      */
-    private $user;
+    private $users;
 
     /**
-     * @return mixed
+     * @return User[]
      */
-    public function getUser()
+    public function getUsers()
     {
-        return $this->user;
+        return $this->users;
     }
 
     /**
-     * @param mixed $user
+     * @param mixed $users
      */
-    public function setUser($user)
+    public function setUsers($users)
     {
-        $this->user = $user;
+        $this->users = $users;
     }
 
     public function __toString()

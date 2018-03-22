@@ -58,24 +58,24 @@ class Exhibit
 
     /**
      * Many Groups have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="exhibitFollow")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="exhibits")
      */
-    private $user;
+    private $users;
 
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getUsers()
     {
-        return $this->user;
+        return $this->users;
     }
 
     /**
-     * @param mixed $user
+     * @param mixed $users
      */
-    public function setUser($user)
+    public function setUsers($users)
     {
-        $this->user = $user;
+        $this->users = $users;
     }
 
 
@@ -96,7 +96,7 @@ class Exhibit
     public function __construct()
     {
         /* comment */
-        $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->date = new \DateTime();
     }
 
