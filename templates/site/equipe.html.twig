@@ -24,7 +24,7 @@
                 {% for member in teamMembers %}
                 <section>
                     <a href="generic.html" class="image">
-                        <img src="images/pic08.jpg" alt="" data-position="center center" />
+                        <img src="{{ asset_base }}{{ asset(member.avatar) }}" alt="{{ member.username }}" data-position="center center" />
                     </a>
                     <div class="content">
                         <div class="inner">
