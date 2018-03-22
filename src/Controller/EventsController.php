@@ -25,6 +25,7 @@ class EventsController extends Controller
         $theParty = $partyRepository->getTheParty($name);
         $theWeekend = $weekendRepository->getTheWeekend($name);
         $theExhibit = $exhibitRepository->getTheExhibit($name);
+        $userFollow = $userRepository->getUserFollow();
 
 
         // Check if no wrong event has been provided
@@ -36,7 +37,8 @@ class EventsController extends Controller
             'controller_name' => 'EventsController',
             'party' => $theParty,
             'weekend' => $theWeekend,
-            'exhibit' => $theExhibit
+            'exhibit' => $theExhibit,
+            'userFollow' => ($userFollow)
         ]);
     }
 
