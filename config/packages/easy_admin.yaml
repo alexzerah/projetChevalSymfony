@@ -32,9 +32,9 @@ easy_admin:
           - { property: exhibit, label: 'followExpo', type: boolean }
           - { property: party, label: 'followSoirées', type: boolean }
           - { property: weekend, label: 'followWeekends', type: boolean }
-          - { property: exhibitFollow, label: 'Expo'}
-          - { property: partyFollow, label: 'Soirées'}
-          - { property: weekendFollow, label: 'Weekends'}
+          - { property: exhibits, label: 'Expo'}
+          - { property: parties, label: 'Soirées'}
+          - { property: weekends, label: 'Weekends'}
       form:
         fields:
           - { property: username, label: 'Username' }
@@ -48,9 +48,9 @@ easy_admin:
           - { property: exhibit, label: 'Abonné aux expositions', type: 'checkbox' }
           - { property: party, label: 'Abonné aux soirées', type: 'checkbox' }
           - { property: weekend, label: 'Abonné aux weekends', type: 'checkbox' }
-          - { property: exhibitFollow, label: 'Expo' }
-          - { property: partyFollow, label: 'Soirées' }
-          - { property: weekendFollow, label: 'Weekends' }
+          - { property: exhibits, label: 'Expo' }
+          - { property: parties, label: 'Soirées' }
+          - { property: weekends, label: 'Weekends' }
     Exhibit:
       class: App\Entity\Exhibit
       label: 'Expositions'

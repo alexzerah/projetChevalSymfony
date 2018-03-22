@@ -49,15 +49,15 @@ class UsersController extends Controller
         $user = $this->getUser();
 
         // Get user events follow
-        $userExhibitFollow = $user->getExhibitFollow()->toArray();
-        $userPartyFollow = $user->getPartyFollow()->toArray();
-        $userWeekendFollow = $user->getWeekendFollow()->toArray();
+        $userExhibits = $user->getExhibits()->toArray();
+        $userParties = $user->getParties()->toArray();
+        $userWeekends = $user->getWeekends()->toArray();
 
         // Call concatenate service
         $userEventsFollow = $concatenate->doConcatenate(
-            $userPartyFollow,
-            $userExhibitFollow,
-            $userWeekendFollow
+            $userParties,
+            $userExhibits,
+            $userWeekends
         );
 
         // user form update
