@@ -49,7 +49,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function getUserFollow()
     {
         return $this->createQueryBuilder('u')
-            ->innerJoin('u.exhibitFollow', 'e')
+            ->innerJoin('u.exhibits', 'e')
             ->where('e.id = :eid AND u.id = :uid')
             ->setParameter('eid', '44')
             ->setParameter('uid', '16')
@@ -60,7 +60,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function getExhibitFollow()
     {
         return $this->createQueryBuilder('u')
-            ->innerJoin('u.exhibitFollow', 'e')
+            ->innerJoin('u.exhibits', 'e')
             ->where('e.id = :eid AND u.id = :uid')
             ->setParameter('eid', '10')
             ->setParameter('uid', '1')
