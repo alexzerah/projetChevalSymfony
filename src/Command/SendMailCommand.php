@@ -55,18 +55,18 @@ class SendMailCommand extends Command
             $mailBody = '';
 
             if ($event instanceof Weekend) {
-                $mailBody = 'Weekend : ' . $event->getNom();
-                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
-                $mailBody .= ' / Date : de ' . $event->getDate()->format('d-m-Y H:i:s') . ' à ' . $event->getDateFin()->format('d-m-Y H:i:s');
+                $mailBody = 'Weekend : ' . $event->getName();
+                $mailBody .= ' / Lieu : ' . $event->getLocation();
+                $mailBody .= ' / Date : de ' . $event->getDate()->format('d-m-Y H:i:s') . ' à ' . $event->getEndDate()->format('d-m-Y H:i:s');
                 $mailBody .= ' / Détails : ' . $event->getDetails();
             } elseif ($event instanceof Exhibit) {
-                $mailBody = 'Weekend : ' . $event->getNom();
-                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
+                $mailBody = 'Exposition : ' . $event->getName();
+                $mailBody .= ' / Lieu : ' . $event->getLocation();
                 $mailBody .= ' / Date : le ' . $event->getDate()->format('d-m-Y H:i:s');
                 $mailBody .= ' / Détails : ' . $event->getDetails();
             } elseif ($event instanceof Party) {
-                $mailBody = 'Weekend : ' . $event->getNom();
-                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
+                $mailBody = 'Soirée : ' . $event->getName();
+                $mailBody .= ' / Lieu : ' . $event->getLocation();
                 $mailBody .= ' / Date : ' . $event->getDate()->format('d-m-Y H:i:s');
                 $mailBody .= ' / Détails : ' . $event->getDetails();
             } else {
