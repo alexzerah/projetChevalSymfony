@@ -16,18 +16,50 @@
                         {% endif %}
                     </header>
                     {% if app.user %}
+                        {% endif %}
+                        {% if eventType == 'exhibit' %}
                             {% if exhibit in app.user.exhibits %}
                                 <a class="aButton" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
                             {% else %}
-                    <a class="aButton" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                                <a class="aButton" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                            {% endif  %}
+                        {% endif %}
+
+                        {% if eventType == 'weekend' %}
+                            {% if weekend in app.user.weekends %}
+                                <a class="aButton" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
+                            {% else %}
+                                <a class="aButton" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                            {% endif  %}
+                        {% endif %}
+
+                        {% if eventType == 'party' %}
+                            {% if party in app.user.parties %}
+                                <a class="aButton" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
+                            {% else %}
+                                <a class="aButton" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
                             {% endif  %}
                     {% endif %}
                     <ul>
-                        {% for user in exhibit.users %}
-                            <li>
-                                {{ user.firstName }} {{ user.lastName }}
-                            </li>
-                        {% endfor %}
+                        {% if eventType == 'exhibit' %}
+                            {% for user in exhibit.users %}
+                                <li>
+                                    {{ user.firstName }} {{ user.lastName }}
+                                </li>
+                            {% endfor %}
+                        {% elseif eventType == 'party' %}
+                            {% for user in party.users %}
+                                <li>
+                                    {{ user.firstName }} {{ user.lastName }}
+                                </li>
+                            {% endfor %}
+                        {% elseif eventType == 'weekend' %}
+                            {% for user in weekend.users %}
+                                <li>
+                                    {{ user.firstName }} {{ user.lastName }}
+                                </li>
+                            {% endfor %}
+                        {% endif %}
                     </ul>
                     <span class="image main"><img src="{{ asset_base }}{{ party ? asset(party.banner) : (weekend ? asset(weekend.banner) : asset(exhibit.banner)) }}" alt="{{ party ? party.name : (weekend ? weekend.name : exhibit.name) }}" /></span>
                         <h3>Prix : {{ party ? party.price : (weekend ? weekend.price : exhibit.price) }} € - Lieu : {{ party ? party.location : (weekend ? weekend.location : exhibit.location) }}</h3>
