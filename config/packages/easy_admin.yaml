@@ -69,7 +69,7 @@ easy_admin:
           - { property: location, label: 'Lieu' }
           - { property: date, label: 'Date et heure' }
           - { property: price, label: 'Prix' }
-          - { property: details, label: 'Description' }
+          - { property: details, label: 'Description', type: 'ckeditor' }
           - { property: bannerFile, label: 'Image', type: 'vich_image' }
     Party:
       class: App\Entity\Party
@@ -89,7 +89,7 @@ easy_admin:
           - { property: location, label: 'Lieu' }
           - { property: date, label: 'Date et heure' }
           - { property: price, label: 'Prix' }
-          - { property: details, label: 'Description' }
+          - { property: details, label: 'Description', type: 'ckeditor' }
           - { property: bannerFile, label: 'Image', type: 'vich_image' }
     Weekend:
       class: App\Entity\Weekend
@@ -112,5 +112,5 @@ easy_admin:
           - { property: date, label: 'Date et heure' }
           - { property: endDate, label: 'Date de fin' }
           - { property: price, label: 'Prix' }
-          - { property: details, label: 'Description' }
+          - { property: details, label: 'Description', type: 'ckeditor' }
           - { property: bannerFile, label: 'Image', type: 'vich_image' }
