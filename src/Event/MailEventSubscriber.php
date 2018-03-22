@@ -21,11 +21,15 @@ class MailEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            EasyAdminEvents::PRE_PERSIST => 'onPrePersist'
+            EasyAdminEvents::POST_PERSIST => 'onPostPersist',
+            EasyAdminEvents::POST_UPDATE => 'onPostUpdate',
+            EasyAdminEvents::POST_REMOVE => 'onPostRemove'
         ];
     }
 
-    public function onPrePersist(GenericEvent $event) {
+    // When new event is created
+
+    public function onPostPersist(GenericEvent $event) {
 
         $entity = $event->getSubject();
 
@@ -33,13 +37,61 @@ class MailEventSubscriber implements EventSubscriberInterface
             || $entity instanceof Exhibit
                 || $entity instanceof Weekend) {
 
-            $message = (new \Swift_Message('Votre BDE organise un nouvel évènement: '. $entity->getname()))
+            $message = (new \Swift_Message('Votre BDE organise un nouvel événement: '. $entity->getname()))
                 ->setFrom('projectcheval@gmail.com')
                 ->setTo('belabesmohammed@gmail.com')
                 ->setBody(
                     $entity->getName().
                             $entity->getLocation().
                                 $entity->getprice()
+                )
+            ;
+
+            $this->mailer->send($message);
+        }
+    }
+
+    // When event is updated
+
+    public function onPostUpdate(GenericEvent $event) {
+
+        $entity = $event->getSubject();
+
+        if($entity instanceof Party
+            || $entity instanceof Exhibit
+            || $entity instanceof Weekend) {
+
+            $message = (new \Swift_Message('Un événement a été modifié: '. $entity->getname()))
+                ->setFrom('projectcheval@gmail.com')
+                ->setTo('belabesmohammed@gmail.com')
+                ->setBody(
+                    $entity->getName().
+                    $entity->getLocation().
+                    $entity->getprice()
+                )
+            ;
+
+            $this->mailer->send($message);
+        }
+    }
+
+    // When event is deleted (on peut plus se bourrer la gueule quoi)
+
+    public function onPostRemove(GenericEvent $event) {
+
+        $entity = $event->getSubject();
+
+        if($entity instanceof Party
+            || $entity instanceof Exhibit
+            || $entity instanceof Weekend) {
+
+            $message = (new \Swift_Message('Un événement a été annulé :( '. $entity->getname()))
+                ->setFrom('projectcheval@gmail.com')
+                ->setTo('belabesmohammed@gmail.com')
+                ->setBody(
+                    $entity->getName().
+                    $entity->getLocation().
+                    $entity->getprice()
                 )
             ;
 
