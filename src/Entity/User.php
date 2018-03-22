@@ -187,30 +187,26 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $Weekend;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="Exhibit")
-     * @ORM\JoinTable(name="user_exhibit",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="exhibit_id", referencedColumnName="id")}
-     *      )
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="Exhibit", inversedBy="users")
+     * @ORM\JoinTable(name="user_exhibit")
      */
     private $exhibitFollow;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="Party")
-     * @ORM\JoinTable(name="user_party",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="party_id", referencedColumnName="id")}
-     *      )
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="Party", inversedBy="users")
+     * @ORM\JoinTable(name="user_party")
      */
     private $partyFollow;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Weekend")
-     * @ORM\JoinTable(name="user_weekend",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="weekend_id", referencedColumnName="id")}
-     *      )
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="Weekend", inversedBy="users")
+     * @ORM\JoinTable(name="user_weekend")
      */
     private $weekendFollow;
 

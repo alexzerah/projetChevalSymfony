@@ -55,6 +55,29 @@ class Exhibit
      */
     private $bannerFile;
 
+    /**
+     * Many Groups have Many Users.
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="exhibitFollow")
+     */
+    private $user;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
     public function setBannerFile(File $bannerFile = null)
     {
         $this->bannerFile = $bannerFile;
@@ -71,6 +94,7 @@ class Exhibit
 
     public function __construct()
     {
+        $this->user = new ArrayCollection();
         $this->date = new \DateTime();
     }
 
