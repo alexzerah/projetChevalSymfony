@@ -189,33 +189,30 @@ class User implements AdvancedUserInterface, \Serializable
 
 
     /**
-     * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="Exhibit", inversedBy="users")
-     * @ORM\JoinTable(name="user_exhibit")
+     * Many Users attends Many exhibits.
+     * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="users")
      */
-    private $exhibitFollow;
+    private $exhibits;
 
 
     /**
-     * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="Party", inversedBy="users")
-     * @ORM\JoinTable(name="user_party")
+     * Many Users attends Many parties.
+     * @ORM\ManyToMany(targetEntity="Party", mappedBy="users")
      */
-    private $partyFollow;
+    private $parties;
 
     /**
-     * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="Weekend", inversedBy="users")
-     * @ORM\JoinTable(name="user_weekend")
+     * Many Users attends many Weekends.
+     * @ORM\ManyToMany(targetEntity="Weekend", mappedBy="users")
      */
-    private $weekendFollow;
+    private $weekends;
 
     public function __construct()
     {
         $this->isActive = true;
-        $this->exhibitFollow = new ArrayCollection();
-        $this->partyFollow = new ArrayCollection();
-        $this->weekendFollow = new ArrayCollection();
+        $this->exhibits = new ArrayCollection();
+        $this->parties = new ArrayCollection();
+        $this->weekends = new ArrayCollection();
         $this->updatedAt = new \DateTime();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
@@ -395,49 +392,49 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getExhibitFollow()
+    public function getExhibits()
     {
-        return $this->exhibitFollow;
+        return $this->exhibits;
     }
 
     /**
-     * @param mixed $exhibitFollow
+     * @param mixed $exhibits
      */
-    public function setExhibitFollow($exhibitFollow)
+    public function setExhibits($exhibits)
     {
-        $this->exhibitFollow = $exhibitFollow;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPartyFollow()
-    {
-        return $this->partyFollow;
-    }
-
-    /**
-     * @param mixed $partyFollow
-     */
-    public function setPartyFollow($partyFollow)
-    {
-        $this->partyFollow = $partyFollow;
+        $this->exhibits = $exhibits;
     }
 
     /**
      * @return mixed
      */
-    public function getWeekendFollow()
+    public function getParties()
     {
-        return $this->weekendFollow;
+        return $this->parties;
     }
 
     /**
-     * @param mixed $weekendFollow
+     * @param mixed $parties
      */
-    public function setWeekendFollow($weekendFollow)
+    public function setParties($parties)
     {
-        $this->weekendFollow = $weekendFollow;
+        $this->parties = $parties;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeekends()
+    {
+        return $this->weekends;
+    }
+
+    /**
+     * @param mixed $weekends
+     */
+    public function setWeekends($weekends)
+    {
+        $this->weekends = $weekends;
     }
 
     /**

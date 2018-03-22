@@ -349,6 +349,10 @@
 
 	});
 
+	// inverser le label/checkbox delete
+    var deleteLabel = $("#user_form_avatarFile_delete").prev();
+    deleteLabel.insertAfter("#user_form_avatarFile_delete");
+
     $('#updateProfile').submit(function (e) {
         e.preventDefault();
 

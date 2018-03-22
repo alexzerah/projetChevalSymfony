@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
     {% block content %}
+        {% set eventType = party ? 'party' : (weekend ? 'weekend' : 'exhibit') %}
+        {% set eventId = party ? party.id : (weekend ? weekend.id : exhibit.id) %}
         <!-- Main -->
         <div id="main" class="alt">
             <!-- One -->
@@ -14,17 +16,23 @@
                         {% endif %}
                     </header>
                     {% if app.user %}
-                            {% if exhibit in app.user.exhibitFollow %}
-                                <a href="">Se désinscrire</a>
+                            {% if exhibit in app.user.exhibits %}
+                                <a class="aButton" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
                             {% else %}
-                                <a href="">S'inscrire</a>
+                    <a class="aButton" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
                             {% endif  %}
-                            <p>{{ dump(exhibit.id) }}</p>
                     {% endif %}
+                    <ul>
+                        {% for user in exhibit.users %}
+                            <li>
+                                {{ user.firstName }} {{ user.lastName }}
+                            </li>
+                        {% endfor %}
+                    </ul>
                     <span class="image main"><img src="{{ asset_base }}{{ party ? asset(party.banner) : (weekend ? asset(weekend.banner) : asset(exhibit.banner)) }}" alt="{{ party ? party.name : (weekend ? weekend.name : exhibit.name) }}" /></span>
                         <h3>Prix : {{ party ? party.price : (weekend ? weekend.price : exhibit.price) }} € - Lieu : {{ party ? party.location : (weekend ? weekend.location : exhibit.location) }}</h3>
                     <h3>Contenu de l'event</h3>
-                    <p>{{ party ? party.details : (weekend ? weekend.details : exhibit.details) }}</p>
+                    <div>{{ (party ? party.details : (weekend ? weekend.details : exhibit.details))|raw }}</div>
                 </div>
             </section>
         </div>

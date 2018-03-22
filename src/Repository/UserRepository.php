@@ -49,12 +49,10 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 //    public function getUserFollow()
 //    {
 //        return $this->createQueryBuilder('u')
-//            ->from('app_users','u')
-//            ->innerJoin('Exhibit','e', 'u.id = e.user')
-////            ->where('u.id = :eid AND e.id = :uid')
-////            ->setParameter('eid', '42')
-////            ->setParameter('uid', '16')
-//            ->setParameter('u.id', '16')
+//            ->innerJoin('u.exhibits', 'e')
+//            ->where('e.id = :eid AND u.id = :uid')
+//            ->setParameter('eid', '44')
+//            ->setParameter('uid', '16')
 //            ->getQuery()
 //            ->getResult();
 //    }
@@ -62,10 +60,10 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function getExhibitFollow()
     {
         return $this->createQueryBuilder('u')
-            ->innerJoin('u.user_exhibit', 'e')
+            ->innerJoin('u.exhibits', 'e')
             ->where('e.id = :eid AND u.id = :uid')
-            ->setParameter('eid', '44')
-            ->setParameter('uid', '16')
+            ->setParameter('eid', '10')
+            ->setParameter('uid', '1')
             ->getQuery()
             ->getResult();
     }

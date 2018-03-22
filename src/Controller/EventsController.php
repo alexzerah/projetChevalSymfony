@@ -123,10 +123,44 @@ class EventsController extends Controller
                 break;
         }
 
-        $event = $repository->find($request->get('event_id'));
+        $event = $repository->find($request->get('eventId'));
 
         if ($event instanceof Exhibit || $event instanceof Party || $event instanceof Weekend) {
-            
+            $event->addUser($this->getUser());
+            $this->getDoctrine()->getManager()->persist($event);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('events_event', ['name' => $event->getName()]);
+        } else {
+            throw $this->createNotFoundException('Aucun événement trouvé !');
+        }
+    }
+
+    /**
+     * @Route("/evenement/desinscription/{eventType}", name="event_unsubscribe")
+     */
+    public function unsubscribeEventAction(Request $request, string $eventType)
+    {
+        switch ($eventType) {
+            case 'exhibit':
+                $repository = $this->getDoctrine()->getRepository(Exhibit::class);
+                break;
+            case 'party':
+                $repository = $this->getDoctrine()->getRepository(Party::class);
+                break;
+            case 'weekend':
+                $repository = $this->getDoctrine()->getRepository(Weekend::class);
+                break;
+        }
+
+        $event = $repository->find($request->get('eventId'));
+
+        if ($event instanceof Exhibit || $event instanceof Party || $event instanceof Weekend) {
+            $event->removeUser($this->getUser());
+            $this->getDoctrine()->getManager()->persist($event);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('events_event', ['name' => $event->getName()]);
         } else {
             throw $this->createNotFoundException('Aucun événement trouvé !');
         }

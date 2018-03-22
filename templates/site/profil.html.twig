@@ -17,12 +17,8 @@
                     {{ form_start(userForm, {'attr': {'id': 'updateProfile', 'novalidate': 'novalidate'}}) }}
                         <!-- avatar -->
                         <p>
-                            {{ form_widget(userForm.avatarFile.file) }}
-                            {{ form_label(userForm.avatarFile.file) }}
-                        </p>
-                        <p>
-                            {{ form_widget(userForm.avatarFile.delete) }}
-                            {{ form_label(userForm.avatarFile.delete) }}
+                            {{ form_widget(userForm.avatarFile) }}
+                            {{ form_label(userForm.avatarFile) }}
                         </p>
                         <p>
                             {{ form_widget(userForm.firstName) }}
