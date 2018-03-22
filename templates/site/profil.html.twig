@@ -13,18 +13,16 @@
                             </ul>
                         {% endif %}
                         <h1>Mon profil</h1>
-                        <!-- Messages d'alerte -->
-                        {% for msg in app.session.flashBag.get('success') %}
-                            <div style="padding: 1em; background:green">
-                                {{ msg }}
-                            </div>
-                        {% endfor %}
-                        <!-- avatar -->
                     </header>
                     {{ form_start(userForm, {'attr': {'id': 'updateProfile', 'novalidate': 'novalidate'}}) }}
+                        <!-- avatar -->
                         <p>
-                            {{ form_widget(userForm.avatarFile) }}
-                            {{ form_label(userForm.avatarFile) }}
+                            {{ form_widget(userForm.avatarFile.file) }}
+                            {{ form_label(userForm.avatarFile.file) }}
+                        </p>
+                        <p>
+                            {{ form_widget(userForm.avatarFile.delete) }}
+                            {{ form_label(userForm.avatarFile.delete) }}
                         </p>
                         <p>
                             {{ form_widget(userForm.firstName) }}
