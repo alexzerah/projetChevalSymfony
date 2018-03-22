@@ -95,6 +95,7 @@ class Exhibit
 
     public function __construct()
     {
+        /* comment */
         $this->user = new ArrayCollection();
         $this->date = new \DateTime();
     }
