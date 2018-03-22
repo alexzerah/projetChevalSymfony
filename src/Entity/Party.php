@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -49,7 +50,7 @@ class Party
 
     /**
      * Many Parties have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="parties")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="parties")
      */
     private $users;
 
@@ -67,6 +68,20 @@ class Party
     public function setUsers($users)
     {
         $this->users = $users;
+    }
+
+    public function addUser($user)
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+    }
+
+    public function removeUser($user)
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
     }
 
     public function __toString()
@@ -92,6 +107,7 @@ class Party
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->users = new ArrayCollection();
     }
     /**
      * @return mixed

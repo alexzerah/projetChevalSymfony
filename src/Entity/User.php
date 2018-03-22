@@ -190,20 +190,20 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * Many Users attends Many exhibits.
-     * @ORM\ManyToMany(targetEntity="Exhibit", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="users")
      */
     private $exhibits;
 
 
     /**
      * Many Users attends Many parties.
-     * @ORM\ManyToMany(targetEntity="Party", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Party", mappedBy="users")
      */
     private $parties;
 
     /**
      * Many Users attends many Weekends.
-     * @ORM\ManyToMany(targetEntity="Weekend", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Weekend", mappedBy="users")
      */
     private $weekends;
 

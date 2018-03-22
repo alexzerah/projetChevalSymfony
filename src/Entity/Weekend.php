@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -61,7 +62,7 @@ class Weekend
 
     /**
      * Many Weekends have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="weekendFollow")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="weekendFollow")
      */
     private $users;
 
@@ -81,6 +82,19 @@ class Weekend
         $this->users = $users;
     }
 
+    public function addUser($user)
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+    }
+
+    public function removeUser($user)
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
+    }
 
     public function setBannerFile(File $bannerFile = null)
     {
@@ -228,5 +242,6 @@ class Weekend
     {
         $this->date = new \DateTime();
         $this->endDate = new \DateTime();
+        $this->users = new ArrayCollection();
     }
 }

@@ -57,8 +57,8 @@ class Exhibit
     private $bannerFile;
 
     /**
-     * Many Groups have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="exhibits")
+     * Many Exhibits have Many Users.
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="exhibits")
      */
     private $users;
 
@@ -78,6 +78,19 @@ class Exhibit
         $this->users = $users;
     }
 
+    public function addUser($user)
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+    }
+
+    public function removeUser($user)
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
+    }
 
     public function setBannerFile(File $bannerFile = null)
     {
