@@ -130,7 +130,7 @@ class EventsController extends Controller
             $this->getDoctrine()->getManager()->persist($event);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('events_event', ['name' => $event->getName()]);
+            return $this->redirectToRoute('events_event', ['slug' => $event->getSlug()]);
         } else {
             throw $this->createNotFoundException('Aucun événement trouvé !');
         }
@@ -160,7 +160,7 @@ class EventsController extends Controller
             $this->getDoctrine()->getManager()->persist($event);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('events_event', ['name' => $event->getName()]);
+            return $this->redirectToRoute('events_event', ['slug' => $event->getSlug()]);
         } else {
             throw $this->createNotFoundException('Aucun événement trouvé !');
         }

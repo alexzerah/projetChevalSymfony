@@ -10,8 +10,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends Controller
 {
     /**
- * @Route("/login", name="login")
- */
+    * @Route("/login", name="login")
+    */
     public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
         // get the login error if there is one
@@ -31,7 +31,7 @@ class SecurityController extends Controller
      */
     public function logout()
     {
-
+        // Permet le logout
     }
 
 }

@@ -15,11 +15,12 @@
 
                 $.toast({
                     heading: 'Youpi !',
-                    text: 'Votre profil a été mis à jour.',
+                    text: 'Nous avons bien reçu votre message.',
                     position: 'bottom-center',
                     stack: false,
                     showHideTransition: 'plain',
-                    icon: 'success'
+                    icon: 'success',
+                    hideAfter: 5000
                 });
             },
             error: function (data) {

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
 use App\Services\Concatenate;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -75,7 +76,8 @@ class UsersController extends Controller
         return $this->render('site/profil.html.twig', [
             'controller_name' => 'UsersController',
             'userForm' => $form->createView(),
-            'userEventsFollow' => $userEventsFollow
+            'userEventsFollow' => $userEventsFollow,
+            'today' => new DateTime()
         ]);
     }
 }
