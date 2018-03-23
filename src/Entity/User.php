@@ -497,13 +497,5 @@ class User implements AdvancedUserInterface, \Serializable
             // $this->salt
             ) = unserialize($serialized);
     }
-
-    /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
 }
 
