@@ -6,6 +6,8 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Form\ForgotPassword;
 use App\Form\PasswordResetType;
+use App\Form\ContactFormType;
+use App\Form\PassChangeFormType;
 use App\Form\PostType;
 use App\Repository\FetchRepository;
 use App\Services\Calculator;
@@ -21,6 +23,40 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class MainController extends Controller
 {
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contactAction(Request $request, \Swift_Mailer $mailer)
+    {
+        $form = $this->createForm(ContactFormType::class);
+
+        // handles data from POST requests
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+
+                $data = (object) $form->getData();
+
+                $message = (new \Swift_Message($data->subject))
+                    ->setFrom($data->email)
+                    ->setTo('chevalproject@gmail.com')
+                    ->setBody($data->message);
+
+                $mailer->send($message);
+
+            } else {
+                return array(
+                    'data' => 'prout'
+                );
+            }
+        }
+
+        return $this->render('site/contact.html.twig', [
+            'contactForm' => $form->createView()
+        ]);
+    }
+
     /**
      * @Route("/", name="home")
      */
