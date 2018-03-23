@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\PasswordCryptController;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -317,11 +318,34 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
+    /**
      * @param mixed $password
      */
     public function setPassword($password)
     {
         $this->password = $password;
+        //$this->password = new PasswordCryptController();
     }
 
     /**
