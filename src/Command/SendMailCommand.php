@@ -7,6 +7,9 @@ use App\Entity\Weekend;
 use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
 use App\Repository\WeekendRepository;
+use Swift_Mailer;
+use Swift_Message;
+use Swift_SmtpTransport;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,12 +19,14 @@ class SendMailCommand extends Command
     private $weekendRepository;
     private $exhibitRepository;
     private $partyRepository;
+    private $mailer;
 
-    public function __construct(WeekendRepository $weekendRepository, ExhibitRepository $exhibitRepository, PartyRepository $partyRepository)
+    public function __construct(WeekendRepository $weekendRepository, ExhibitRepository $exhibitRepository, PartyRepository $partyRepository, Swift_Mailer $mailer)
     {
         $this->weekendRepository = $weekendRepository;
         $this->exhibitRepository = $exhibitRepository;
         $this->partyRepository = $partyRepository;
+        $this->mailer = $mailer;
 
         parent::__construct();
     }
@@ -49,25 +54,34 @@ class SendMailCommand extends Command
             $mailBody = '';
 
             if ($event instanceof Weekend) {
-                $mailBody = 'Weekend : ' . $event->getNom();
-                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
-                $mailBody .= ' / Date : de ' . $event->getDate()->format('d-m-Y H:i:s') . ' à ' . $event->getDateFin()->format('d-m-Y H:i:s');
+                $mailBody = 'Weekend : ' . $event->getName();
+                $mailBody .= ' / Lieu : ' . $event->getLocation();
+                $mailBody .= ' / Date : de ' . $event->getDate()->format('d-m-Y H:i:s') . ' à ' . $event->getEndDate()->format('d-m-Y H:i:s');
                 $mailBody .= ' / Détails : ' . $event->getDetails();
             } elseif ($event instanceof Exhibit) {
-                $mailBody = 'Weekend : ' . $event->getNom();
-                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
+                $mailBody = 'Exposition : ' . $event->getName();
+                $mailBody .= ' / Lieu : ' . $event->getLocation();
                 $mailBody .= ' / Date : le ' . $event->getDate()->format('d-m-Y H:i:s');
                 $mailBody .= ' / Détails : ' . $event->getDetails();
             } elseif ($event instanceof Party) {
-                $mailBody = 'Weekend : ' . $event->getNom();
-                $mailBody .= ' / Lieux : ' . $event->getLocalisation();
+                $mailBody = 'Soirée : ' . $event->getName();
+                $mailBody .= ' / Lieu : ' . $event->getLocation();
                 $mailBody .= ' / Date : ' . $event->getDate()->format('d-m-Y H:i:s');
                 $mailBody .= ' / Détails : ' . $event->getDetails();
             } else {
                 $output->writeln('Event type is unknown');
             }
-
-            dump($mailBody);die;
+            print_r($mailBody);
+            $receivers = [];
+            foreach ($event->getUsers() as $users) {
+                $receivers[] = $users->getEmail();
+            }
+            print_r($receivers);
+            $message = (new Swift_Message('Wonderful Subject'))
+                ->setFrom(['chevalproject@gmail.com' => 'Projet Cheval'])
+                ->setTo($receivers)
+                ->setBody($mailBody);
+            $this->mailer->send($message);
         }
     }
 }

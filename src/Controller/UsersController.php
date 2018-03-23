@@ -2,13 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
 use App\Services\Concatenate;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -49,15 +45,15 @@ class UsersController extends Controller
         $user = $this->getUser();
 
         // Get user events follow
-        $userExhibitFollow = $user->getExhibitFollow()->toArray();
-        $userPartyFollow = $user->getPartyFollow()->toArray();
-        $userWeekendFollow = $user->getWeekendFollow()->toArray();
+        $userExhibits = $user->getExhibits()->toArray();
+        $userParties = $user->getParties()->toArray();
+        $userWeekends = $user->getWeekends()->toArray();
 
         // Call concatenate service
         $userEventsFollow = $concatenate->doConcatenate(
-            $userPartyFollow,
-            $userExhibitFollow,
-            $userWeekendFollow
+            $userParties,
+            $userExhibits,
+            $userWeekends
         );
 
         // user form update

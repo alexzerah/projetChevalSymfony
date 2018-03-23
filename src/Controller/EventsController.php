@@ -2,6 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Exhibit;
+use App\Entity\Party;
+use App\Entity\Weekend;
+use App\Form\SubscribeSingleExhibit;
+use App\Form\UnsubscribeSingleExhibit;
+use App\Form\UserFormType;
 use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
 use App\Repository\UserRepository;
@@ -9,6 +15,8 @@ use App\Repository\WeekendRepository;
 use App\Services\Concatenate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class EventsController extends Controller
 {
@@ -26,17 +34,15 @@ class EventsController extends Controller
         $theWeekend = $weekendRepository->getTheWeekend($name);
         $theExhibit = $exhibitRepository->getTheExhibit($name);
 
-
         // Check if no wrong event has been provided
         if (!$theParty && !$theWeekend && !$theExhibit) {
             throw $this->createNotFoundException('Aucun événement trouvé !');
         }
 
         return $this->render('site\event.html.twig', [
-            'controller_name' => 'EventsController',
             'party' => $theParty,
             'weekend' => $theWeekend,
-            'exhibit' => $theExhibit
+            'exhibit' => $theExhibit,
         ]);
     }
 
@@ -100,4 +106,63 @@ class EventsController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/evenement/inscription/{eventType}", name="event_subscribe")
+     */
+    public function subscribeEventAction(Request $request, string $eventType)
+    {
+        switch ($eventType) {
+            case 'exhibit':
+                $repository = $this->getDoctrine()->getRepository(Exhibit::class);
+                break;
+            case 'party':
+                $repository = $this->getDoctrine()->getRepository(Party::class);
+                break;
+            case 'weekend':
+                $repository = $this->getDoctrine()->getRepository(Weekend::class);
+                break;
+        }
+
+        $event = $repository->find($request->get('eventId'));
+
+        if ($event instanceof Exhibit || $event instanceof Party || $event instanceof Weekend) {
+            $event->addUser($this->getUser());
+            $this->getDoctrine()->getManager()->persist($event);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('events_event', ['name' => $event->getName()]);
+        } else {
+            throw $this->createNotFoundException('Aucun événement trouvé !');
+        }
+    }
+
+    /**
+     * @Route("/evenement/desinscription/{eventType}", name="event_unsubscribe")
+     */
+    public function unsubscribeEventAction(Request $request, string $eventType)
+    {
+        switch ($eventType) {
+            case 'exhibit':
+                $repository = $this->getDoctrine()->getRepository(Exhibit::class);
+                break;
+            case 'party':
+                $repository = $this->getDoctrine()->getRepository(Party::class);
+                break;
+            case 'weekend':
+                $repository = $this->getDoctrine()->getRepository(Weekend::class);
+                break;
+        }
+
+        $event = $repository->find($request->get('eventId'));
+
+        if ($event instanceof Exhibit || $event instanceof Party || $event instanceof Weekend) {
+            $event->removeUser($this->getUser());
+            $this->getDoctrine()->getManager()->persist($event);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('events_event', ['name' => $event->getName()]);
+        } else {
+            throw $this->createNotFoundException('Aucun événement trouvé !');
+        }
+    }
 }

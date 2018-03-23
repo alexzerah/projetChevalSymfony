@@ -46,10 +46,21 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
     // Work in progress (try to get user follows)
 
-    public function getUserFollow()
+//    public function getUserFollow()
+//    {
+//        return $this->createQueryBuilder('u')
+//            ->innerJoin('u.exhibits', 'e')
+//            ->where('e.id = :eid AND u.id = :uid')
+//            ->setParameter('eid', '44')
+//            ->setParameter('uid', '16')
+//            ->getQuery()
+//            ->getResult();
+//    }
+
+    public function getExhibitFollow()
     {
         return $this->createQueryBuilder('u')
-            ->innerJoin('u.exhibitFollow', 'e')
+            ->innerJoin('u.exhibits', 'e')
             ->where('e.id = :eid AND u.id = :uid')
             ->setParameter('eid', '10')
             ->setParameter('uid', '1')

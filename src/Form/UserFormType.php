@@ -25,7 +25,7 @@ class UserFormType extends AbstractType
                 'label' => 'Photo de profil',
                 'required' => false,
                 'allow_delete' => true,
-                'delete_label' => 'Supprimer',
+                'delete_label' => 'Supprimer ?',
                 'download_link' => false
             ))
             ->add('firstName',TextType::class, array(
