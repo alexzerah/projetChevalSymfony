@@ -101,11 +101,10 @@ class User implements AdvancedUserInterface, \Serializable
 
 
     /**
-     * Many Users attends Many exhibits.
-     * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="users")
+     * Many Users attends Many .
+     * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="users", cascade={"persist"})
      */
     private $exhibits;
-
 
     /**
      * Many Users attends Many parties.
@@ -118,6 +117,14 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\ManyToMany(targetEntity="Weekend", mappedBy="users")
      */
     private $weekends;
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
 
     /**
      * @Assert\Length(max=4096)

@@ -58,7 +58,7 @@ class Exhibit
 
     /**
      * Many Exhibits have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="exhibits")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="exhibits", cascade={"persist"})
      */
     private $users;
 
