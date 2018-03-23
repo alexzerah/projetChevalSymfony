@@ -23,9 +23,7 @@
             <section id="two" class="spotlights">
                 {% for member in teamMembers %}
                 <section>
-                    <a href="generic.html" class="image">
-                        <img src="{{ asset_base }}{{ asset(member.avatar) }}" alt="{{ member.username }}" data-position="center center" />
-                    </a>
+                    <img src="{{ asset_base }}{{ asset(member.avatar) }}" alt="{{ member.username }}" data-position="center center" />
                     <div class="content">
                         <div class="inner">
                             <header class="major">
