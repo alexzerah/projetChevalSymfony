@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ExhibitRepository")
@@ -59,7 +58,7 @@ class Exhibit
 
     /**
      * Many Exhibits have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="exhibits")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="exhibits", cascade={"persist"})
      */
     private $users;
 
