@@ -190,11 +190,10 @@ class User implements AdvancedUserInterface, \Serializable
 
 
     /**
-     * Many Users attends Many exhibits.
-     * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="users")
+     * Many Users attends Many .
+     * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="users", cascade={"persist"})
      */
     private $exhibits;
-
 
     /**
      * Many Users attends Many parties.
@@ -315,7 +314,6 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
@@ -348,7 +346,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getisAdmin()
+    public function getIsAdmin()
     {
         if ($this->isAdmin == true) {
             return true;
