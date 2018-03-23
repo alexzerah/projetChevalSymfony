@@ -21,12 +21,12 @@ class ExhibitRepository extends ServiceEntityRepository
         parent::__construct($registry, Exhibit::class);
     }
 
-    public function getTheExhibit($name)
+    public function getTheExhibit($slug)
     {
         try {
             return $this->createQueryBuilder('e')
-                ->where('e.name = :name')
-                ->setParameter('name', $name)
+                ->where('e.slug = :slug')
+                ->setParameter('slug', $slug)
                 ->getQuery()
                 ->getOneOrNullResult();
         } catch (NonUniqueResultException $e) {

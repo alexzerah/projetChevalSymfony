@@ -21,12 +21,12 @@ class WeekendRepository extends ServiceEntityRepository
         parent::__construct($registry, Weekend::class);
     }
 
-    public function getTheWeekend($name)
+    public function getTheWeekend($slug)
     {
         try {
             return $this->createQueryBuilder('w')
-                ->where('w.name = :name')
-                ->setParameter('name', $name)
+                ->where('w.slug = :slug')
+                ->setParameter('slug', $slug)
                 ->getQuery()
                 ->getOneOrNullResult();
         } catch (NonUniqueResultException $e) {

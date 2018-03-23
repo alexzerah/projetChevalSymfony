@@ -119,14 +119,6 @@ class User implements AdvancedUserInterface, \Serializable
     private $weekends;
 
     /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    /**
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
