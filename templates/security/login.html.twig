@@ -30,11 +30,11 @@
 
                     <form action="{{ path('login') }}" method="post">
                         <p>
-                            <label for="username">Username:</label>
+                            <label for="username">Identifiant :</label>
                             <input type="text" id="username" name="_username" value="{{ last_username }}" />
                         </p>
                         <p>
-                            <label for="password">Password:</label>
+                            <label for="password">Mot de passe :</label>
                             <input type="password" id="password" name="_password" />
                         </p>
                         <p><a href="{{ path('forgotpassword') }}">Mot de passe oublié</a></p>
@@ -52,7 +52,7 @@
 
 
 
-                        <button type="submit">login</button>
+                        <button type="submit">Se connecter</button>
                     </form>
                 </div>
             </section>

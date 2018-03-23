@@ -13,14 +13,14 @@
                         {% endfor %}
                     </header>
                     {{ form_start(contactForm, {'attr': {'id': 'contactForm', 'novalidate': 'novalidate'}}) }}
-                        {{ form_widget(contactForm.name) }}
                         {{ form_label(contactForm.name) }}
-                        {{ form_widget(contactForm.email) }}
+                        {{ form_widget(contactForm.name) }}
                         {{ form_label(contactForm.email) }}
-                        {{ form_widget(contactForm.subject) }}
+                        {{ form_widget(contactForm.email) }}
                         {{ form_label(contactForm.subject) }}
-                        {{ form_widget(contactForm.message) }}
+                        {{ form_widget(contactForm.subject) }}
                         {{ form_label(contactForm.message) }}
+                        {{ form_widget(contactForm.message) }}
                         <button type="submit">Envoyer</button>
                     {{ form_end(contactForm) }}
                     <p><a href="{{ path('home') }}">Retour à l'accueil</a></p>
