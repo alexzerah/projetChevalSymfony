@@ -21,7 +21,7 @@
                             {% endfor %}
                             {#<p>{{ userFollow }}</p>#}
                         {% endif %}
-                        <button>S'abonner</button>
+                        <button>+</button>
                     {% endif %}
                     <span class="image main"><img src="{{ asset_base }}{{ party ? asset(party.banner) : (weekend ? asset(weekend.banner) : asset(exhibit.banner)) }}" alt="{{ party ? party.name : (weekend ? weekend.name : exhibit.name) }}" /></span>
                         <h3>Prix : {{ party ? party.price : (weekend ? weekend.price : exhibit.price) }} € - Lieu : {{ party ? party.location : (weekend ? weekend.location : exhibit.location) }}</h3>
