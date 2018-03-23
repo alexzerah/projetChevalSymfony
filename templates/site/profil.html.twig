@@ -17,22 +17,23 @@
                     {{ form_start(userForm, {'attr': {'id': 'updateProfile', 'novalidate': 'novalidate'}}) }}
                         <!-- avatar -->
                         <p>
-                            {{ form_widget(userForm.avatarFile) }}
                             {{ form_label(userForm.avatarFile) }}
+                            {{ form_widget(userForm.avatarFile) }}
+
                         </p>
                         <p>
-                            {{ form_widget(userForm.firstName) }}
                             {{ form_label(userForm.firstName) }}
+                            {{ form_widget(userForm.firstName) }}
                             {{ form_errors(userForm.firstName) }}
                         </p>
                         <p>
-                            {{ form_widget(userForm.lastName) }}
                             {{ form_label(userForm.lastName) }}
+                            {{ form_widget(userForm.lastName) }}
                             {{ form_errors(userForm.lastName) }}
                         </p>
                         <p>
-                            {{ form_widget(userForm.email) }}
                             {{ form_label(userForm.email) }}
+                            {{ form_widget(userForm.email) }}
                             {{ form_errors(userForm.email) }}
                         </p>
                         <h2>Mes abonnements : </h2>
@@ -51,7 +52,7 @@
                         </p>
                         <button type="submit">Enregistrer</button>
                     {{ form_end(userForm) }}
-                    <p><a href="#">Changer de mot de passe</a></p>
+                    <p><a href="{{ path('changepassword') }}">Changer de mot de passe</a></p>
                     <h2>Mes futurs événements</h2>
                     <ul>
                         {% for event in userEventsFollow|sort('date') %}
