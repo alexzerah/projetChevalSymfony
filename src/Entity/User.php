@@ -119,17 +119,22 @@ class User implements AdvancedUserInterface, \Serializable
     private $weekends;
 
     /**
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $resetPasswordToken = false;
+
+    /**
      * @param mixed $username
      */
     public function setUsername($username)
     {
         $this->username = $username;
     }
-
-    /**
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
 
     /**
      * @return mixed
@@ -497,5 +502,22 @@ class User implements AdvancedUserInterface, \Serializable
             // $this->salt
             ) = unserialize($serialized);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getResetPasswordToken()
+    {
+        return $this->resetPasswordToken;
+    }
+
+    /**
+     * @param mixed $resetPasswordToken
+     */
+    public function setResetPasswordToken($resetPasswordToken)
+    {
+        $this->resetPasswordToken = $resetPasswordToken;
+    }
+
 }
 
