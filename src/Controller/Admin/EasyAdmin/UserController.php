@@ -28,6 +28,7 @@ class UserController extends AdminController
     }
 
     protected function encryptAction($entity) {
+
         if (!$entity instanceof User) {
             return;
         }

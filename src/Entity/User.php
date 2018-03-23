@@ -61,7 +61,7 @@ class User implements AdvancedUserInterface, \Serializable
      * )
      * @ORM\Column(type="string", length=254, unique=true)
      */
-    private $email;
+    public $email;
 
     /**
      * @ORM\Column(name="avatar", type="string", nullable=true)
