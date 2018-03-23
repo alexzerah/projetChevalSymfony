@@ -4,7 +4,6 @@
         <!-- Main -->
         <div id="main" class="alt">
             <!-- One -->
-            {{ dump(app.user) }}
             <section id="one">
                 <div class="inner">
                     <header class="major">
@@ -53,7 +52,7 @@
                         </p>
                         <button type="submit">Enregistrer</button>
                     {{ form_end(userForm) }}
-                    <p><a href="{{ path('changepassword') }}">Changer de mot de passe</a></p>
+                    <p><a href="{{ path('forgotpassword') }}">Changer de mot de passe</a></p>
                     <h2>Mes futurs événements</h2>
                     <ul>
                         {% for event in userEventsFollow|sort('date') %}
