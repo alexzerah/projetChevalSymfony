@@ -28,6 +28,7 @@
                     <li><a href="{{ path('home') }}">Accueil</a></li>
                     <li><a href="{{ path('listeEvent') }}">anciens événements</a></li>
                     <li><a href="{{ path('team') }}">Présentation du BDE</a></li>
+                    <li><a href="{{ path('contact') }}">Nous contacter</a></li>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
                         <li><a href="{{ path('profil') }}">Mon profil</a></li>
                     {% endif %}
