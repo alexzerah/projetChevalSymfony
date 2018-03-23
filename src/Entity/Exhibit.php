@@ -57,27 +57,40 @@ class Exhibit
     private $bannerFile;
 
     /**
-     * Many Groups have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="exhibitFollow")
+     * Many Exhibits have Many Users.
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="exhibits")
      */
-    private $user;
+    private $users;
 
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getUsers()
     {
-        return $this->user;
+        return $this->users;
     }
 
     /**
-     * @param mixed $user
+     * @param mixed $users
      */
-    public function setUser($user)
+    public function setUsers($users)
     {
-        $this->user = $user;
+        $this->users = $users;
     }
 
+    public function addUser($user)
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+    }
+
+    public function removeUser($user)
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
+    }
 
     public function setBannerFile(File $bannerFile = null)
     {
@@ -96,7 +109,7 @@ class Exhibit
     public function __construct()
     {
         /* comment */
-        $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->date = new \DateTime();
     }
 
