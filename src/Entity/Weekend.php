@@ -62,24 +62,24 @@ class Weekend
 
     /**
      * Many Weekends have Many Users.
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="weekendFollow")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="weekends")
      */
     private $users;
 
     /**
      * @return mixed
      */
-    public function getUsers()
+    public function getUser()
     {
-        return $this->users;
+        return $this->user;
     }
 
     /**
      * @param mixed $users
      */
-    public function setUsers($users)
+    public function setUser($user)
     {
-        $this->users = $users;
+        $this->users = $user;
     }
 
     public function addUser($user)

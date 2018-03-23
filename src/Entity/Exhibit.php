@@ -71,11 +71,11 @@ class Exhibit
     }
 
     /**
-     * @param mixed $users
+     * @param mixed $user
      */
-    public function setUsers($users)
+    public function setUser($user)
     {
-        $this->users = $users;
+        $this->users = $user;
     }
 
     public function addUser($user)
