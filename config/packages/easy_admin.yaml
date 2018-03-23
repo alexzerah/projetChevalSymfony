@@ -68,7 +68,7 @@ easy_admin:
         fields:
           - { property: name, label: 'Nom' }
           - { property: location, label: 'Lieu' }
-          - { property: date, label: 'Date et heure' }
+          - { property: date, label: 'Date et heure'}
           - { property: price, label: 'Prix' }
           - { property: details, label: 'Description', type: 'ckeditor' }
           - { property: bannerFile, label: 'Image', type: 'vich_image' }
