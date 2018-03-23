@@ -30,86 +30,6 @@ class User implements AdvancedUserInterface, \Serializable
     private $id;
 
     /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param mixed $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param mixed $lastName
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getisActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param mixed $isActive
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-    }
-
-    /**
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
@@ -153,15 +73,6 @@ class User implements AdvancedUserInterface, \Serializable
      * @var File
      */
     private $avatarFile;
-
-    public function setAvatarFile(File $avatarFile = null)
-    {
-        $this->avatarFile = $avatarFile;
-    }
-    public function getAvatarFile()
-    {
-        return $this->avatarFile;
-    }
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -208,114 +119,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $weekends;
 
-    public function __construct()
-    {
-        $this->isActive = true;
-        $this->exhibits = new ArrayCollection();
-        $this->parties = new ArrayCollection();
-        $this->weekends = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
-    }
-
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function getSalt()
-    {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getRoles()
-    {
-        $roles = array('ROLE_USER');
-
-        if ($this->isAdmin == true) {
-            $roles = array('ROLE_ADMIN');
-        }
-
-        return $roles;
-    }
-
-    public function setRoles(array $roles)
-    {
-        $this->isAdmin = $roles;
-
-        // allows for chaining
-        return $this;
-    }
-
-
-    public function eraseCredentials()
-    {
-    }
-
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    public function isAccountNonLocked()
-    {
-        return true;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    public function isEnabled()
-    {
-        return $this->isActive;
-    }
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->isActive,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized);
-    }
-
     /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
@@ -348,7 +152,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getisAdmin()
+    public function getIsAdmin()
     {
         if ($this->isAdmin == true) {
             return true;
@@ -501,6 +305,198 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->updatedAt = $updatedAt;
     }
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+    public function setAvatarFile(File $avatarFile = null)
+    {
+        $this->avatarFile = $avatarFile;
+    }
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+    public function __construct()
+    {
+        $this->isActive = true;
+        $this->exhibits = new ArrayCollection();
+        $this->parties = new ArrayCollection();
+        $this->weekends = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid('', true));
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRoles()
+    {
+        $roles = array('ROLE_USER');
+
+        if ($this->isAdmin == true) {
+            $roles = array('ROLE_ADMIN');
+        }
+
+        return $roles;
+    }
+
+    public function setRoles(array $roles)
+    {
+        $this->isAdmin = $roles;
+
+        // allows for chaining
+        return $this;
+    }
+
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->isActive,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
 }
 

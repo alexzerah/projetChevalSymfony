@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ExhibitRepository")
@@ -72,11 +71,11 @@ class Exhibit
     }
 
     /**
-     * @param mixed $users
+     * @param mixed $user
      */
-    public function setUsers($users)
+    public function setUser($user)
     {
-        $this->users = $users;
+        $this->users = $user;
     }
 
     public function addUser($user)

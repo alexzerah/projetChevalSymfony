@@ -77,9 +77,9 @@ class SendMailCommand extends Command
                 $receivers[] = $users->getEmail();
             }
             print_r($receivers);
-            $message = (new Swift_Message('Wonderful Subject'))
+            $message = (new Swift_Message('Un événement aura lieu demain !'))
                 ->setFrom(['chevalproject@gmail.com' => 'Projet Cheval'])
-                ->setTo($receivers)
+                ->setTo('anjuere.corentin@gmail.com')
                 ->setBody($mailBody);
             $this->mailer->send($message);
         }
