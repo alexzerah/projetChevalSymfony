@@ -11,11 +11,6 @@ class UserController extends AdminController
 {
     private $passwordEncoder;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $this->passwordEncoder = $passwordEncoder;
-    }
-
     /**
      * @param User $entity
      */
@@ -33,6 +28,7 @@ class UserController extends AdminController
     }
 
     protected function encryptAction($entity) {
+
         if (!$entity instanceof User) {
             return;
         }
@@ -43,5 +39,10 @@ class UserController extends AdminController
         );
 
         $entity->setPassword($encoded);
+    }
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
     }
 }

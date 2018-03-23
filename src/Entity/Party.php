@@ -55,41 +55,6 @@ class Party
     private $users;
 
     /**
-     * @return User[]
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    /**
-     * @param mixed $users
-     */
-    public function setUsers($users)
-    {
-        $this->users = $users;
-    }
-
-    public function addUser($user)
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-        }
-    }
-
-    public function removeUser($user)
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-        }
-    }
-
-    public function __toString()
-    {
-        return (string) $this->getName();
-    }
-
-    /**
      * @Vich\UploadableField(mapping="images", fileNameProperty="banner")
      * @var File
      */
@@ -206,5 +171,40 @@ class Party
     public function setBanner($banner)
     {
         $this->banner = $banner;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->users = $user;
+    }
+
+    public function addUser($user)
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+    }
+
+    public function removeUser($users)
+    {
+        if ($this->users->contains($users)) {
+            $this->users->removeElement($users);
+        }
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getName();
     }
 }

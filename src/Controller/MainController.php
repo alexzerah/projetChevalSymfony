@@ -118,22 +118,4 @@ class MainController extends Controller
             'form' => $form->createView(),
         ]);
     }
-
-
-
-
-
-
-
-
-    /**
-     * @Route("/404", name="quatrecentquatre")
-     */
-    public function quatrecentquatre()
-    {
-        return $this->render('site/error404.html.twig', [
-        ]);
-    }
-
-
 }

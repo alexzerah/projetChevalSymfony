@@ -44,19 +44,6 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getResult();
     }
 
-    // Work in progress (try to get user follows)
-
-//    public function getUserFollow()
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->innerJoin('u.exhibits', 'e')
-//            ->where('e.id = :eid AND u.id = :uid')
-//            ->setParameter('eid', '44')
-//            ->setParameter('uid', '16')
-//            ->getQuery()
-//            ->getResult();
-//    }
-
     public function getExhibitFollow()
     {
         return $this->createQueryBuilder('u')
@@ -64,6 +51,35 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->where('e.id = :eid AND u.id = :uid')
             ->setParameter('eid', '10')
             ->setParameter('uid', '1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    // Useful for mailing (on event create)
+
+    public function getUsersFollowingParties()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.Party = :value')
+            ->setParameter('value', '1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getUsersFollowingExhibits()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.Party = :value')
+            ->setParameter('value', '1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getUsersFollowingWeekends()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.Weekend = :value')
+            ->setParameter('value', '1')
             ->getQuery()
             ->getResult();
     }
