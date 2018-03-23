@@ -27,18 +27,24 @@ class UserController extends AdminController
         $this->encryptAction($entity);
     }
 
-    protected function encryptAction($entity) {
 
+    protected function encryptAction($entity) {
         if (!$entity instanceof User) {
+            return;
+        }
+
+        if($entity->getPlainPassword() == null){
             return;
         }
 
         $encoded = $this->passwordEncoder->encodePassword(
             $entity,
-            $entity->getPassword()
+            $entity->getPlainPassword()
         );
 
         $entity->setPassword($encoded);
+        $entity->setPlainPassword(null);
+
     }
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)

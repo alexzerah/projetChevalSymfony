@@ -41,7 +41,7 @@ easy_admin:
           - { property: username, label: 'Username' }
           - { property: firstName, label: 'Prénom' }
           - { property: lastName, label: 'Nom' }
-          - { property: password, label: 'Mot de passe' }
+          - { property: plainPassword, label: 'Mot de passe', type: 'password' }
           - { property: email, label: 'Adresse email' }
           - { property: avatarFile, label: 'Photo de profil', type: 'vich_image' }
           - { property: isActive, label: 'Actif' }

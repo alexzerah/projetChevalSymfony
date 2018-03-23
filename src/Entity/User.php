@@ -13,12 +13,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @Vich\Uploadable
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     errorPath="username",
+ *     message="Ce nom d'utilisateur existe déjà."
+ * )
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     errorPath="email",
+ *     message="Cette adresse email existe déjà."
+ * )
+
  */
 class User implements AdvancedUserInterface, \Serializable
 {
@@ -52,6 +63,11 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="string", length=64)
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $plainPassword;
 
     /**
      * @Assert\NotBlank(message="L'email ne doit pas être vide")
@@ -117,11 +133,6 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\ManyToMany(targetEntity="Weekend", mappedBy="users")
      */
     private $weekends;
-
-    /**
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
