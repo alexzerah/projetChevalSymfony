@@ -61,7 +61,7 @@ class User implements AdvancedUserInterface, \Serializable
      * )
      * @ORM\Column(type="string", length=254, unique=true)
      */
-    private $email;
+    public $email;
 
     /**
      * @ORM\Column(name="avatar", type="string", nullable=true)
@@ -122,6 +122,19 @@ class User implements AdvancedUserInterface, \Serializable
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $resetPasswordToken = false;
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
 
     /**
      * @return mixed
@@ -491,11 +504,20 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param mixed $username
+     * @return mixed
      */
-    public function setUsername($username)
+    public function getResetPasswordToken()
     {
-        $this->username = $username;
+        return $this->resetPasswordToken;
     }
+
+    /**
+     * @param mixed $resetPasswordToken
+     */
+    public function setResetPasswordToken($resetPasswordToken)
+    {
+        $this->resetPasswordToken = $resetPasswordToken;
+    }
+
 }
 

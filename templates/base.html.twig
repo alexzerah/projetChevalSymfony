@@ -28,6 +28,7 @@
                     <li><a href="{{ path('home') }}">Accueil</a></li>
                     <li><a href="{{ path('listeEvent') }}">anciens événements</a></li>
                     <li><a href="{{ path('team') }}">Présentation du BDE</a></li>
+                    <li><a href="{{ path('contact') }}">Nous contacter</a></li>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
                         <li><a href="{{ path('profil') }}">Mon profil</a></li>
                     {% endif %}
@@ -52,26 +53,6 @@
                     <!-- Contact -->
                     <section id="contact">
                         <div class="inner">
-                            <section>
-                                <form method="post" action="#">
-                                    <div class="field half first">
-                                        <label for="name">Nom</label>
-                                        <input type="text" name="name" id="name" placeholder="Votre nom"/>
-                                    </div>
-                                    <div class="field half">
-                                        <label for="email">Email</label>
-                                        <input type="text" name="email" id="email" placeholder="michel@mail.com"/>
-                                    </div>
-                                    <div class="field">
-                                        <label for="message">Message</label>
-                                        <textarea name="message" id="message" rows="6" placeholder="Dites nous un truc sympa !"></textarea>
-                                    </div>
-                                    <ul class="actions">
-                                        <li><input type="submit" value="Envoyer" class="special" /></li>
-                                    </ul>
-                                </form>
-                            </section>
-                            <section class="split">
                                 <section>
                                     <div class="contact-method">
                                         <span class="icon alt fa-envelope"></span>
@@ -97,7 +78,6 @@
                                         <a href="https://www.facebook.com/iesabdefuries/" target="_blank">Retrouver notre profil ici !</a>
                                     </div>
                                 </section>
-                            </section>
                         </div>
                     </section>
 
@@ -115,6 +95,7 @@
         <script src="{{ asset('asset/js/toast.js') }}"></script>
         <script src="{{ asset('asset/js/util.js') }}"></script>
         <script src="{{ asset('asset/js/main.js') }}"></script>
+        <script src="{{ asset('asset/js/contactForm.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

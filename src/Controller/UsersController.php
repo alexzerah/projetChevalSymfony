@@ -11,16 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UsersController extends Controller
 {
-    public function sendContact(UserRepository $userRepository)
-    {
-        $teamMembers = $userRepository->getTeamMembers();
-
-        return $this->render('site/equipe.html.twig', [
-            'controller_name' => 'UsersController',
-            'teamMembers' => $teamMembers
-        ]);
-    }
-
     /**
      * @Route("/equipe", name="team")
      */
