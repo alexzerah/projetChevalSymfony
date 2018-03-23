@@ -16,11 +16,13 @@
                         {% endif %}
                     </header>
                     {% if app.user %}
+
                             {% if exhibit in app.user.exhibits %}
                                 <a class="aButton" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
                             {% else %}
                     <a class="aButton" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
                             {% endif  %}
+
                     {% endif %}
                     <ul>
                         {% for user in exhibit.users %}
