@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+    {% block content %}
+        <!-- Main -->
+        <div id="main" class="alt">
+            <!-- One -->
+            <section id="one">
+                <div class="inner">
+                    <header class="major">
+                        <h1>Contact</h1>
+                        {% for msg in app.flashes('success') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </header>
+                    {{ form_start(contactForm) }}
+                        {{ form_widget(contactForm.name) }}
+                        {{ form_label(contactForm.name) }}
+                        {{ form_widget(contactForm.email) }}
+                        {{ form_label(contactForm.email) }}
+                        {{ form_widget(contactForm.subject) }}
+                        {{ form_label(contactForm.subject) }}
+                        {{ form_widget(contactForm.message) }}
+                        {{ form_label(contactForm.message) }}
+                        <button type="submit">Envoyers</button>
+                    {{ form_end(contactForm) }}
+                    <p><a href="{{ path('home') }}">Retour à l'accueil</a></p>
+                </div>
+            </section>
+        </div>
+    {% endblock %}
