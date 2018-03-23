@@ -37,7 +37,10 @@ class MainController extends Controller
 
                 $mailer->send($message);
 
-                $this->addFlash('success', 'prout');
+            } else {
+                return array(
+                    'data' => 'prout'
+                );
             }
         }
 
