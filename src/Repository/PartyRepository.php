@@ -21,12 +21,12 @@ class PartyRepository extends ServiceEntityRepository
         parent::__construct($registry, Party::class);
     }
 
-    public function getTheParty($name)
+    public function getTheParty($slug)
     {
         try {
             return $this->createQueryBuilder('p')
-                ->where('p.name = :name')
-                ->setParameter('name', $name)
+                ->where('p.slug = :slug')
+                ->setParameter('slug', $slug)
                 ->getQuery()
                 ->getOneOrNullResult();
         } catch (NonUniqueResultException $e) {

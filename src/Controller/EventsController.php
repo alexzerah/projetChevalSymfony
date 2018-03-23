@@ -21,18 +21,18 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class EventsController extends Controller
 {
     /**
-     * @Route("/event/{name}", name="events_event"),
+     * @Route("/event/{slug}", name="events_event"),
      */
     public function showEvent(WeekendRepository $weekendRepository,
                               PartyRepository $partyRepository,
                               ExhibitRepository $exhibitRepository,
                               UserRepository $userRepository,
-                              $name)
+                              $slug)
     {
         // Call the function that give us one event based on the name for each entities
-        $theParty = $partyRepository->getTheParty($name);
-        $theWeekend = $weekendRepository->getTheWeekend($name);
-        $theExhibit = $exhibitRepository->getTheExhibit($name);
+        $theParty = $partyRepository->getTheParty($slug);
+        $theWeekend = $weekendRepository->getTheWeekend($slug);
+        $theExhibit = $exhibitRepository->getTheExhibit($slug);
 
         // Check if no wrong event has been provided
         if (!$theParty && !$theWeekend && !$theExhibit) {

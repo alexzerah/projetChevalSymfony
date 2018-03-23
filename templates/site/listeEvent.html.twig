@@ -23,7 +23,7 @@
             <section id="two" class="spotlights">
                 {% for event in previousEvents|sortbyfield('date')|reverse %}
                 <section>
-                    <a href="{{ url('events_event', {name: event.name}) }}" class="image">
+                    <a href="{{ url('events_event', {slug: event.slug}) }}" class="image">
                         <img src="{{ asset_base }}{{ asset(event.banner) }}" alt="{{ event.name}}" data-position="center center" />
                     </a>
                     <div class="content">
@@ -33,7 +33,7 @@
                             </header>
                             <p>{{ event.date|date('d-m-Y à H:m') }} / {{ event.location }}</p>
                             <ul class="actions">
-                                <li><a href="{{ url('events_event', {name: event.name}) }}" class="button">Voir plus</a></li>
+                                <li><a href="{{ url('events_event', {slug: event.slug}) }}" class="button">Voir plus</a></li>
                             </ul>
                         </div>
                     </div>
