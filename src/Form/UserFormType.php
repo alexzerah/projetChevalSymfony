@@ -24,7 +24,7 @@ class UserFormType extends AbstractType
             ->add('avatarFile',VichImageType::class, array(
                 'label' => 'Photo de profil',
                 'required' => false,
-                'allow_delete' => true,
+                'allow_delete' => false,
                 'delete_label' => 'Supprimer ?',
                 'download_link' => false
             ))
