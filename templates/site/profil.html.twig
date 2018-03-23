@@ -56,16 +56,16 @@
                     <h2>Mes futurs événements</h2>
                     <ul>
                         {% for event in userEventsFollow|sort('date') %}
-                            {% if event.date|date('d-m-Y') > "now"|date('d-m-Y') %}
-                                <li><a href="{{ url('events_event', {name: event.name}) }}">{{ event.name }}</a></li>
+                            {% if event.date > today %}
+                                <li><a href="{{ url('events_event', {slug: event.slug}) }}">{{ event.name }}</a></li>
                             {% endif %}
                         {% endfor %}
                     </ul>
                     <h2>Mes anciens événements</h2>
                     <ul>
                         {% for event in userEventsFollow|sort('date')|reverse %}
-                            {% if event.date|date('d-m-Y') < "now"|date('d-m-Y') %}
-                                <li><a href="{{ url('events_event', {name: event.name}) }}">{{ event.name }}</a></li>
+                            {% if event.date < today %}
+                                <li><a href="{{ url('events_event', {slug: event.slug}) }}">{{ event.name }}</a></li>
                             {% endif %}
                         {% endfor %}
                     </ul>
