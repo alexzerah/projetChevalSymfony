@@ -69,7 +69,11 @@ class Weekend
 
     /**
      * Many Weekends have Many Users.
+<<<<<<< HEAD
      * @ORM\ManyToMany(targetEntity="User", inversedBy="weekends")
+=======
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="weekends", cascade={"persist"})
+>>>>>>> c5c345d3e54602009f9c22bc14ef50426a11e110
      */
     private $users;
 

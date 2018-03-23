@@ -90,6 +90,8 @@ class Exhibit
         if (!$this->users->contains($user)) {
             $this->users->add($user);
         }
+
+        return $this;
     }
 
     public function removeUser($user)
