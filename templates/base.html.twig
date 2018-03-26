@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="{{ asset('asset/css/main.css') }}" />
         <link rel="stylesheet" href="{{ asset('asset/css/toast.css') }}" />
+        <link rel="stylesheet" href="{{ asset('asset/css/bde.css') }}" />
     </head>
     <body>
         <!-- Wrapper -->
@@ -31,6 +32,8 @@
                     <li><a href="{{ path('contact') }}">Nous contacter</a></li>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
                         <li><a href="{{ path('profil') }}">Mon profil</a></li>
+                    {% else %}
+                        <li><a href="{{ path('forgotpassword') }}">Mot de passe oublié</a></li>
                     {% endif %}
                 </ul>
 
@@ -57,7 +60,7 @@
                                     <div class="contact-method">
                                         <span class="icon alt fa-envelope"></span>
                                         <h3>Email</h3>
-                                        <a href="mailto:bdefuries@gmail.com">bdefuries@gmail.com</a>
+                                        <a href="{{ url('contact') }}">bdefuries@gmail.com</a>
                                     </div>
                                 </section>
                                 <section>

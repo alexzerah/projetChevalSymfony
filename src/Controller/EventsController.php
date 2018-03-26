@@ -26,7 +26,7 @@ class EventsController extends Controller
     public function showEvent(WeekendRepository $weekendRepository,
                               PartyRepository $partyRepository,
                               ExhibitRepository $exhibitRepository,
-                              UserRepository $userRepository,
+                              Request $request,
                               $slug)
     {
         // Call the function that give us one event based on the name for each entities
@@ -42,7 +42,7 @@ class EventsController extends Controller
         return $this->render('site\event.html.twig', [
             'party' => $theParty,
             'weekend' => $theWeekend,
-            'exhibit' => $theExhibit,
+            'exhibit' => $theExhibit
         ]);
     }
 

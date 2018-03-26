@@ -31,7 +31,7 @@
                             <header class="major">
                                 <h3>{{ event.name }}</h3>
                             </header>
-                            <p>{{ event.date|date('d-m-Y à H:m') }} / {{ event.location }}</p>
+                            <p>{{ event.date|localizeddate('medium', 'short') }} / {{ event.location }}</p>
                             <ul class="actions">
                                 <li><a href="{{ url('events_event', {slug: event.slug}) }}" class="button">Voir plus</a></li>
                             </ul>
