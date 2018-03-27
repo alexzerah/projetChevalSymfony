@@ -21,20 +21,20 @@ class UserFormType extends AbstractType
         $builder
             ->setMethod('POST')
             ->setAction('profil')
-            ->add('avatarFile',VichImageType::class, array(
+            ->add('avatarFile', VichImageType::class, array(
                 'label' => 'Photo de profil',
                 'required' => false,
                 'allow_delete' => false,
                 'delete_label' => 'Supprimer ?',
                 'download_link' => false
             ))
-            ->add('firstName',TextType::class, array(
+            ->add('firstName', TextType::class, array(
                 'label'=>'Prénom'
             ))
-            ->add('lastName',TextType::class, array(
+            ->add('lastName', TextType::class, array(
                 'label'=>'Nom'
             ))
-            ->add('email',EmailType::class, array(
+            ->add('email', EmailType::class, array(
                 'label'=>'Adresse e-Mail'
             ))
             ->add('exhibit', CheckboxType::class, array(

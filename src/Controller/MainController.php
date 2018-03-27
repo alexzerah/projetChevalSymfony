@@ -2,89 +2,91 @@
 
 namespace App\Controller;
 
-use App\Entity\Post;
 use App\Entity\User;
 use App\Form\ForgotPassword;
 use App\Form\PasswordResetType;
 use App\Form\ContactFormType;
-use App\Form\PassChangeFormType;
-use App\Form\PostType;
-use App\Repository\FetchRepository;
-use App\Services\Calculator;
-use Swift_Mailer;
 use Swift_Message;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class MainController extends Controller
 {
+    // Setup
+    private $mailer;
+    private $factory;
+
+    protected function getErrorsAsArray(FormInterface $form)
+    {
+        $errors = array();
+        foreach ($form->getErrors() as $error)
+            $errors[] = $error->getMessage();
+
+        foreach ($form->all() as $key => $child) {
+            if ($err = $this->getErrorsAsArray($child))
+                $errors[$key] = $err;
+        }
+        return $errors;
+    }
+
+    // Constructor
+    public function __construct(\Swift_Mailer $mailer, EncoderFactoryInterface $factory)
+    {
+        $this->mailer = $mailer;
+        $this->factory = $factory;
+    }
+
     /**
+     * This route shows a contact form.
      * @Route("/contact", name="contact")
      */
-    public function contactAction(Request $request, \Swift_Mailer $mailer)
+    public function contactAction(Request $request)
     {
+        // Create the form
         $form = $this->createForm(ContactFormType::class);
 
-        // handles data from POST requests
+        // Listen post requests
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+
             if ($form->isValid()) {
 
-                $data = (object) $form->getData();
+                // Cast to an object
+                $content = (object) $form->getData();
 
-                $message = (new \Swift_Message($data->subject))
-                    ->setFrom($data->email)
-                    ->setTo('chevalproject@gmail.com')
-                    ->setBody($data->message);
+                // [!] Cannot setFrom a different mail than ours, need Email Entity and save data
+                // then send confirmation mail to user
+                // For test purpose : we just send a notification mail
+                $message = (new \Swift_Message($content->subject))
+                    ->setFrom(['chevalproject@gmail.com' => '[BDE] Horse'])
+                    ->setTo([$content->email => $content->name])
+                    ->setBody(
+                        'Hey '.$content->name.', ton super BDE a bien reçu ta requête, il te répondra dans les 48 heures !'
+                    );
 
-                $mailer->send($message);
+                $this->mailer->send($message);
+
+                $this->addFlash('success', 'Merci de nous avoir contacté !');
 
             } else {
-                return array(
-                    'data' => 'prout'
-                );
+                $this->addFlash('error', 'Zut...');
             }
         }
 
+        // Render
         return $this->render('site/contact.html.twig', [
             'contactForm' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/", name="home")
-     */
-    public function home()
-    {
-        return $this->render('site/home.html.twig', [
-        ]);
-    }
-
-    /**
-     * @Route("/listeEvenements", name="listeEvent")
-     */
-    public function listeEvent()
-    {
-        return $this->render('site/listeEvent.html.twig', [
-        ]);
-    }
-
-    /**
-     * @Route("/event", name="event")
-     */
-    public function event()
-    {
-        return $this->render('site/event.html.twig', [
-        ]);
-    }
-
-    /**
+     * This route shows login page.
      * @Route("/connexion", name="connexion")
      */
     public function connexion()
@@ -94,19 +96,19 @@ class MainController extends Controller
     }
 
     /**
+     * This route shows forgot password page.
      * @Route("/mot-de-passe-oublie", name="forgotpassword")
      */
-    public function forgotpassword(Request $request, Swift_Mailer $mailer)
+    public function forgotPassAction(Request $request)
     {
-
         $form = $this->createForm(ForgotPassword::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $email = $form->get('email')->getData();
             $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $email]);
 
-            if(!$user){
+            if (!$user) {
                 return $this->render('site/forgotpassword.html.twig', [
                     'form' => $form->createView(),
                     'invalid_email' => $email,
@@ -122,9 +124,10 @@ class MainController extends Controller
 
             $message = (new Swift_Message('Nouveau mot de passe'))
                 ->setFrom(['chevalproject@gmail.com' => 'Projet Cheval'])
-                ->setTo('charlotte.palma@teching.com')
+                ->setTo($user->getEmail())
                 ->setBody($mailBody);
-            $mailer->send($message);
+
+            $this->mailer->send($message);
 
             $user->setResetPasswordToken($token);
             $this->getDoctrine()->getManager()->persist($user);
@@ -135,6 +138,7 @@ class MainController extends Controller
             return $this->redirectToRoute('login');
         }
 
+        // Render
         return $this->render('site/forgotpassword.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -142,23 +146,27 @@ class MainController extends Controller
 
 
     /**
+     * This route shows change password page.
      * @Route("/changer-mon-mot-de-passe/{token}", name="changepassword")
      */
-    public function changepassword(Request $request, string $token, EncoderFactoryInterface $factory)
+    public function changePassAction(Request $request, string $token)
     {
         /** @var User $user */
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['resetPasswordToken' => $token]);
-        if(!$user){
+        if (!$user) {
             $this->addFlash('error', 'raté');
             return $this->redirectToRoute('login');
         }
 
-        // user form update
+        // Create the form
         $form = $this->createForm(PasswordResetType::class, $user);
+
+        // Post request
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $encoder = $factory->getEncoder(User::class);
+        // Token logic
+        if ($form->isSubmitted() && $form->isValid()) {
+            $encoder = $this->factory->getEncoder(User::class);
             $user->setPassword($encoder->encodePassword($user->getPlainPassword(), $user->getSalt()));
             $user->eraseCredentials();
             $user->setResetPasswordToken(null);
@@ -170,6 +178,7 @@ class MainController extends Controller
             return $this->redirectToRoute('login');
         }
 
+        // Render
         return $this->render('site/changepassword.html.twig', [
             'form' => $form->createView(),
         ]);

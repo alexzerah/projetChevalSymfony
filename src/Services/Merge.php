@@ -2,14 +2,13 @@
 
 namespace App\Services;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Concatenate
+class Merge
 {
-    public function doConcatenate($a, $b, $c)
+    public function mergeAction($a, $b, $c)
     {
-        // Concatenate arrays into a single array
+        // Great.
         return new ArrayCollection(
             array_merge(
                 $a,

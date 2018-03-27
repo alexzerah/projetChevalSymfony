@@ -21,7 +21,7 @@ class WeekendRepository extends ServiceEntityRepository
         parent::__construct($registry, Weekend::class);
     }
 
-    public function getTheWeekend($slug)
+    public function getWeekend($slug)
     {
         try {
             return $this->createQueryBuilder('w')
@@ -34,7 +34,7 @@ class WeekendRepository extends ServiceEntityRepository
         }
     }
 
-    public function getNextWeekends()
+    public function getUpcomingWeekends()
     {
         return $this->createQueryBuilder('w')
             ->orderBy('w.date')
@@ -57,10 +57,10 @@ class WeekendRepository extends ServiceEntityRepository
     public function getNextDayWeekends()
     {
         $nextDayStart =  new \DateTime();
-        $nextDayStart->modify('+ 1 day')->setTime(0,0,1);
+        $nextDayStart->modify('+ 1 day')->setTime(0, 0, 1);
 
         $nextDayEnd =  new \DateTime();
-        $nextDayEnd->modify('+ 1 day')->setTime(23,59,59);
+        $nextDayEnd->modify('+ 1 day')->setTime(23, 59, 59);
 
         return $this->createQueryBuilder('w')
             ->andWhere('w.date BETWEEN :nextDayStart AND :nextDayEnd')

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
-use App\Services\Concatenate;
+use App\Services\Merge;
 use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,9 +28,9 @@ class UsersController extends Controller
     /**
      * @Route("/profil", name="profil")
      */
-    public function userProfil(Request $request, Concatenate $concatenate)
+    public function userProfil(Request $request, Merge $concatenate)
     {
-        // Check is a user is logged in
+        // Access
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         // Set the user
         $user = $this->getUser();
@@ -41,7 +41,7 @@ class UsersController extends Controller
         $userWeekends = $user->getWeekends()->toArray();
 
         // Call concatenate service
-        $userEventsFollow = $concatenate->doConcatenate(
+        $userEventsFollow = $concatenate->mergeAction(
             $userParties,
             $userExhibits,
             $userWeekends
@@ -65,7 +65,6 @@ class UsersController extends Controller
 
                 $em->persist($theUser);
                 $em->flush();
-
             } else {
                 return array(
                     'data' => 'prout'

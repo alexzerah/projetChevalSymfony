@@ -18,11 +18,18 @@ class MailEventSubscriber implements EventSubscriberInterface
     private $userRepository;
     private $templating;
 
-    public function __construct(\Twig_Environment $templating, UserRepository $userRepository, \Swift_Mailer $mailer)
+    /*
+     * Get users emails and put 'em in an array
+     */
+    protected function getUsersEmails($users)
     {
-        $this->mailer = $mailer;
-        $this->userRepository = $userRepository;
-        $this->templating = $templating;
+        $userEmail = [];
+
+        foreach ($users as $user) {
+            $userEmail[] = $user->email;
+        }
+
+        return $userEmail;
     }
 
     public static function getSubscribedEvents()
@@ -34,24 +41,23 @@ class MailEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    // When new event is created
-
-    public function onPostPersist(GenericEvent $event) {
-
+    /*
+     * Hook fires when event has been created
+     */
+    public function onPostPersist(GenericEvent $event)
+    {
         $entity = $event->getSubject();
 
-        if($entity instanceof Party
-            || $entity instanceof Exhibit
-            || $entity instanceof Weekend) {
+            // Résoi
+            if ($entity instanceof Party) {
 
-            if($entity instanceof Party) {
-
+                // Custom DQL
                 $users = $this->userRepository->getUsersFollowingParties();
 
                 try {
-                    $message = (new \Swift_Message('Votre BDE organise une nouvelle soirée ' . $entity->getname()))
+                    $message = (new \Swift_Message('Votre BDE organise une soirée : (' . $entity->getname() . ')'))
                         ->setFrom('projectcheval@gmail.com')
-                        ->setTo($this->emailsArray($users))
+                        ->setTo($this->getUsersEmails($users))
                         ->setBody(
                             $this->templating->render(
                                 'mails/eventcreated.html.twig',
@@ -61,7 +67,7 @@ class MailEventSubscriber implements EventSubscriberInterface
                                     'price' => $entity->getPrice(),
                                     'date' => $entity->getDate(),
                                     'details' => $entity->getDetails(),
-                                    'banner' => $entity->getBanner(),
+                                    'banner' => $entity->getBanner()
                                 )
                             ),
                             'text/html'
@@ -76,13 +82,16 @@ class MailEventSubscriber implements EventSubscriberInterface
 
                 $this->mailer->send($message);
 
-            } else if($entity instanceof Exhibit) {
+                // Expo
+            } elseif ($entity instanceof Exhibit) {
+
+                // Custom DQL
                 $users = $this->userRepository->getUsersFollowingExhibits();
 
                 try {
-                    $message = (new \Swift_Message('Votre BDE organise une nouvelle soirée ' . $entity->getname()))
+                    $message = (new \Swift_Message('Votre BDE organise une exposition : (' . $entity->getname() . ')'))
                         ->setFrom('projectcheval@gmail.com')
-                        ->setTo($this->emailsArray($users))
+                        ->setTo($this->getUsersEmails($users))
                         ->setBody(
                             $this->templating->render(
                                 'mails/eventcreated.html.twig',
@@ -92,7 +101,7 @@ class MailEventSubscriber implements EventSubscriberInterface
                                     'price' => $entity->getPrice(),
                                     'date' => $entity->getDate(),
                                     'details' => $entity->getDetails(),
-                                    'banner' => $entity->getBanner(),
+                                    'banner' => $entity->getBanner()
                                 )
                             ),
                             'text/html'
@@ -106,13 +115,17 @@ class MailEventSubscriber implements EventSubscriberInterface
                 }
 
                 $this->mailer->send($message);
-            } else {
+
+                // Weekend
+            } elseif ($entity instanceof Weekend) {
+
+                // Custom DQL
                 $users = $this->userRepository->getUsersFollowingWeekends();
 
                 try {
-                    $message = (new \Swift_Message('Votre BDE organise une nouvelle soirée ' . $entity->getname()))
+                    $message = (new \Swift_Message('Votre BDE organise un weekend : (' . $entity->getname() . ')'))
                         ->setFrom('projectcheval@gmail.com')
-                        ->setTo($this->emailsArray($users))
+                        ->setTo($this->getUsersEmails($users))
                         ->setBody(
                             $this->templating->render(
                                 'mails/eventcreated.html.twig',
@@ -122,7 +135,7 @@ class MailEventSubscriber implements EventSubscriberInterface
                                     'price' => $entity->getPrice(),
                                     'date' => $entity->getDate(),
                                     'details' => $entity->getDetails(),
-                                    'banner' => $entity->getBanner(),
+                                    'banner' => $entity->getBanner()
                                 )
                             ),
                             'text/html'
@@ -136,33 +149,29 @@ class MailEventSubscriber implements EventSubscriberInterface
                 }
 
                 $this->mailer->send($message);
+
+            } else {
+                return false;
             }
-        }
 
         return false;
     }
 
-    // When event is updated
-
-    public function onPostUpdate(GenericEvent $event) {
-
+    /*
+     * Hook fires when event has been updated
+     */
+    public function onPostUpdate(GenericEvent $event)
+    {
         $entity = $event->getSubject();
 
-        if($entity instanceof Party
-            || $entity instanceof Exhibit
-            || $entity instanceof Weekend) {
+        if ($entity instanceof Party || $entity instanceof Exhibit || $entity instanceof Weekend) {
 
             $users = $entity->getUsers()->toArray();
-
-            $userEmail = [];
-            foreach($users as $user) {
-                $userEmail[] = $user->email;
-            }
 
             try {
                 $message = (new \Swift_Message('Un événement a été modifié: ' . $entity->getname()))
                     ->setFrom('projectcheval@gmail.com')
-                    ->setTo($userEmail)
+                    ->setTo($this->getUsersEmails($users))
                     ->setBody(
                         $this->templating->render(
                             'mails/eventupdated.html.twig',
@@ -172,7 +181,7 @@ class MailEventSubscriber implements EventSubscriberInterface
                                 'price' => $entity->getPrice(),
                                 'date' => $entity->getDate(),
                                 'details' => $entity->getDetails(),
-                                'banner' => $entity->getBanner(),
+                                'banner' => $entity->getBanner()
                             )
                         ),
                         'text/html'
@@ -191,27 +200,22 @@ class MailEventSubscriber implements EventSubscriberInterface
         return false;
     }
 
-    // When event is deleted (on peut plus se bourrer la gueule quoi)
-
-    public function onPreRemove(GenericEvent $event) {
-
+    /*
+     * Hook fires when event is going to be removed
+     * onPreRemove cuz we need to send info mail before we delete it
+     */
+    public function onPreRemove(GenericEvent $event)
+    {
         $entity = $event->getSubject();
 
-        if($entity instanceof Party
-            || $entity instanceof Exhibit
-            || $entity instanceof Weekend) {
+        if ($entity instanceof Party || $entity instanceof Exhibit || $entity instanceof Weekend) {
 
             $users = $entity->getUsers()->toArray();
 
-            $userEmail = [];
-            foreach($users as $user) {
-                $userEmail[] = $user->email;
-            }
-
             try {
-                $message = (new \Swift_Message('Un événement a été annulé :( ! ' . $entity->getname()))
+                $message = (new \Swift_Message('L \' événement (' . $entity->getname() . ') a été annulé...'))
                     ->setFrom('projectcheval@gmail.com')
-                    ->setTo($userEmail)
+                    ->setTo($this->getUsersEmails($users))
                     ->setBody(
                         $this->templating->render(
                             'mails/eventcanceled.html.twig',
@@ -221,7 +225,7 @@ class MailEventSubscriber implements EventSubscriberInterface
                                 'price' => $entity->getPrice(),
                                 'date' => $entity->getDate(),
                                 'details' => $entity->getDetails(),
-                                'banner' => $entity->getBanner(),
+                                'banner' => $entity->getBanner()
                             )
                         ),
                         'text/html'
@@ -240,13 +244,13 @@ class MailEventSubscriber implements EventSubscriberInterface
         return false;
     }
 
-    protected function emailsArray($users) {
-        $userEmail = [];
-        foreach($users as $user) {
-            $userEmail[] = $user->email;
-        }
-
-        return $userEmail;
+    /*
+     * Init
+     */
+    public function __construct(\Twig_Environment $templating, UserRepository $userRepository, \Swift_Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+        $this->userRepository = $userRepository;
+        $this->templating = $templating;
     }
-
 }

@@ -11,22 +11,29 @@
                         {% for msg in app.flashes('success') %}
                             {{ msg }}
                         {% endfor %}
+                        {% for msg in app.flashes('error') %}
+                            {{ msg }}
+                        {% endfor %}
                     </header>
                     {{ form_start(contactForm, {'attr': {'id': 'contactForm', 'novalidate': 'novalidate'}}) }}
                         <p>
                             {{ form_label(contactForm.name) }}
+                            {{ form_errors(contactForm.name) }}
                             {{ form_widget(contactForm.name) }}
                         </p>
                         <p>
                             {{ form_label(contactForm.email) }}
+                            {{ form_errors(contactForm.email) }}
                             {{ form_widget(contactForm.email) }}
                         </p>
                         <p>
                             {{ form_label(contactForm.subject) }}
+                            {{ form_errors(contactForm.subject) }}
                             {{ form_widget(contactForm.subject) }}
                         </p>
                         <p>
-                            {{  form_label(contactForm.message) }}
+                            {{ form_label(contactForm.message) }}
+                            {{ form_errors(contactForm.message) }}
                             {{ form_widget(contactForm.message) }}
                         </p>
                         <p>

@@ -27,15 +27,12 @@ class DataFixtures extends Fixture
         $manager->persist($user);
 
         $manager->flush();
-
-
     }
 
     public function load(ObjectManager $manager)
     {
         $i = 1;
         while ($i <= 10) {
-
             $exhibit = new Exhibit();
             $exhibit->setName("Nom Expo " . $i);
             $exhibit->setLocation($i . " Rue Machin 7500" . $i . " Paris");

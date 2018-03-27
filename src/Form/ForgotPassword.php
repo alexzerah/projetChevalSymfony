@@ -29,5 +29,4 @@ class ForgotPassword extends AbstractType
             'error_bubbling' => true
         ));
     }
-
 }

@@ -249,6 +249,4 @@ class Exhibit
     {
         $this->slug = $slug;
     }
-
-
 }

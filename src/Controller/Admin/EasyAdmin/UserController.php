@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin\EasyAdmin;
 
-
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -28,12 +27,13 @@ class UserController extends AdminController
     }
 
 
-    protected function encryptAction($entity) {
+    protected function encryptAction($entity)
+    {
         if (!$entity instanceof User) {
             return;
         }
 
-        if($entity->getPlainPassword() == null){
+        if ($entity->getPlainPassword() == null) {
             return;
         }
 
@@ -44,7 +44,6 @@ class UserController extends AdminController
 
         $entity->setPassword($encoded);
         $entity->setPlainPassword(null);
-
     }
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)

@@ -16,11 +16,10 @@ class ContactFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->setMethod('POST')
-            ->setAction('contact')
             ->add('name', TextType::class, array('attr' => array('placeholder' => 'Nom'),
                 'label' => 'Nom',
                 'required' => true,
+                'error_bubbling'=>true,
                 'constraints' => array(
                     new NotBlank(array("message" => "Entrez votre nom")),
                 )
@@ -28,6 +27,7 @@ class ContactFormType extends AbstractType
             ->add('subject', TextType::class, array('attr' => array('placeholder' => 'Objet'),
                 'label' => 'Objet',
                 'required' => true,
+                'error_bubbling'=>true,
                 'constraints' => array(
                     new NotBlank(array("message" => "Entrez un objet")),
                 )
@@ -35,6 +35,7 @@ class ContactFormType extends AbstractType
             ->add('email', EmailType::class, array('attr' => array('placeholder' => 'Email'),
                 'label' => 'Email',
                 'required' => true,
+                'error_bubbling'=>true,
                 'constraints' => array(
                     new NotBlank(array("message" => "Entrez un mail valide")),
                     new Email(array("message" => "mail invalide")),
@@ -43,18 +44,12 @@ class ContactFormType extends AbstractType
             ->add('message', TextareaType::class, array('attr' => array('placeholder' => 'Dites coucou !'),
                 'label' => 'Message',
                 'required' => true,
+                'error_bubbling'=>true,
                 'constraints' => array(
                     new NotBlank(array("message" => "Dites nous quelque chose")),
                 )
             ))
         ;
-    }
-
-    public function setDefaultOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'error_bubbling' => true
-        ));
     }
 
     public function getName()

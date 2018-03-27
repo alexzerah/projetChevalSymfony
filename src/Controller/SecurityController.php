@@ -33,5 +33,4 @@ class SecurityController extends Controller
     {
         // Permet le logout
     }
-
 }

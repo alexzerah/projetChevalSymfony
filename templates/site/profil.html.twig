@@ -57,7 +57,7 @@
                     <ul>
                         {% for event in userEventsFollow|sort('date') %}
                             {% if event.date > today %}
-                                <li><a href="{{ url('events_event', {slug: event.slug}) }}">{{ event.name }}</a></li>
+                                <li><a href="{{ url('event_show', {slug: event.slug}) }}">{{ event.name }}</a></li>
                             {% endif %}
                         {% endfor %}
                     </ul>
@@ -65,7 +65,7 @@
                     <ul>
                         {% for event in userEventsFollow|sort('date')|reverse %}
                             {% if event.date < today %}
-                                <li><a href="{{ url('events_event', {slug: event.slug}) }}">{{ event.name }}</a></li>
+                                <li><a href="{{ url('event_show', {slug: event.slug}) }}">{{ event.name }}</a></li>
                             {% endif %}
                         {% endfor %}
                     </ul>
