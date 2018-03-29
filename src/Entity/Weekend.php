@@ -251,7 +251,6 @@ class Weekend
 
     public function __construct()
     {
-        $this->date = new \DateTime();
         $this->endDate = new \DateTime();
         $this->users = new ArrayCollection();
     }
