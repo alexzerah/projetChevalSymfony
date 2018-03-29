@@ -69,13 +69,15 @@ class Weekend
 
     /**
      * Many Weekends have Many Users.
-<<<<<<< HEAD
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="weekends")
-=======
      * @ORM\ManyToMany(targetEntity="User", inversedBy="weekends", cascade={"persist"})
->>>>>>> c5c345d3e54602009f9c22bc14ef50426a11e110
      */
     private $users;
+
+    /**
+     * Many Parties have Many Users.
+     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoweekends", cascade={"persist"})
+     */
+    private $photos;
 
     /**
      * @return mixed
@@ -286,6 +288,22 @@ class Weekend
     public function setUsers($users)
     {
         $this->users = $users;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * @param mixed $photos
+     */
+    public function setPhotos($photos)
+    {
+        $this->photos = $photos;
     }
 
 }

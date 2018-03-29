@@ -70,6 +70,12 @@ class Exhibit
     private $users;
 
     /**
+     * Many Parties have Many Users.
+     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoexhibits", cascade={"persist"})
+     */
+    private $photos;
+
+    /**
      * @return mixed
      */
     public function getUsers()
@@ -248,6 +254,22 @@ class Exhibit
     public function setSlug($slug)
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * @param mixed $photos
+     */
+    public function setPhotos($photos)
+    {
+        $this->photos = $photos;
     }
 
 

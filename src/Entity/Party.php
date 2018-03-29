@@ -56,6 +56,12 @@ class Party
     private $users;
 
     /**
+     * Many Parties have Many Users.
+     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoparties", cascade={"persist"})
+     */
+    private $photos;
+
+    /**
      * @Vich\UploadableField(mapping="images", fileNameProperty="banner")
      * @var File
      */
@@ -229,5 +235,21 @@ class Party
     public function setSlug($slug)
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * @param mixed $photos
+     */
+    public function setPhotos($photos)
+    {
+        $this->photos = $photos;
     }
 }

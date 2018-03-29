@@ -10,6 +10,7 @@ easy_admin:
           - Party
           - Exhibit
           - Weekend
+          - Photo
   list:
     title: 'Liste des %%entity_label%%'
     actions: ['show']
@@ -116,3 +117,20 @@ easy_admin:
           - { property: price, label: 'Prix' }
           - { property: details, label: 'Description', type: 'ckeditor' }
           - { property: bannerFile, label: 'Image', type: 'vich_image' }
+    Photo:
+          class: App\Entity\Photo
+          label: 'Photo'
+          list:
+            title: 'Liste des photos'
+            fields:
+              - id
+              - { property: photo, label: 'Photo', type: image, base_path: '/media/' }
+              - { property: photoexhibits, label: 'Expo'}
+              - { property: photoparties, label: 'Soirées'}
+              - { property: photoweekends, label: 'Weekends'}
+          form:
+            fields:
+              - { property: photoFile, label: 'Photo', type: 'vich_image'}
+              - { property: photoexhibits, label: 'Expo'}
+              - { property: photoparties, label: 'Soirées'}
+              - { property: photoweekends, label: 'Weekends'}
