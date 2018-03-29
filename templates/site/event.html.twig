@@ -62,9 +62,23 @@
                                     <li>
                                         {{ party ? party.location : (weekend ? weekend.location : exhibit.location) }}
                                     </li>
-                                    <li>
-                                        Entrée : {{ party ? party.price : (weekend ? weekend.price : exhibit.price) }} euros
-                                    </li>
+                                    {% if party and (party.price > 0) %}
+                                        <li>
+                                            Entrée : {{ party.price }} euros
+                                        </li>
+                                    {% elseif weekend and (weekend.price > 0) %}
+                                        <li>
+                                            Entrée : {{ weekend.price }} euros
+                                        </li>
+                                    {% elseif exhibit and (exhibit.price > 0) %}
+                                        <li>
+                                            Entrée : {{ exhibit.price }} euros
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            GRATUIT
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
