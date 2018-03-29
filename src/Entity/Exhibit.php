@@ -39,7 +39,7 @@ class Exhibit
     /**
      * @ORM\Column(name="price", type="decimal")
      */
-    private $price;
+    private $price = 0;
 
     /**
      * @ORM\Column(name="details", type="text")
