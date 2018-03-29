@@ -75,7 +75,7 @@ class Weekend
 
     /**
      * Many Parties have Many Users.
-     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoweekends", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoWeekends", cascade={"persist"})
      */
     private $photos;
 
@@ -303,6 +303,21 @@ class Weekend
     public function setPhotos($photos)
     {
         $this->photos = $photos;
+    }
+
+    public function addPhotos($photos)
+    {
+        if (!$this->photos->contains($photos)) {
+            $this->photos->add($photos);
+        }
+        return $this;
+    }
+
+    public function removePhotos($photos)
+    {
+        if ($this->photos->contains($photos)) {
+            $this->photos->removeElement($photos);
+        }
     }
 
 }

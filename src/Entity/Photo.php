@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -25,6 +27,13 @@ class Photo{
      */
     private $photo;
     /**
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Le fichier choisi ne correspond pas à un fichier valide",
+     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
+     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
+     * )
      * @Vich\UploadableField(mapping="images", fileNameProperty="photo")
      * @var File
      */
@@ -34,22 +43,50 @@ class Photo{
      * Many Users attends Many .
      * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="photos", cascade={"persist"})
      */
-    private $photoexhibits;
+    private $photoExhibits;
 
     /**
      * Many Users attends Many parties.
      * @ORM\ManyToMany(targetEntity="Party", mappedBy="photos", cascade={"persist"})
      */
-    private $photoparties;
+    private $photoParties;
 
     /**
      * Many Users attends many Weekends.
      * @ORM\ManyToMany(targetEntity="Weekend", mappedBy="photos", cascade={"persist"})
      */
-    private $photoweekends;
+    private $photoWeekends;
 
+    /**
+     * @ORM\Column(name="updatedAt", type="datetime")
+     */
+    private $updatedAt;
 
+    public function __construct()
+    {
+        $this->photoExhibits = new ArrayCollection();
+        $this->photoParties = new ArrayCollection();
+        $this->photoWeekends = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid('', true));
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
 
     /**
      * @return mixed
@@ -81,6 +118,9 @@ class Photo{
     public function setPhoto($photo)
     {
         $this->photo = $photo;
+        if ($photo instanceof UploadedFile) {
+            $this->setUpdatedAt(new \DateTime());
+        }
     }
 
     /**
@@ -94,57 +134,103 @@ class Photo{
     /**
      * @param File $photoFile
      */
-    public function setPhotoFile(File $photoFile)
+    public function setPhotoFile(File $photoFile = null)
     {
         $this->photoFile = $photoFile;
+
+        if ($photoFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
     /**
      * @return mixed
      */
-    public function getPhotoexhibits()
+    public function getPhotoExhibits()
     {
-        return $this->photoexhibits;
+        return $this->photoExhibits;
     }
 
     /**
-     * @param mixed $photoexhibits
+     * @param mixed $photoExhibits
      */
-    public function setPhotoexhibits($photoexhibits)
+    public function setPhotoExhibits($photoExhibits)
     {
-        $this->photoexhibits = $photoexhibits;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPhotoparties()
-    {
-        return $this->photoparties;
-    }
-
-    /**
-     * @param mixed $photoparties
-     */
-    public function setPhotoparties($photoparties)
-    {
-        $this->photoparties = $photoparties;
+        $this->photoExhibits = $photoExhibits;
     }
 
     /**
      * @return mixed
      */
-    public function getPhotoweekends()
+    public function getPhotoParties()
     {
-        return $this->photoweekends;
+        return $this->photoParties;
     }
 
     /**
-     * @param mixed $photoweekends
+     * @param mixed $photoParties
      */
-    public function setPhotoweekends($photoweekends)
+    public function setPhotoParties($photoParties)
     {
-        $this->photoweekends = $photoweekends;
+        $this->photoParties = $photoParties;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoWeekends()
+    {
+        return $this->photoWeekends;
+    }
+
+    /**
+     * @param mixed $photoWeekends
+     */
+    public function setPhotoWeekends($photoWeekends)
+    {
+        $this->photoWeekends = $photoWeekends;
+    }
+
+    public function addPhotoExhibit(Exhibit $exhibit)
+    {
+        if(!$this->photoExhibits->contains($exhibit)) {
+            $this->photoExhibits->add($exhibit);
+            $exhibit->addPhotos($this);
+        }
+    }
+    public function removePhotoExhibit(Exhibit $exhibit){
+        if ($this->photoExhibits->contains($exhibit)) {
+            $this->photoExhibits->removeElement($exhibit);
+            $exhibit->removePhotos($this);
+        }
+    }
+
+    public function addPhotoParty(Party $party)
+    {
+        if(!$this->photoParties->contains($party)) {
+            $this->photoParties->add($party);
+            $party->addPhotos($this);
+        }
+    }
+    public function removePhotoParty(Party $party){
+        if ($this->photoParties->contains($party)) {
+            $this->photoParties->removeElement($party);
+            $party->removePhotos($this);
+        }
+    }
+
+    public function addPhotoWeekend(Weekend $weekend)
+    {
+        if(!$this->photoWeekends->contains($weekend)) {
+            $this->photoWeekends->add($weekend);
+            $weekend->addPhotos($this);
+        }
+    }
+    public function removePhotoWeekend(Weekend $weekend){
+        if ($this->photoWeekends->contains($weekend)) {
+            $this->photoWeekends->removeElement($weekend);
+            $weekend->removePhotos($this);
+        }
     }
 
 }
