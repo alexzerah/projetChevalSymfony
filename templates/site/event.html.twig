@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="8u 12u$(small)">
-                            <h4>Participants</h4>
+                            <h4>Participant{{ party and (party.users|length > 1)? "s" }}{{ weekend and (weekend.users|length > 1) ? "s" }}{{ weekend and (exhibit.users|length > 1) ? "s" }} ({{ party ? party.users|length : (weekend ? weekend.users|length : exhibit.users|length) }})</h4>
                             <div class="table-wrapper">
                                 <table class="alt">
                                     <tbody>
