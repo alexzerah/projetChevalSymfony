@@ -71,7 +71,7 @@ class Exhibit
 
     /**
      * Many Parties have Many Users.
-     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoexhibits", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoExhibits", cascade={"persist"})
      */
     private $photos;
 
@@ -104,6 +104,20 @@ class Exhibit
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
+        }
+    }
+
+    public function addPhoto($photo)
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+        }
+    }
+
+    public function removePhoto($photo)
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
         }
     }
 

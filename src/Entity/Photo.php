@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
@@ -34,19 +35,19 @@ class Photo{
      * Many Users attends Many .
      * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="photos", cascade={"persist"})
      */
-    private $photoexhibits;
+    private $photoExhibits;
 
     /**
      * Many Users attends Many parties.
      * @ORM\ManyToMany(targetEntity="Party", mappedBy="photos", cascade={"persist"})
      */
-    private $photoparties;
+    private $photoParties;
 
     /**
      * Many Users attends many Weekends.
      * @ORM\ManyToMany(targetEntity="Weekend", mappedBy="photos", cascade={"persist"})
      */
-    private $photoweekends;
+    private $photoWeekends;
 
 
 
@@ -94,57 +95,102 @@ class Photo{
     /**
      * @param File $photoFile
      */
-    public function setPhotoFile(File $photoFile)
+    public function setPhotoFile(File $photoFile = null)
     {
         $this->photoFile = $photoFile;
+
     }
 
     /**
      * @return mixed
      */
-    public function getPhotoexhibits()
+    public function getPhotoExhibits()
     {
-        return $this->photoexhibits;
+        return $this->photoExhibits;
     }
 
     /**
-     * @param mixed $photoexhibits
+     * @param mixed $photoExhibits
      */
-    public function setPhotoexhibits($photoexhibits)
+    public function setPhotoExhibits($photoExhibits)
     {
-        $this->photoexhibits = $photoexhibits;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPhotoparties()
-    {
-        return $this->photoparties;
-    }
-
-    /**
-     * @param mixed $photoparties
-     */
-    public function setPhotoparties($photoparties)
-    {
-        $this->photoparties = $photoparties;
+        $this->photoExhibits = $photoExhibits;
     }
 
     /**
      * @return mixed
      */
-    public function getPhotoweekends()
+    public function getPhotoParties()
     {
-        return $this->photoweekends;
+        return $this->photoParties;
     }
 
     /**
-     * @param mixed $photoweekends
+     * @param mixed $photoParties
      */
-    public function setPhotoweekends($photoweekends)
+    public function setPhotoParties($photoParties)
     {
-        $this->photoweekends = $photoweekends;
+        $this->photoParties = $photoParties;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoWeekends()
+    {
+        return $this->photoWeekends;
+    }
+
+    /**
+     * @param mixed $photoWeekends
+     */
+    public function setPhotoWeekends($photoWeekends)
+    {
+        $this->photoWeekends = $photoWeekends;
+    }
+
+    public function addPhotoParty(Party $party)
+    {
+        if(!$this->photoParties->contains($party)) {
+            $this->photoParties->add($party);
+            $party->addPhoto($this);
+        }
+    }
+    public function removePhotoParty(Party $party){
+        if ($this->photoParties->contains($party)) {
+            $this->photoParties->removeElement($party);
+            $party->removePhoto($this);
+        }
+    }
+
+
+    public function addPhotoExhibit(Exhibit $exhibit)
+    {
+
+        if(!$this->photoExhibits->contains($exhibit)) {
+            $this->photoExhibits->add($exhibit);
+            $exhibit->addPhoto($this);
+        }
+    }
+    public function removePhotoExhibit(Exhibit $exhibit){
+        if ($this->photoExhibits->contains($exhibit)) {
+            $this->photoExhibits->removeElement($exhibit);
+            $exhibit->removePhoto($this);
+        }
+    }
+
+    public function addPhotoWeekend(Weekend $weekend)
+    {
+        if(!$this->photoWeekends->contains($weekend)) {
+            $this->photoWeekends->add($weekend);
+            $weekend->addPhoto($this);
+        }
+    }
+    public function removePhotoWeekend(Weekend $weekend){
+        if ($this->photoWeekends->contains($weekend)) {
+            $this->photoWeekends->removeElement($weekend);
+            $weekend->removePhoto($this);
+        }
     }
 
 }

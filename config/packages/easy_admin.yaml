@@ -125,12 +125,12 @@ easy_admin:
             fields:
               - id
               - { property: photo, label: 'Photo', type: image, base_path: '/media/' }
-              - { property: photoexhibits, label: 'Expo'}
-              - { property: photoparties, label: 'Soirées'}
-              - { property: photoweekends, label: 'Weekends'}
+              - { property: photoExhibits, label: 'Expo'}
+              - { property: photoParties, label: 'Soirées'}
+              - { property: photoWeekends, label: 'Weekends'}
           form:
             fields:
               - { property: photoFile, label: 'Photo', type: 'vich_image'}
-              - { property: photoexhibits, label: 'Expo'}
-              - { property: photoparties, label: 'Soirées'}
-              - { property: photoweekends, label: 'Weekends'}
+              - { property: photoExhibits, label: 'Expo', type_options: { by_reference: false }}
+              - { property: photoParties, label: 'Soirées', type_options: { by_reference: false }}
+              - { property: photoWeekends, label: 'Weekends', type_options: { by_reference: false }}
