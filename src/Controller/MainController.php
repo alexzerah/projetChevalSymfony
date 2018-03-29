@@ -76,15 +76,6 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/event", name="event")
-     */
-    public function event()
-    {
-        return $this->render('site/event.html.twig', [
-        ]);
-    }
-
-    /**
      * @Route("/connexion", name="connexion")
      */
     public function connexion()
