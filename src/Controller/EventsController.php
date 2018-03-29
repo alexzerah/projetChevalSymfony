@@ -17,6 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Unirest;
 
 class EventsController extends Controller
 {
@@ -49,18 +50,46 @@ class EventsController extends Controller
     /**
      * @Route("/event", name="event_home"),
      */
-    public function eventNotFound()
+    public function eventNotFound(request $response)
     {
-        throw $this->createNotFoundException('Aucun événement trouvé !');
+        /*throw $this->createNotFoundException('Aucun événement trouvé !');*/
+
+        // search Songs of Frank Sinatra
+        $headers = array('Accept' => 'application/json');
+        $query = array('input' => 'paris', 'appid' => 'L594T8-Y5R7GAYLL3', 'output' => 'json');
+
+//            $response = Unirest\Request::post('https://api.openweathermap.org/data/2.5/weather', $headers, $query);
+//        $response = Unirest\Request::post('https://api.openweathermap.org/data/2.5/weather?id=2172797&APPID=a60f4c70672119a8c5b03f7592382596', $headers);
+        $response = Unirest\Request::get('http://api.wolframalpha.com/v2/query', $headers, $query);
+
+
+        // Display the result
+        /*dump($response->body->queryresult);die;*/
+
+        $weatherWolphormAlpha = $response->body->queryresult->pods[6]->subpods[0]->plaintext;
+
+
+        $oldString = array("|","relative humidity:","wind:", "overcast");
+        $newString = array("","L'humidité relative est de", "la vitesse du vent sera de ", "");
+        $weatherWolphormAlphaFR = "Pour la ville de Paris, la température sera de ";
+        $weatherWolphormAlphaFR = $weatherWolphormAlphaFR . str_replace($oldString, $newString, $weatherWolphormAlpha);
+
+       /* while ($row = mysqli_fetch_assoc($weatherWolphormAlpha)) {
+            print_r ($row);
+        }*/
+
+        return $this->render('site/weather.html.twig', [
+            'weatherWolphormAlpha' => $weatherWolphormAlphaFR,
+        ]);
     }
 
     /**
      * @Route("/", name="events_nextEvents")
      */
     public function getNextEvents(WeekendRepository $weekendRepository,
-                                      PartyRepository $partyRepository,
-                                        ExhibitRepository $exhibitRepository,
-                                            Concatenate $concatenate)
+                                  PartyRepository $partyRepository,
+                                  ExhibitRepository $exhibitRepository,
+                                  Concatenate $concatenate)
     {
         // Call the function that give us events when event.date > today for each entities
         $nextWeekends = $weekendRepository->getNextWeekends();
@@ -84,9 +113,9 @@ class EventsController extends Controller
      * @Route("/listeEvenements", name="events_previousEvents")
      */
     public function getPreviousEvents(WeekendRepository $weekendRepository,
-                                        PartyRepository $partyRepository,
-                                            ExhibitRepository $exhibitRepository,
-                                                Concatenate $concatenate)
+                                      PartyRepository $partyRepository,
+                                      ExhibitRepository $exhibitRepository,
+                                      Concatenate $concatenate)
     {
         // Call the function that give us events when event.date < today for each entities
         $previousWeekends = $weekendRepository->getPreviousWeekends();
