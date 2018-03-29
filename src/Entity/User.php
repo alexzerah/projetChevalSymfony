@@ -90,15 +90,15 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="boolean")
      */
-    private $Exhibit;
+    private $followCategoryExhibit;
     /**
      * @ORM\Column(type="boolean")
      */
-    private $Party;
+    private $followCategoryParty;
     /**
      * @ORM\Column(type="boolean")
      */
-    private $Weekend;
+    private $followCategoryWeekend;
     /**
      * Many Users attends Many .
      * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="users", cascade={"persist"})
@@ -168,44 +168,44 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getExhibit()
+    public function getFollowCategoryExhibit()
     {
-        return $this->Exhibit;
+        return $this->followCategoryExhibit;
     }
     /**
-     * @param mixed $Exhibit
+     * @param mixed $followCategoryExhibit
      */
-    public function setExhibit($Exhibit)
+    public function setFollowCategoryExhibit($followCategoryExhibit)
     {
-        $this->Exhibit = $Exhibit;
+        $this->followCategoryExhibit = $followCategoryExhibit;
     }
     /**
      * @return mixed
      */
-    public function getParty()
+    public function getFollowCategoryParty()
     {
-        return $this->Party;
+        return $this->followCategoryParty;
     }
     /**
      * @param mixed $Party
      */
-    public function setParty($Party)
+    public function setFollowCategoryParty($followCategoryParty)
     {
-        $this->Party = $Party;
+        $this->followCategoryParty = $followCategoryParty;
     }
     /**
      * @return mixed
      */
-    public function getWeekend()
+    public function getFollowCategoryWeekend()
     {
-        return $this->Weekend;
+        return $this->followCategoryWeekend;
     }
     /**
      * @param mixed $Weekend
      */
-    public function setWeekend($Weekend)
+    public function setFollowCategoryWeekend($followCategoryWeekend)
     {
-        $this->Weekend = $Weekend;
+        $this->followCategoryWeekend = $followCategoryWeekend;
     }
     /**
      * @return mixed

@@ -31,9 +31,9 @@ easy_admin:
           - { property: avatar, label: 'Photo', type: image, base_path: '/media/' }
           - { property: isActive, label: 'Actif' }
           - { property: isAdmin, label: 'Admin' }
-          - { property: exhibit, label: 'followExpo', type: boolean }
-          - { property: party, label: 'followSoirées', type: boolean }
-          - { property: weekend, label: 'followWeekends', type: boolean }
+          - { property: followCategoryExhibit, label: 'followExpo', type: boolean }
+          - { property: followCategoryParty, label: 'followSoirées', type: boolean }
+          - { property: followCategoryWeekend, label: 'followWeekends', type: boolean }
           - { property: exhibits, label: 'Expo'}
           - { property: parties, label: 'Soirées'}
           - { property: weekends, label: 'Weekends'}
@@ -47,9 +47,9 @@ easy_admin:
           - { property: avatarFile, label: 'Photo de profil', type: 'vich_image' }
           - { property: isActive, label: 'Actif' }
           - { property: isAdmin, label: 'Admin' }
-          - { property: exhibit, label: 'Abonné aux expositions', type: 'checkbox' }
-          - { property: party, label: 'Abonné aux soirées', type: 'checkbox' }
-          - { property: weekend, label: 'Abonné aux weekends', type: 'checkbox' }
+          - { property: followCategoryExhibit, label: 'Abonné aux expositions', type: 'checkbox' }
+          - { property: followCategoryParty, label: 'Abonné aux soirées', type: 'checkbox' }
+          - { property: followCategoryWeekend, label: 'Abonné aux weekends', type: 'checkbox' }
           - { property: exhibits, label: 'Expo' }
           - { property: parties, label: 'Soirées' }
           - { property: weekends, label: 'Weekends' }
