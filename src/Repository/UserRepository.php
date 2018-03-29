@@ -60,7 +60,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function getUsersFollowingParties()
     {
         return $this->createQueryBuilder('u')
-            ->where('u.Party = :value')
+            ->where('u.followCategoryParty = :value')
             ->setParameter('value', '1')
             ->getQuery()
             ->getResult();
@@ -69,7 +69,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function getUsersFollowingExhibits()
     {
         return $this->createQueryBuilder('u')
-            ->where('u.Party = :value')
+            ->where('u.followCategoryExhibit = :value')
             ->setParameter('value', '1')
             ->getQuery()
             ->getResult();
@@ -78,7 +78,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function getUsersFollowingWeekends()
     {
         return $this->createQueryBuilder('u')
-            ->where('u.Weekend = :value')
+            ->where('u.followCategoryWeekend = :value')
             ->setParameter('value', '1')
             ->getQuery()
             ->getResult();

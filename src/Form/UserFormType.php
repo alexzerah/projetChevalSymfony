@@ -37,13 +37,16 @@ class UserFormType extends AbstractType
             ->add('email',EmailType::class, array(
                 'label'=>'Adresse e-Mail'
             ))
-            ->add('exhibit', CheckboxType::class, array(
+            ->add('followCategoryExhibit', CheckboxType::class, array(
+                'label' => "S'abonner aux soirées",
                 'required' => false
             ))
-            ->add('party', CheckboxType::class, array(
+            ->add('followCategoryParty', CheckboxType::class, array(
+                'label' => "S'abonner aux expositions",
                 'required' => false
             ))
-            ->add('weekend', CheckboxType::class, array(
+            ->add('followCategoryWeekend', CheckboxType::class, array(
+                'label' => "S'abonner aux weekends",
                 'required' => false
             ))
         ;
