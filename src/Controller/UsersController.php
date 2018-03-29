@@ -73,11 +73,13 @@ class UsersController extends Controller
             }
         }
 
+
+
         return $this->render('site/profil.html.twig', [
             'controller_name' => 'UsersController',
             'userForm' => $form->createView(),
             'userEventsFollow' => $userEventsFollow,
-            'today' => new DateTime()
+            'today' => new DateTime(),
         ]);
     }
 }

@@ -39,10 +39,39 @@ class EventsController extends Controller
             throw $this->createNotFoundException('Aucun événement trouvé !');
         }
 
+        $queryWiki = 'konoha';
+
+        $apiWiki = 'https://fr.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages%7Cextracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' . $queryWiki;
+        $ch1 = curl_init();
+        curl_setopt($ch1, CURLOPT_URL, $apiWiki);
+        curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
+        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+
+        $apiWeather = 'http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=a60f4c70672119a8c5b03f7592382596&';
+        $ch2 = curl_init();
+        curl_setopt($ch2, CURLOPT_URL, $apiWeather);
+        curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+
+        $responseWiki = curl_exec($ch1);
+        $responseWeather = curl_exec($ch2);
+
+        $data = json_decode($responseWiki, true);
+        $desc = ((array_shift($data["query"]["pages"]))["extract"]);
+
+
+        // If using JSON...
+        $dataWiki = json_decode($responseWiki);/**/
+        $dataWeather = json_decode($responseWeather);/**/
+        $apiWeatherOk = $dataWeather->main->temp;
+
         return $this->render('site\event.html.twig', [
             'party' => $theParty,
             'weekend' => $theWeekend,
-            'exhibit' => $theExhibit
+            'exhibit' => $theExhibit,
+            'subject' => 'Konoha',
+            'wikiSubject' => $desc,
+            'weatherTemp' => $apiWeatherOk
         ]);
     }
 
@@ -51,59 +80,8 @@ class EventsController extends Controller
      */
     public function eventNotFound(request $response)
     {
-        /*throw $this->createNotFoundException('Aucun événement trouvé !');*/
+        throw $this->createNotFoundException('Veuillez soumettre un évènement !');
 
-        // search Songs of Frank Sinatra
-        /*$headers = array('Accept' => 'application/json');
-        $query = array('input' => 'paris', 'appid' => 'L594T8-Y5R7GAYLL3', 'output' => 'json');
-        $query2 = array('q' => 'Paris, fr', 'units' => 'metric', 'APPID' => 'a60f4c70672119a8c5b03f7592382596');*/
-
-        $api = 'http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=a60f4c70672119a8c5b03f7592382596&' .
-
-//            $response = Unirest\Request::post('https://api.openweathermap.org/data/2.5/weather', $headers, $query);
-//        $response = Unirest\Request::post('https://api.openweathermap.org/data/2.5/weather?id=2172797&APPID=a60f4c70672119a8c5b03f7592382596', $headers);
-//        $response = Unirest\Request::get('http://api.wolframalpha.com/v2/query', $headers, $query);
-//        $response2 = Unirest\Request::get('http://api.openweathermap.org/data/2.5/weather', $headers, $query2);
-
-
-        // Display the result
-//        dump($response->body->queryresult);die;
-//        dump($response2->body->main->temp);die;
-
-//        $weatherWolphormAlpha = $response->body->queryresult->pods[6]->subpods[0]->plaintext;
-//        $weatherWolphormAlpha2 = $response2->body;
-//        $weatherWolphormAlpha2Temp = $weatherWolphormAlpha2->main->temp;
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $api);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $response3 = curl_exec($ch);
-
-
-
-        // If using JSON...
-        $data = json_decode($response3);/**/
-
-        $apiOk = $data->main->temp;
-
-//        dump($apiOk);die;
-
-
-
-//        $oldString = array("|","relative humidity:","wind:", "overcast");
-//        $newString = array("","L'humidité relative est de", "la vitesse du vent sera de ", "");
-//        $weatherWolphormAlphaFR = "Pour la ville de Paris, la température sera de ";
-//        $weatherWolphormAlphaFR = $weatherWolphormAlphaFR . str_replace($oldString, $newString, $weatherWolphormAlpha);
-
-       /* while ($row = mysqli_fetch_assoc($weatherWolphormAlpha)) {
-            print_r ($row);
-        }*/
-
-        return $this->render('site/weather.html.twig', [
-            'weatherWolphormAlpha' => $apiOk,
-        ]);
     }
 
     /**
