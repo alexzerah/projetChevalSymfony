@@ -15,28 +15,33 @@
                     <p>
                         {% if app.user %}
                             {% if eventType == 'exhibit' %}
-                                {% if exhibit in app.user.exhibits %}
-                                    <a class="aButton button special" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
-                                {% else %}
-                                    <a class="aButton button special" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                                {% if "now"|date('Ymd') < exhibit.date|date('Ymd') %}
+                                    {% if exhibit in app.user.exhibits %}
+                                        <a class="aButton button special" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
+                                    {% else %}
+                                        <a class="aButton button special" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                                    {% endif  %}
                                 {% endif  %}
                             {% endif %}
 
                             {% if eventType == 'weekend' %}
-                                {% if weekend in app.user.weekends %}
-                                    <a class="aButton button special" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
-                                {% else %}
-                                    <a class="aButton button special" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                                {% if "now"|date('Ymd') < weekend.date|date('Ymd') %}
+                                    {% if weekend in app.user.weekends %}
+                                        <a class="aButton button special" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
+                                    {% else %}
+                                        <a class="aButton button special" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                                    {% endif  %}
                                 {% endif  %}
                             {% endif %}
 
                             {% if eventType == 'party' %}
-                                {% if party in app.user.parties %}
-                                    <a class="aButton button special" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
-                                {% else %}
-                                    <a class="aButton button special" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                                {% if "now"|date('Ymd') < party.date|date('Ymd') %}
+                                    {% if party in app.user.parties %}
+                                        <a class="aButton button special" href="{{ path('event_unsubscribe', {'eventType': eventType, 'eventId': eventId}) }}">Se désinscrire</a>
+                                    {% else %}
+                                        <a class="aButton button special" href="{{ path('event_subscribe', {'eventType': eventType, 'eventId': eventId}) }}">S'inscrire</a>
+                                    {% endif  %}
                                 {% endif  %}
-
                             {% endif %}
                         {% endif %}
                     </p>
