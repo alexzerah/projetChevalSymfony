@@ -17,7 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Unirest;
 
 class EventsController extends Controller
 {
@@ -55,31 +54,55 @@ class EventsController extends Controller
         /*throw $this->createNotFoundException('Aucun événement trouvé !');*/
 
         // search Songs of Frank Sinatra
-        $headers = array('Accept' => 'application/json');
+        /*$headers = array('Accept' => 'application/json');
         $query = array('input' => 'paris', 'appid' => 'L594T8-Y5R7GAYLL3', 'output' => 'json');
+        $query2 = array('q' => 'Paris, fr', 'units' => 'metric', 'APPID' => 'a60f4c70672119a8c5b03f7592382596');*/
+
+        $api = 'http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=a60f4c70672119a8c5b03f7592382596&' .
 
 //            $response = Unirest\Request::post('https://api.openweathermap.org/data/2.5/weather', $headers, $query);
 //        $response = Unirest\Request::post('https://api.openweathermap.org/data/2.5/weather?id=2172797&APPID=a60f4c70672119a8c5b03f7592382596', $headers);
-        $response = Unirest\Request::get('http://api.wolframalpha.com/v2/query', $headers, $query);
+//        $response = Unirest\Request::get('http://api.wolframalpha.com/v2/query', $headers, $query);
+//        $response2 = Unirest\Request::get('http://api.openweathermap.org/data/2.5/weather', $headers, $query2);
 
 
         // Display the result
-        /*dump($response->body->queryresult);die;*/
+//        dump($response->body->queryresult);die;
+//        dump($response2->body->main->temp);die;
 
-        $weatherWolphormAlpha = $response->body->queryresult->pods[6]->subpods[0]->plaintext;
+//        $weatherWolphormAlpha = $response->body->queryresult->pods[6]->subpods[0]->plaintext;
+//        $weatherWolphormAlpha2 = $response2->body;
+//        $weatherWolphormAlpha2Temp = $weatherWolphormAlpha2->main->temp;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $api);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $response3 = curl_exec($ch);
 
 
-        $oldString = array("|","relative humidity:","wind:", "overcast");
-        $newString = array("","L'humidité relative est de", "la vitesse du vent sera de ", "");
-        $weatherWolphormAlphaFR = "Pour la ville de Paris, la température sera de ";
-        $weatherWolphormAlphaFR = $weatherWolphormAlphaFR . str_replace($oldString, $newString, $weatherWolphormAlpha);
+
+        // If using JSON...
+        $data = json_decode($response3);/**/
+
+        $apiOk = $data->main->temp;
+
+//        dump($apiOk);die;
+
+
+
+//        $oldString = array("|","relative humidity:","wind:", "overcast");
+//        $newString = array("","L'humidité relative est de", "la vitesse du vent sera de ", "");
+//        $weatherWolphormAlphaFR = "Pour la ville de Paris, la température sera de ";
+//        $weatherWolphormAlphaFR = $weatherWolphormAlphaFR . str_replace($oldString, $newString, $weatherWolphormAlpha);
 
        /* while ($row = mysqli_fetch_assoc($weatherWolphormAlpha)) {
             print_r ($row);
         }*/
 
         return $this->render('site/weather.html.twig', [
-            'weatherWolphormAlpha' => $weatherWolphormAlphaFR,
+            'weatherWolphormAlpha' => $apiOk,
         ]);
     }
 
