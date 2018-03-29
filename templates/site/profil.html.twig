@@ -39,16 +39,16 @@
                         <h2>Mes abonnements : </h2>
                         <p>M'abonner aux notifications des nouveaux évènements</p>
                         <p>
-                            {{ form_widget(userForm.party) }}
-                            {{ form_label(userForm.party) }}
+                            {{ form_widget(userForm.followCategoryParty) }}
+                            {{ form_label(userForm.followCategoryParty) }}
                         </p>
                         <p>
-                            {{ form_widget(userForm.exhibit) }}
-                            {{ form_label(userForm.exhibit) }}
+                            {{ form_widget(userForm.followCategoryExhibit) }}
+                            {{ form_label(userForm.followCategoryExhibit) }}
                         </p>
                         <p>
-                            {{ form_widget(userForm.weekend) }}
-                            {{ form_label(userForm.weekend) }}
+                            {{ form_widget(userForm.followCategoryWeekend) }}
+                            {{ form_label(userForm.followCategoryWeekend) }}
                         </p>
                         <button type="submit">Enregistrer</button>
                     {{ form_end(userForm) }}
