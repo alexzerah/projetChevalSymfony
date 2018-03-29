@@ -1,4 +1,5 @@
 easy_admin:
+  disabled_actions: ['show']
   site_name: BDE Dashboard
   design:
     menu:
