@@ -50,9 +50,9 @@ easy_admin:
           - { property: followCategoryExhibit, label: 'Abonné aux expositions', type: 'checkbox' }
           - { property: followCategoryParty, label: 'Abonné aux soirées', type: 'checkbox' }
           - { property: followCategoryWeekend, label: 'Abonné aux weekends', type: 'checkbox' }
-          - { property: exhibits, label: 'Expo' }
-          - { property: parties, label: 'Soirées' }
-          - { property: weekends, label: 'Weekends' }
+          - { property: exhibits, label: 'Expo', type_options: { by_reference: false } }
+          - { property: parties, label: 'Soirées', type_options: { by_reference: false } }
+          - { property: weekends, label: 'Weekends', type_options: { by_reference: false } }
     Exhibit:
       class: App\Entity\Exhibit
       label: 'Expositions'

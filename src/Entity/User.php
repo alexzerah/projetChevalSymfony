@@ -75,10 +75,18 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $avatar;
     /**
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Le fichier choisi ne correspond pas à un fichier valide",
+     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
+     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
+     * )
      * @Vich\UploadableField(mapping="images", fileNameProperty="avatar")
      * @var File
      */
     private $avatarFile;
+
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
@@ -117,6 +125,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
      */
+
     private $resetPasswordToken = false;
     /**
      * @param mixed $username
@@ -219,6 +228,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function setExhibits($exhibits)
     {
+        //dump($exhibits); die;
         $this->exhibits = $exhibits;
     }
     /**
@@ -359,7 +369,6 @@ class User implements AdvancedUserInterface, \Serializable
         $this->avatarFile = $avatarFile;
 
         if ($avatarFile) {
-            // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTime('now');
         }
     }
@@ -461,4 +470,47 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->resetPasswordToken = $resetPasswordToken;
     }
+
+    public function addExhibit(Exhibit $exhibit)
+    {
+        if(!$this->exhibits->contains($exhibit)) {
+            $this->exhibits->add($exhibit);
+            $exhibit->addUser($this);
+        }
+    }
+    public function removeExhibit(Exhibit $exhibit){
+        if ($this->exhibits->contains($exhibit)) {
+            $this->exhibits->removeElement($exhibit);
+            $exhibit->removeUser($this);
+        }
+    }
+
+    public function addWeekend(Weekend $weekend)
+    {
+        if(!$this->weekends->contains($weekend)) {
+            $this->weekends->add($weekend);
+            $weekend->addUser($this);
+        }
+    }
+    public function removeWeekend(Weekend $weekend){
+        if ($this->weekends->contains($weekend)) {
+            $this->weekends->removeElement($weekend);
+            $weekend->removeUser($this);
+        }
+    }
+
+    public function addParty(Party $party)
+    {
+        if(!$this->parties->contains($party)) {
+            $this->parties->add($party);
+            $party->addUser($this);
+        }
+    }
+    public function removeParty(Party $party){
+        if ($this->parties->contains($party)) {
+            $this->parties->removeElement($party);
+            $party->removeUser($this);
+        }
+    }
+
 }
