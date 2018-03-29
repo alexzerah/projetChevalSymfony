@@ -57,7 +57,7 @@ class Party
 
     /**
      * Many Parties have Many Users.
-     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoparties", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="photoParties", cascade={"persist"})
      */
     private $photos;
 
@@ -252,4 +252,20 @@ class Party
     {
         $this->photos = $photos;
     }
+
+    public function addPhotos($photos)
+    {
+        if (!$this->photos->contains($photos)) {
+            $this->photos->add($photos);
+        }
+        return $this;
+    }
+
+    public function removePhotos($photos)
+    {
+        if ($this->photos->contains($photos)) {
+            $this->photos->removeElement($photos);
+        }
+    }
+
 }
