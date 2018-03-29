@@ -357,6 +357,11 @@ class User implements AdvancedUserInterface, \Serializable
     public function setAvatarFile(File $avatarFile = null)
     {
         $this->avatarFile = $avatarFile;
+
+        if ($avatarFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
     }
     public function getAvatarFile()
     {
