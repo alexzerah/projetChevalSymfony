@@ -148,8 +148,8 @@ class DataFixtures extends Fixture
 
         $userTwo = new User();
         $userTwo->setUsername('user');
-        $userTwo->setFirstName('Michel');
-        $userTwo->setLastName('Dupont');
+        $userTwo->setFirstName('Jessica');
+        $userTwo->setLastName('Mehameha');
         $userTwo->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userTwo->setEmail('user@gmail.com');
         $userTwo->setAvatar('default_avatar.jpg');
@@ -160,6 +160,77 @@ class DataFixtures extends Fixture
         $userTwo->setFollowCategoryExhibit(false);
         $manager->persist($userTwo);
 
+
+        $userThree= new User();
+        $userThree->setUsername('HarryDick');
+        $userThree->setFirstName('Harry');
+        $userThree->setLastName('Dick');
+        $userThree->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userThree->setEmail('HarryDick@gmail.com');
+        $userThree->setAvatar('default_avatar.jpg');
+        $userThree->setIsAdmin(false);
+        $userThree->setIsActive('1');
+        $userThree->setFollowCategoryParty(false);
+        $userThree->setFollowCategoryWeekend(false);
+        $userThree->setFollowCategoryExhibit(false);
+        $manager->persist($userThree);
+
+        $userFour= new User();
+        $userFour->setUsername('PHP');
+        $userFour->setFirstName('Phillipe Henry');
+        $userFour->setLastName('Pheng');
+        $userFour->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userFour->setEmail('PhillipeHenryPheng@gmail.com');
+        $userFour->setAvatar('default_avatar.jpg');
+        $userFour->setIsAdmin(true);
+        $userFour->setIsActive('1');
+        $userFour->setFollowCategoryParty(false);
+        $userFour->setFollowCategoryWeekend(false);
+        $userFour->setFollowCategoryExhibit(false);
+        $manager->persist($userFour);
+
+        $userFive= new User();
+        $userFive->setUsername('CheVal');
+        $userFive->setFirstName('Valentin');
+        $userFive->setLastName('Chevalier');
+        $userFive->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userFive->setEmail('CheVal@gmail.com');
+        $userFive->setAvatar('default_avatar.jpg');
+        $userFive->setIsAdmin(false);
+        $userFive->setIsActive('1');
+        $userFive->setFollowCategoryParty(false);
+        $userFive->setFollowCategoryWeekend(false);
+        $userFive->setFollowCategoryExhibit(false);
+        $manager->persist($userFive);
+
+        $userSix= new User();
+        $userSix->setUsername('FabulousFab');
+        $userSix->setFirstName('Fabien');
+        $userSix->setLastName('Potencier');
+        $userSix->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userSix->setEmail('FabPot@gmail.com');
+        $userSix->setAvatar('default_avatar.jpg');
+        $userSix->setIsAdmin(false);
+        $userSix->setIsActive('1');
+        $userSix->setFollowCategoryParty(false);
+        $userSix->setFollowCategoryWeekend(false);
+        $userSix->setFollowCategoryExhibit(false);
+        $manager->persist($userSix);
+
+        $userSeven= new User();
+        $userSeven->setUsername('UbUntu');
+        $userSeven->setFirstName('Uub');
+        $userSeven->setLastName('Untu');
+        $userSeven->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userSeven->setEmail('UubUntu@gmail.com');
+        $userSeven->setAvatar('default_avatar.jpg');
+        $userSeven->setIsAdmin(false);
+        $userSeven->setIsActive('1');
+        $userSeven->setFollowCategoryParty(false);
+        $userSeven->setFollowCategoryWeekend(false);
+        $userSeven->setFollowCategoryExhibit(false);
+        $manager->persist($userSeven);
+      
 
         $photo = new Photo();
         $photo->setPhoto('5abdf4fd44a9d140863487.jpg');
@@ -262,6 +333,7 @@ class DataFixtures extends Fixture
         $photo17->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
         $photo17->addPhotoWeekend($weekend1);
         $manager->persist($photo17);
+
 
 
         $manager->flush();
