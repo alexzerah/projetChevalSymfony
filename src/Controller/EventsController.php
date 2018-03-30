@@ -69,6 +69,12 @@ class EventsController extends Controller
         $res = $client->request('GET', $apiWeather, [
         ]);
 
+        /*$request = new \GuzzleHttp\Psr7\Request('GET', $apiWeather);
+        $promise = $client->sendAsync($request)->then(function ($response) {
+            $resFinale = json_decode($response->getBody()->getContents(), true)['main']['temp'];
+        });
+        $promise->wait();*/
+
         $resFinale = json_decode($res->getBody()->getContents(), true)['main']['temp'];
         /*var_dump($resFinale);
         die;*/
@@ -85,6 +91,22 @@ class EventsController extends Controller
             'exhibit' => $theExhibit,
             'subject' => 'Konoha',
             /*'wikiSubject' => $desc,*/
+            'weatherTemp' => $resFinale
+        ]);
+    }
+
+    /**
+     * @Route("/weather", name="weather"),
+     */
+
+    public function getweather(request $request) {
+        $apiWeather = 'http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=a60f4c70672119a8c5b03f7592382596&';
+        $client = new Client();
+        $res = $client->request('GET', $apiWeather, [
+        ]);
+        $resFinale = json_decode($res->getBody()->getContents(), true)['main']['temp'];
+
+        return $this->render('site\weather2.html.twig', [
             'weatherTemp' => $resFinale
         ]);
     }
