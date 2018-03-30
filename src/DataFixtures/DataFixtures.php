@@ -137,12 +137,15 @@ class DataFixtures extends Fixture
         $user->setLastName('Lawper');
         $user->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $user->setEmail('admin@gmail.com');
-        $user->setAvatar('default_avatar.jpg');
+        $user->setAvatar('5abe3534257a4988048525.jpg');
         $user->setIsAdmin(true);
         $user->setIsActive('1');
         $user->setFollowCategoryParty(true);
         $user->setFollowCategoryWeekend(false);
         $user->setFollowCategoryExhibit(true);
+        $user->addExhibit($exhibit2);
+        $user->addParty($party3);
+        $user->addWeekend($weekend1);
         $manager->persist($user);
 
         $userTwo = new User();
@@ -151,12 +154,15 @@ class DataFixtures extends Fixture
         $userTwo->setLastName('Mehameha');
         $userTwo->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userTwo->setEmail('user@gmail.com');
-        $userTwo->setAvatar('default_avatar.jpg');
+        $userTwo->setAvatar('5abe353d9ae8c724858723.jpg');
         $userTwo->setIsAdmin(false);
         $userTwo->setIsActive('1');
         $userTwo->setFollowCategoryParty(false);
         $userTwo->setFollowCategoryWeekend(false);
         $userTwo->setFollowCategoryExhibit(false);
+        $userTwo->addExhibit($exhibit2);
+        $userTwo->addParty($party3);
+        $userTwo->addWeekend($weekend1);
         $manager->persist($userTwo);
 
 
@@ -166,12 +172,15 @@ class DataFixtures extends Fixture
         $userThree->setLastName('Dick');
         $userThree->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userThree->setEmail('HarryDick@gmail.com');
-        $userThree->setAvatar('default_avatar.jpg');
+        $userThree->setAvatar('5abe3546d0dd4245898539.jpeg');
         $userThree->setIsAdmin(false);
         $userThree->setIsActive('1');
         $userThree->setFollowCategoryParty(false);
         $userThree->setFollowCategoryWeekend(false);
         $userThree->setFollowCategoryExhibit(false);
+        $userThree->addExhibit($exhibit2);
+        $userThree->addParty($party3);
+        $userThree->addWeekend($weekend1);
         $manager->persist($userThree);
 
         $userFour= new User();
@@ -180,12 +189,15 @@ class DataFixtures extends Fixture
         $userFour->setLastName('Pheng');
         $userFour->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userFour->setEmail('PhillipeHenryPheng@gmail.com');
-        $userFour->setAvatar('default_avatar.jpg');
+        $userFour->setAvatar('5abe3667dc954358176762.png');
         $userFour->setIsAdmin(true);
         $userFour->setIsActive('1');
         $userFour->setFollowCategoryParty(false);
         $userFour->setFollowCategoryWeekend(false);
         $userFour->setFollowCategoryExhibit(false);
+        $userFour->addExhibit($exhibit2);
+        $userFour->addParty($party3);
+        $userFour->addWeekend($weekend1);
         $manager->persist($userFour);
 
         $userFive= new User();
@@ -194,12 +206,15 @@ class DataFixtures extends Fixture
         $userFive->setLastName('Chevalier');
         $userFive->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userFive->setEmail('CheVal@gmail.com');
-        $userFive->setAvatar('default_avatar.jpg');
+        $userFive->setAvatar('5abe355fa335c590241555.jpg');
         $userFive->setIsAdmin(false);
         $userFive->setIsActive('1');
         $userFive->setFollowCategoryParty(false);
         $userFive->setFollowCategoryWeekend(false);
         $userFive->setFollowCategoryExhibit(false);
+        $userFive->addExhibit($exhibit1);
+        $userFive->addParty($party2);
+        $userFive->addWeekend($weekend3);
         $manager->persist($userFive);
 
         $userSix= new User();
@@ -208,12 +223,15 @@ class DataFixtures extends Fixture
         $userSix->setLastName('Potencier');
         $userSix->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userSix->setEmail('FabPot@gmail.com');
-        $userSix->setAvatar('default_avatar.jpg');
+        $userSix->setAvatar('5abe356a6c85c306523987.jpg');
         $userSix->setIsAdmin(false);
         $userSix->setIsActive('1');
         $userSix->setFollowCategoryParty(false);
         $userSix->setFollowCategoryWeekend(false);
         $userSix->setFollowCategoryExhibit(false);
+        $userSix->addExhibit($exhibit1);
+        $userSix->addParty($party1);
+        $userSix->addWeekend($weekend1);
         $manager->persist($userSix);
 
         $userSeven= new User();
@@ -222,12 +240,15 @@ class DataFixtures extends Fixture
         $userSeven->setLastName('Untu');
         $userSeven->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userSeven->setEmail('UubUntu@gmail.com');
-        $userSeven->setAvatar('default_avatar.jpg');
+        $userSeven->setAvatar('5abe357389934815509665.jpg');
         $userSeven->setIsAdmin(false);
         $userSeven->setIsActive('1');
         $userSeven->setFollowCategoryParty(false);
         $userSeven->setFollowCategoryWeekend(false);
         $userSeven->setFollowCategoryExhibit(false);
+        $userSeven->addExhibit($exhibit3);
+        $userSeven->addParty($party3);
+        $userSeven->addWeekend($weekend3);
         $manager->persist($userSeven);
       
 
