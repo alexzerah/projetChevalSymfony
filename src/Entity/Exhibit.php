@@ -140,6 +140,7 @@ class Exhibit
         /* comment */
         $this->users = new ArrayCollection();
         $this->date = new \DateTime();
+        $this->photos = new ArrayCollection();
     }
 
     /**
