@@ -12,6 +12,9 @@
                 </div>
                 <div class="inner">
                     <h2>{{ party ? party.name : (weekend ? weekend.name : exhibit.name) }}</h2>
+                    {#<p>{{ subject }}</p>
+                    {{ wikiSubject }}#}
+                    <p><i class="fas fa-sun"></i> La température à Paris sera de {{ weatherTemp }}°C</p>
                     <p>
                         {% if app.user %}
                             {% if eventType == 'exhibit' %}

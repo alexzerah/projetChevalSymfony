@@ -107,6 +107,15 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.33"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.2"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -136,6 +145,9 @@
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.0.2"
@@ -283,15 +295,6 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
-    },
-    "symfony/phpunit-bridge": {
-        "version": "3.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.3",
-            "ref": "41416370e732d1c8e7a0953a5ce815b641cfba0f"
-        }
     },
     "symfony/polyfill-apcu": {
         "version": "v1.7.0"
