@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Exhibit;
 use App\Entity\Party;
-use App\Entity\Photo;
 use App\Entity\User;
 use App\Entity\Weekend;
 use App\Entity\Photo;
