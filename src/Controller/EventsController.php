@@ -51,55 +51,37 @@ class EventsController extends Controller
             $photoGallery = null;
         }
 
-        $queryWiki = 'konoha';
+        return $this->render('site\event.html.twig', [
+            'party' => $theParty,
+            'weekend' => $theWeekend,
+            'exhibit' => $theExhibit,
+            'photoGallery' => $photoGallery
+        ]);
+    }
 
+    /**
+     * @Route("/event", name="event_home"),
+     */
+    public function eventNotFound(request $response)
+    {
+        throw $this->createNotFoundException('Veuillez soumettre un évènement !');
 
-        /*$apiWiki = 'https://fr.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages%7Cextracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' . $queryWiki;
-        $ch1 = curl_init();
-        curl_setopt($ch1, CURLOPT_URL, $apiWiki);
-        curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);*/
+    }
 
+    /**
+     * @Route("/weather", name="weather"),
+     */
+    public function getWeather(request $response)
+    {
         $apiWeather = 'http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=a60f4c70672119a8c5b03f7592382596&';
-        $ch2 = curl_init();
-        curl_setopt($ch2, CURLOPT_URL, $apiWeather);
-        curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
-        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
-
-        /*$responseWiki = curl_exec($ch1);*/
-        $responseWeather = curl_exec($ch2);
-
-        /*$data = json_decode($responseWiki, true);
-        $desc = ((array_shift($data["query"]["pages"]))["extract"]);*/
-
-
-        // If using JSON...
-        /*$dataWiki = json_decode($responseWiki);/**/
-        $dataWeather = json_decode($responseWeather);/**/
-        $apiWeatherOk = $dataWeather->main->temp;
-
         $client = new Client();
         $res = $client->request('GET', $apiWeather, [
         ]);
 
         $resFinale = json_decode($res->getBody()->getContents(), true)['main']['temp'];
-        /*var_dump($resFinale);
-        die;*/
-        /*        echo $res->getStatusCode();
-        // "200"
-                echo $res->getHeader('content-type');
-        // 'application/json; charset=utf8'
-                echo $res->getBody();
-        // {"type":"User"...*/
 
-        return $this->render('site\event.html.twig', [
-            'party' => $theParty,
-            'weekend' => $theWeekend,
-            'exhibit' => $theExhibit,
-            'subject' => 'Konoha',
-            /*'wikiSubject' => $desc,*/
-            'weatherTemp' => $resFinale,
-            'photoGallery' => $photoGallery
+        return$this->render('site\weather2.html.twig', [
+            'weatherTemp' => $resFinale
         ]);
     }
 
