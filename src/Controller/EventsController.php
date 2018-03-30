@@ -10,6 +10,7 @@ use App\Form\UnsubscribeSingleExhibit;
 use App\Form\UserFormType;
 use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
+use App\Repository\PhotoRepository;
 use App\Repository\UserRepository;
 use App\Repository\WeekendRepository;
 use App\Services\Concatenate;
@@ -26,6 +27,7 @@ class EventsController extends Controller
     public function showEvent(WeekendRepository $weekendRepository,
                               PartyRepository $partyRepository,
                               ExhibitRepository $exhibitRepository,
+                              PhotoRepository $photoRepository,
                               Request $request,
                               $slug)
     {
@@ -65,13 +67,25 @@ class EventsController extends Controller
         $dataWeather = json_decode($responseWeather);/**/
         $apiWeatherOk = $dataWeather->main->temp;
 
+        // Photo Gallery :
+        if ($theParty) {
+            $photoGallery = $photoRepository->getPartyPhotos($theParty->getId());
+        } elseif ($theExhibit) {
+            $photoGallery = $photoRepository->getExhibitPhotos($theExhibit->getId());
+        } elseif ($theWeekend) {
+            $photoGallery = $photoRepository->getWeekendPhotos($theWeekend->getId());
+        } else {
+            $photoGallery = null;
+        }
+
         return $this->render('site\event.html.twig', [
             'party' => $theParty,
             'weekend' => $theWeekend,
             'exhibit' => $theExhibit,
             'subject' => 'Konoha',
             'wikiSubject' => $desc,
-            'weatherTemp' => $apiWeatherOk
+            'weatherTemp' => $apiWeatherOk,
+            'photoGallery' => $photoGallery
         ]);
     }
 
