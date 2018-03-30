@@ -27,7 +27,9 @@ Installer [git](https://git-scm.com/downloads)
 
 `Git clone https://github.com/alexzerah/projetChevalSymfony.git`
 
-`Cd {NomDuDossierContenantLeProjet} : composer Install`
+`Cd {NomDuDossierContenantLeProjet}` 
+
+`composer Install`
 
 Dans .env modifié la Database `DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name`
 
@@ -36,3 +38,9 @@ Démarrer SQL
 `Php bin/console doctrine:database:create`
 `Php bin/console doctrine:database:update —force`
 `Php bin/console doctrine:fixtures:load`
+
+`php bin/console ckeditor:install`
+
+`php bin/console assets:install --symlink`
+
+`php bin/console assets:install`
