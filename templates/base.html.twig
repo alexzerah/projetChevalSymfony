@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ asset('asset/css/main.css') }}" />
         <link rel="stylesheet" href="{{ asset('asset/css/toast.css') }}" />
         <link rel="stylesheet" href="{{ asset('asset/css/bde.css') }}" />
+
     </head>
     <body>
         <!-- Wrapper -->
@@ -101,6 +102,13 @@
         <script src="{{ asset('asset/js/util.js') }}"></script>
         <script src="{{ asset('asset/js/main.js') }}"></script>
         <script src="{{ asset('asset/js/contactForm.js') }}"></script>
+
+        <script src="{{ asset('asset/js/jssor.slider-27.1.0.min.js') }}"></script>
+        <script src="{{ asset('asset/js/slider.js') }}"></script>
+
+        <script type="text/javascript">jssor_1_slider_init();</script>
+        <!-- #endregion Jssor Slider End -->
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
