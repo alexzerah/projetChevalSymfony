@@ -12,9 +12,12 @@
                 </div>
                 <div class="inner">
                     <h2>{{ party ? party.name : (weekend ? weekend.name : exhibit.name) }}</h2>
-                    <p>{{ subject }}</p>
-                    {{ wikiSubject }}
-                    <p><i class="fas fa-sun"></i> La température à Paris sera de {{ weatherTemp }}°C</p>
+                    {#<p>{{ subject }}</p>
+                    {{ wikiSubject }}#}
+
+
+                    <div id="weather"><p>Chargement de la température</p></div>
+
                     <p>
                         {% if app.user %}
                             {% if eventType == 'exhibit' %}
@@ -124,9 +127,6 @@
                         </div>
                     </div>
 
-
-
-
                     <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:600px;height:500px;overflow:hidden;visibility:hidden;">
                         <!-- Loading Screen -->
                         <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
@@ -162,10 +162,22 @@
                         </div>
                     </div>
 
-
-
-
                 </div>
             </section>
         </div>
     {% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var req = new XMLHttpRequest();
+            req.open('GET', '{{ path('weather')}}', false);
+            req.send(null);
+            if (req.status === 200) {
+                document.getElementById('weather').innerHTML = req.responseText;
+            } else {
+                console.log("Status de la réponse: %d (%s)", req.status, req.statusText);
+            }
+        });
+    </script>
+{% endblock %}
