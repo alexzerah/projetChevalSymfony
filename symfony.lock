@@ -122,6 +122,9 @@
     "jms/metadata": {
         "version": "1.6.0"
     },
+    "mashape/unirest-php": {
+        "version": "v3.0.4"
+    },
     "monolog/monolog": {
         "version": "1.23.0"
     },
