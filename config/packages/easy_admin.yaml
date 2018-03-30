@@ -10,6 +10,9 @@ easy_admin:
           - Party
           - Exhibit
           - Weekend
+      -
+        label: Galerie
+        children:
           - Photo
   list:
     title: 'Liste des %%entity_label%%'
@@ -32,12 +35,6 @@ easy_admin:
           - { property: avatar, label: 'Photo', type: image, base_path: '/media/' }
           - { property: isActive, label: 'Actif' }
           - { property: isAdmin, label: 'Admin' }
-          - { property: followCategoryExhibit, label: 'followExpo', type: boolean }
-          - { property: followCategoryParty, label: 'followSoirées', type: boolean }
-          - { property: followCategoryWeekend, label: 'followWeekends', type: boolean }
-          - { property: exhibits, label: 'Expo'}
-          - { property: parties, label: 'Soirées'}
-          - { property: weekends, label: 'Weekends'}
       form:
         fields:
           - { property: username, label: 'Username' }
