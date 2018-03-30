@@ -41,6 +41,16 @@ class EventsController extends Controller
             throw $this->createNotFoundException('Aucun événement trouvé !');
         }
 
+        if ($theParty) {
+            $photoGallery = $photoRepository->getPartyPhotos($theParty->getId());
+        } elseif ($theExhibit) {
+            $photoGallery = $photoRepository->getExhibitPhotos($theExhibit->getId());
+        } elseif ($theWeekend) {
+            $photoGallery = $photoRepository->getWeekendPhotos($theWeekend->getId());
+        } else {
+            $photoGallery = null;
+        }
+
         $queryWiki = 'konoha';
 
 
@@ -88,7 +98,8 @@ class EventsController extends Controller
             'exhibit' => $theExhibit,
             'subject' => 'Konoha',
             /*'wikiSubject' => $desc,*/
-            'weatherTemp' => $resFinale
+            'weatherTemp' => $resFinale,
+            'photoGallery' => $photoGallery
         ]);
     }
 
