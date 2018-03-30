@@ -35,9 +35,9 @@ Dans .env modifié la Database `DATABASE_URL=mysql://db_user:db_password@127.0.0
 
 Démarrer SQL
 
-`Php bin/console doctrine:database:create`
-`Php bin/console doctrine:database:update —force`
-`Php bin/console doctrine:fixtures:load`
+`Php bin/console doctrine:database:create`  
+`Php bin/console doctrine:database:update —force`  
+`Php bin/console doctrine:fixtures:load`  
 
 `php bin/console ckeditor:install`
 
