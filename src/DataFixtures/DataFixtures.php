@@ -54,8 +54,7 @@ class DataFixtures extends Fixture
         $exhibit3->setLocation("Palais de Chaillot - 17 place du Trocadéro et du 11 Novembre - 75016 Paris");
         $exhibit3->setPrice("10");
         $exhibit3->setDetails("Il y a 35 000 ans disparaissait l’Homme de Néandertal après 350 000 ans de présence sur Terre. Une morphologie robuste, un menton absent, des arcades sourcilières proéminentes… le physique de ce lointain cousin lui a valu toute sorte d’appellations jusqu’à ce qu’on le considère récemment comme un être humain à part entière. L’exposition du musée de l’Homme propose d’aller à sa rencontre et d’en finir avec ces méprises grâce à un parcours immersif adapté aux enfants où l’on apprend de manière ludique comment il vivait. Un voyage fascinant, riche en découvertes et en activités.");
-        $exhibit3->setBanner("5abcd6cfd0aac275456020.jpg
-");
+        $exhibit3->setBanner("5abcd6cfd0aac275456020.jpg");
         $exhibit3->setDate(new \DateTime('2018-04-15 10:00:00'));
 
 
@@ -107,8 +106,8 @@ class DataFixtures extends Fixture
         $weekend3->setPrice("10");
         $weekend3->setDetails("Konoha est l'un des cinq grands villages ninjas et il est l'un des plus puissants. En tant que tel, il est l'un des cinq villages à avoir un Kage comme chef du village, connu sous le nom de Hokage. ");
         $weekend3->setBanner("5abcd9850ed1c989345074.jpg");
-        $weekend3->setDate(new \DateTime("2018-05-14 21:00:00"));
-        $weekend3->setEndDate(new \DateTime('2018-05-17 14:30:00'));
+        $weekend3->setDate(new \DateTime("2018-05-12 21:00:00"));
+        $weekend3->setEndDate(new \DateTime('2018-05-15 14:30:00'));
 
 
 
@@ -140,8 +139,8 @@ class DataFixtures extends Fixture
 
         $userTwo = new User();
         $userTwo->setUsername('user');
-        $userTwo->setFirstName('Michel');
-        $userTwo->setLastName('Dupont');
+        $userTwo->setFirstName('Jessica');
+        $userTwo->setLastName('Mehameha');
         $userTwo->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
         $userTwo->setEmail('user@gmail.com');
         $userTwo->setAvatar('default_avatar.jpg');
@@ -151,6 +150,76 @@ class DataFixtures extends Fixture
         $userTwo->setFollowCategoryWeekend(false);
         $userTwo->setFollowCategoryExhibit(false);
         $manager->persist($userTwo);
+
+        $userThree= new User();
+        $userThree->setUsername('HarryDick');
+        $userThree->setFirstName('Harry');
+        $userThree->setLastName('Dick');
+        $userThree->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userThree->setEmail('HarryDick@gmail.com');
+        $userThree->setAvatar('default_avatar.jpg');
+        $userThree->setIsAdmin(false);
+        $userThree->setIsActive('1');
+        $userThree->setFollowCategoryParty(false);
+        $userThree->setFollowCategoryWeekend(false);
+        $userThree->setFollowCategoryExhibit(false);
+        $manager->persist($userThree);
+
+        $userFour= new User();
+        $userFour->setUsername('PHP');
+        $userFour->setFirstName('Phillipe Henry');
+        $userFour->setLastName('Pheng');
+        $userFour->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userFour->setEmail('PhillipeHenryPheng@gmail.com');
+        $userFour->setAvatar('default_avatar.jpg');
+        $userFour->setIsAdmin(true);
+        $userFour->setIsActive('1');
+        $userFour->setFollowCategoryParty(false);
+        $userFour->setFollowCategoryWeekend(false);
+        $userFour->setFollowCategoryExhibit(false);
+        $manager->persist($userFour);
+
+        $userFive= new User();
+        $userFive->setUsername('CheVal');
+        $userFive->setFirstName('Valentin');
+        $userFive->setLastName('Chevalier');
+        $userFive->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userFive->setEmail('CheVal@gmail.com');
+        $userFive->setAvatar('default_avatar.jpg');
+        $userFive->setIsAdmin(false);
+        $userFive->setIsActive('1');
+        $userFive->setFollowCategoryParty(false);
+        $userFive->setFollowCategoryWeekend(false);
+        $userFive->setFollowCategoryExhibit(false);
+        $manager->persist($userFive);
+
+        $userSix= new User();
+        $userSix->setUsername('FabulousFab');
+        $userSix->setFirstName('Fabien');
+        $userSix->setLastName('Potencier');
+        $userSix->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userSix->setEmail('FabPot@gmail.com');
+        $userSix->setAvatar('default_avatar.jpg');
+        $userSix->setIsAdmin(false);
+        $userSix->setIsActive('1');
+        $userSix->setFollowCategoryParty(false);
+        $userSix->setFollowCategoryWeekend(false);
+        $userSix->setFollowCategoryExhibit(false);
+        $manager->persist($userSix);
+
+        $userSeven= new User();
+        $userSeven->setUsername('UbUntu');
+        $userSeven->setFirstName('Uub');
+        $userSeven->setLastName('Untu');
+        $userSeven->setPassword('$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC');
+        $userSeven->setEmail('UubUntu@gmail.com');
+        $userSeven->setAvatar('default_avatar.jpg');
+        $userSeven->setIsAdmin(false);
+        $userSeven->setIsActive('1');
+        $userSeven->setFollowCategoryParty(false);
+        $userSeven->setFollowCategoryWeekend(false);
+        $userSeven->setFollowCategoryExhibit(false);
+        $manager->persist($userSeven);
 
         $manager->flush();
     }
