@@ -10,6 +10,7 @@ use App\Form\UnsubscribeSingleExhibit;
 use App\Form\UserFormType;
 use App\Repository\ExhibitRepository;
 use App\Repository\PartyRepository;
+use App\Repository\PhotoRepository;
 use App\Repository\UserRepository;
 use App\Repository\WeekendRepository;
 use App\Services\Concatenate;
@@ -26,6 +27,7 @@ class EventsController extends Controller
     public function showEvent(WeekendRepository $weekendRepository,
                               PartyRepository $partyRepository,
                               ExhibitRepository $exhibitRepository,
+                              PhotoRepository $photoRepository,
                               Request $request,
                               $slug)
     {
@@ -40,6 +42,7 @@ class EventsController extends Controller
         }
 
         $queryWiki = 'konoha';
+
 
         /*$apiWiki = 'https://fr.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages%7Cextracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' . $queryWiki;
         $ch1 = curl_init();
@@ -69,12 +72,6 @@ class EventsController extends Controller
         $res = $client->request('GET', $apiWeather, [
         ]);
 
-        /*$request = new \GuzzleHttp\Psr7\Request('GET', $apiWeather);
-        $promise = $client->sendAsync($request)->then(function ($response) {
-            $resFinale = json_decode($response->getBody()->getContents(), true)['main']['temp'];
-        });
-        $promise->wait();*/
-
         $resFinale = json_decode($res->getBody()->getContents(), true)['main']['temp'];
         /*var_dump($resFinale);
         die;*/
@@ -93,31 +90,6 @@ class EventsController extends Controller
             /*'wikiSubject' => $desc,*/
             'weatherTemp' => $resFinale
         ]);
-    }
-
-    /**
-     * @Route("/weather", name="weather"),
-     */
-
-    public function getweather(request $request) {
-        $apiWeather = 'http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=a60f4c70672119a8c5b03f7592382596&';
-        $client = new Client();
-        $res = $client->request('GET', $apiWeather, [
-        ]);
-        $resFinale = json_decode($res->getBody()->getContents(), true)['main']['temp'];
-
-        return $this->render('site\weather2.html.twig', [
-            'weatherTemp' => $resFinale
-        ]);
-    }
-
-    /**
-     * @Route("/event", name="event_home"),
-     */
-    public function eventNotFound(request $response)
-    {
-        throw $this->createNotFoundException('Veuillez soumettre un évènement !');
-
     }
 
     /**

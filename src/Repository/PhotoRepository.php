@@ -47,4 +47,35 @@ class PhotoRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getPartyPhotos($partyId)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.photoParties', 'e')
+            ->where('e.id = :uid')
+            ->setParameter('uid', $partyId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getExhibitPhotos($exhibitId)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.photoExhibits', 'e')
+            ->where('e.id = :uid')
+            ->setParameter('uid', $exhibitId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getWeekendPhotos($weekendId)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.photoWeekends', 'e')
+            ->where('e.id = :uid')
+            ->setParameter('uid', $weekendId)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
