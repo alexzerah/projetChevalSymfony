@@ -216,6 +216,20 @@ class Party
         }
     }
 
+    public function addPhoto($photo)
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+        }
+    }
+
+    public function removePhoto($photo)
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
+        }
+    }
+
     public function __toString()
     {
         return (string) $this->getName();

@@ -7,7 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
+ * @property  user
  * @ORM\Entity(repositoryClass="App\Repository\WeekendRepository")
  * @Vich\Uploadable
  */
@@ -106,6 +108,20 @@ class Weekend
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
+        }
+    }
+
+    public function addPhoto($photo)
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+        }
+    }
+
+    public function removePhoto($photo)
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
         }
     }
 

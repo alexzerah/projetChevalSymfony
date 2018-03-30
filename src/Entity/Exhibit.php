@@ -107,6 +107,20 @@ class Exhibit
         }
     }
 
+    public function addPhoto($photo)
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+        }
+    }
+
+    public function removePhoto($photo)
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
+        }
+    }
+
     public function setBannerFile(File $bannerFile = null)
     {
         $this->bannerFile = $bannerFile;
