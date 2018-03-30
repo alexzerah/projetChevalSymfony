@@ -271,6 +271,7 @@ class Weekend
     {
         $this->endDate = new \DateTime();
         $this->users = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     /**
