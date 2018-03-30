@@ -123,6 +123,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        {% for photo in photoGallery %}
+                            <img src="{{ asset_base }}{{ photo.photo }}" alt="{{ party ? party.name : (weekend ? weekend.name : exhibit.name) }}">
+                        {% endfor %}
+                    </div>
                 </div>
             </section>
         </div>
