@@ -39,28 +39,58 @@ class EventsController extends Controller
             throw $this->createNotFoundException('Aucun événement trouvé !');
         }
 
+        $queryWiki = 'konoha';
+
+        $apiWiki = 'https://fr.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages%7Cextracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' . $queryWiki;
+        $ch1 = curl_init();
+        curl_setopt($ch1, CURLOPT_URL, $apiWiki);
+        curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
+        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+
+        $apiWeather = 'http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=a60f4c70672119a8c5b03f7592382596&';
+        $ch2 = curl_init();
+        curl_setopt($ch2, CURLOPT_URL, $apiWeather);
+        curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+
+        $responseWiki = curl_exec($ch1);
+        $responseWeather = curl_exec($ch2);
+
+        $data = json_decode($responseWiki, true);
+        $desc = ((array_shift($data["query"]["pages"]))["extract"]);
+
+
+        // If using JSON...
+        $dataWiki = json_decode($responseWiki);/**/
+        $dataWeather = json_decode($responseWeather);/**/
+        $apiWeatherOk = $dataWeather->main->temp;
+
         return $this->render('site\event.html.twig', [
             'party' => $theParty,
             'weekend' => $theWeekend,
-            'exhibit' => $theExhibit
+            'exhibit' => $theExhibit,
+            'subject' => 'Konoha',
+            'wikiSubject' => $desc,
+            'weatherTemp' => $apiWeatherOk
         ]);
     }
 
     /**
      * @Route("/event", name="event_home"),
      */
-    public function eventNotFound()
+    public function eventNotFound(request $response)
     {
-        throw $this->createNotFoundException('Aucun événement trouvé !');
+        throw $this->createNotFoundException('Veuillez soumettre un évènement !');
+
     }
 
     /**
      * @Route("/", name="events_nextEvents")
      */
     public function getNextEvents(WeekendRepository $weekendRepository,
-                                      PartyRepository $partyRepository,
-                                        ExhibitRepository $exhibitRepository,
-                                            Concatenate $concatenate)
+                                  PartyRepository $partyRepository,
+                                  ExhibitRepository $exhibitRepository,
+                                  Concatenate $concatenate)
     {
         // Call the function that give us events when event.date > today for each entities
         $nextWeekends = $weekendRepository->getNextWeekends();
@@ -84,9 +114,9 @@ class EventsController extends Controller
      * @Route("/listeEvenements", name="events_previousEvents")
      */
     public function getPreviousEvents(WeekendRepository $weekendRepository,
-                                        PartyRepository $partyRepository,
-                                            ExhibitRepository $exhibitRepository,
-                                                Concatenate $concatenate)
+                                      PartyRepository $partyRepository,
+                                      ExhibitRepository $exhibitRepository,
+                                      Concatenate $concatenate)
     {
         // Call the function that give us events when event.date < today for each entities
         $previousWeekends = $weekendRepository->getPreviousWeekends();

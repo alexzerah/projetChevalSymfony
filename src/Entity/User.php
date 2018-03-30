@@ -107,6 +107,12 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="boolean")
      */
     private $followCategoryWeekend;
+
+    /**
+     * @ORM\Column(name="updatedAt", type="datetime")
+     */
+    private $updatedAt;
+
     /**
      * Many Users attends Many .
      * @ORM\ManyToMany(targetEntity="Exhibit", mappedBy="users", cascade={"persist"})
@@ -125,6 +131,8 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
      */
+
+
 
     private $resetPasswordToken = false;
     /**
@@ -276,10 +284,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->setUpdatedAt(new \DateTime());
         }
     }
-    /**
-     * @ORM\Column(name="updatedAt", type="datetime")
-     */
-    private $updatedAt;
+
     /**
      * @return mixed
      */

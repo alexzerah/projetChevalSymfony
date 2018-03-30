@@ -134,3 +134,4 @@ easy_admin:
               - { property: photoExhibits, label: 'Expo', type_options: { by_reference: false }}
               - { property: photoParties, label: 'Soirées', type_options: { by_reference: false }}
               - { property: photoWeekends, label: 'Weekends', type_options: { by_reference: false }}
+

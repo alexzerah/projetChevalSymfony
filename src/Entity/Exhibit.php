@@ -286,5 +286,20 @@ class Exhibit
         $this->photos = $photos;
     }
 
+    public function addPhotos($photos)
+    {
+        if (!$this->photos->contains($photos)) {
+            $this->photos->add($photos);
+        }
+        return $this;
+    }
+
+    public function removePhotos($photos)
+    {
+        if ($this->photos->contains($photos)) {
+            $this->photos->removeElement($photos);
+        }
+    }
+
 
 }
