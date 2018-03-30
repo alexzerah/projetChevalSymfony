@@ -1,6 +1,6 @@
 # AVEC CHEVAL BDE, LAISSE TON CERVEAU AU VESTIAIRE!
 
-![alt text](https://imgur.com/MLecfHU "BDE CHEVAL")
+![alt text](https://i.imgur.com/MLecfHU.png "BDE CHEVAL")
 *
 <3
 
