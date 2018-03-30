@@ -86,6 +86,7 @@ class Party
     {
         $this->date = new \DateTime();
         $this->users = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
     /**
      * @return mixed
@@ -253,18 +254,18 @@ class Party
         $this->photos = $photos;
     }
 
-    public function addPhotos($photos)
+    public function addPhoto($photo)
     {
-        if (!$this->photos->contains($photos)) {
-            $this->photos->add($photos);
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
         }
         return $this;
     }
 
-    public function removePhotos($photos)
+    public function removePhoto($photo)
     {
-        if ($this->photos->contains($photos)) {
-            $this->photos->removeElement($photos);
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
         }
     }
 

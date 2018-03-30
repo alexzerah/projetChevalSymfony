@@ -6,6 +6,7 @@ use App\Entity\Exhibit;
 use App\Entity\Party;
 use App\Entity\User;
 use App\Entity\Weekend;
+use App\Entity\Photo;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -30,6 +31,9 @@ class DataFixtures extends Fixture
 
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $exhibit1 = new Exhibit();
@@ -65,6 +69,8 @@ class DataFixtures extends Fixture
         $party1->setBanner("5abcee816926c933704431.jpg");
         $party1->setDate(new \DateTime("2018-03-30 21:00:00"));
 
+
+
         $party2 = new Party();
         $party2->setName("Soirée Jolicode");
         $party2->setLocation(" 7 rue d'argenteuil");
@@ -72,6 +78,9 @@ class DataFixtures extends Fixture
         $party2->setDetails("On va faire du Jolicode, avec des gens très très doués. Et peut être même que Shrek sera de la partie.");
         $party2->setBanner("5abcd69e3005c343706488.jpeg");
         $party2->setDate(new \DateTime("2018-03-14 21:00:00"));
+
+
+
 
         $party3 = new Party();
         $party3->setName("Soirée Reine des Neiges");
@@ -155,6 +164,7 @@ class DataFixtures extends Fixture
         $userTwo->addParty($party3);
         $userTwo->addWeekend($weekend1);
         $manager->persist($userTwo);
+
 
         $userThree= new User();
         $userThree->setUsername('HarryDick');
@@ -240,7 +250,113 @@ class DataFixtures extends Fixture
         $userSeven->addParty($party3);
         $userSeven->addWeekend($weekend3);
         $manager->persist($userSeven);
+      
+
+        $photo = new Photo();
+        $photo->setPhoto('5abdf4fd44a9d140863487.jpg');
+        $photo->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo->addPhotoExhibit($exhibit2);
+        $manager->persist($photo);
+
+        $photo2 = new Photo();
+        $photo2->setPhoto('5abdf5f55e261479941221.jpg');
+        $photo2->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo2->addPhotoExhibit($exhibit2);
+        $manager->persist($photo2);
+
+        $photo3 = new Photo();
+        $photo3->setPhoto('5abdf62b52bb0446033939.jpg');
+        $photo3->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo3->addPhotoExhibit($exhibit2);
+        $manager->persist($photo3);
+
+        $photo4 = new Photo();
+        $photo4->setPhoto('5abdf69b812f8549716766.jpg');
+        $photo4->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo4->addPhotoExhibit($exhibit1);
+        $manager->persist($photo4);
+
+        $photo5 = new Photo();
+        $photo5->setPhoto('5abdf75e238c4588024317.jpg');
+        $photo5->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo5->addPhotoParty($party1);
+        $manager->persist($photo5);
+
+        $photo6 = new Photo();
+        $photo6->setPhoto('5abdf790a1cdd069530308.jpg');
+        $photo6->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo6->addPhotoParty($party1);
+        $manager->persist($photo6);
+
+        $photo7 = new Photo();
+        $photo7->setPhoto('5abdf7dee6ee0912572257.jpg');
+        $photo7->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo7->addPhotoParty($party1);
+        $manager->persist($photo7);
+
+        $photo8 = new Photo();
+        $photo8->setPhoto('5abdf846ccce1268378630.jpg');
+        $photo8->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo8->addPhotoParty($party1);
+        $manager->persist($photo8);
+
+        $photo9 = new Photo();
+        $photo9->setPhoto('5abdf870c6fc8442519918.jpg');
+        $photo9->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo9->addPhotoParty($party1);
+        $manager->persist($photo9);
+
+        $photo10 = new Photo();
+        $photo10->setPhoto('5abdf8afb27db469920311.png');
+        $photo10->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo10->addPhotoParty($party2);
+        $manager->persist($photo10);
+
+        $photo11 = new Photo();
+        $photo11->setPhoto('5abdf9620114d980981674.jpg');
+        $photo11->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo11->addPhotoWeekend($weekend2);
+        $manager->persist($photo11);
+
+        $photo12 = new Photo();
+        $photo12->setPhoto('5abdf9d949dec529894079.jpg');
+        $photo12->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo12->addPhotoWeekend($weekend2);
+        $manager->persist($photo12);
+
+        $photo13 = new Photo();
+        $photo13->setPhoto('5abdfa1af3d06492112251.jpg');
+        $photo13->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo13->addPhotoWeekend($weekend2);
+        $manager->persist($photo13);
+
+        $photo14 = new Photo();
+        $photo14->setPhoto('5abdfb0f2873a517206158.jpg');
+        $photo14->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo14->addPhotoWeekend($weekend1);
+        $manager->persist($photo14);
+
+        $photo15 = new Photo();
+        $photo15->setPhoto('5abdfb3326c33315518533.jpg');
+        $photo15->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo15->addPhotoWeekend($weekend1);
+        $manager->persist($photo15);
+
+        $photo16 = new Photo();
+        $photo16->setPhoto('5abdfb5bbf032519389069.jpg');
+        $photo16->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo16->addPhotoWeekend($weekend1);
+        $manager->persist($photo16);
+
+        $photo17 = new Photo();
+        $photo17->setPhoto('5abdfb8eb8538059665151.jpg');
+        $photo17->setUpdatedAt(new \DateTime("2018-03-29 21:00:00"));
+        $photo17->addPhotoWeekend($weekend1);
+        $manager->persist($photo17);
+
+
 
         $manager->flush();
+
     }
 }
