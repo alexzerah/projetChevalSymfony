@@ -62,6 +62,7 @@ class MailEventSubscriber implements EventSubscriberInterface
                                     'date' => $entity->getDate(),
                                     'details' => $entity->getDetails(),
                                     'banner' => $entity->getBanner(),
+                                    'slug' => $entity->getSlug()
                                 )
                             ),
                             'text/html'
@@ -93,6 +94,7 @@ class MailEventSubscriber implements EventSubscriberInterface
                                     'date' => $entity->getDate(),
                                     'details' => $entity->getDetails(),
                                     'banner' => $entity->getBanner(),
+                                    'slug' => $entity->getSlug()
                                 )
                             ),
                             'text/html'
@@ -123,6 +125,7 @@ class MailEventSubscriber implements EventSubscriberInterface
                                     'date' => $entity->getDate(),
                                     'details' => $entity->getDetails(),
                                     'banner' => $entity->getBanner(),
+                                    'slug' => $entity->getSlug()
                                 )
                             ),
                             'text/html'

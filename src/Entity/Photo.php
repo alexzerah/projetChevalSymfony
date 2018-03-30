@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -68,8 +69,6 @@ class Photo{
         $this->photoParties = new ArrayCollection();
         $this->photoWeekends = new ArrayCollection();
         $this->updatedAt = new \DateTime();
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
     }
 
     /**
@@ -191,31 +190,33 @@ class Photo{
         $this->photoWeekends = $photoWeekends;
     }
 
-    public function addPhotoExhibit(Exhibit $exhibit)
-    {
-        if(!$this->photoExhibits->contains($exhibit)) {
-            $this->photoExhibits->add($exhibit);
-            $exhibit->addPhotos($this);
-        }
-    }
-    public function removePhotoExhibit(Exhibit $exhibit){
-        if ($this->photoExhibits->contains($exhibit)) {
-            $this->photoExhibits->removeElement($exhibit);
-            $exhibit->removePhotos($this);
-        }
-    }
-
     public function addPhotoParty(Party $party)
     {
         if(!$this->photoParties->contains($party)) {
             $this->photoParties->add($party);
-            $party->addPhotos($this);
+            $party->addPhoto($this);
         }
     }
     public function removePhotoParty(Party $party){
         if ($this->photoParties->contains($party)) {
             $this->photoParties->removeElement($party);
-            $party->removePhotos($this);
+            $party->removePhoto($this);
+        }
+    }
+
+
+    public function addPhotoExhibit(Exhibit $exhibit)
+    {
+
+        if(!$this->photoExhibits->contains($exhibit)) {
+            $this->photoExhibits->add($exhibit);
+            $exhibit->addPhoto($this);
+        }
+    }
+    public function removePhotoExhibit(Exhibit $exhibit){
+        if ($this->photoExhibits->contains($exhibit)) {
+            $this->photoExhibits->removeElement($exhibit);
+            $exhibit->removePhoto($this);
         }
     }
 
@@ -223,13 +224,14 @@ class Photo{
     {
         if(!$this->photoWeekends->contains($weekend)) {
             $this->photoWeekends->add($weekend);
-            $weekend->addPhotos($this);
-        }
+            $weekend->addPhoto($this);
+         }
     }
     public function removePhotoWeekend(Weekend $weekend){
         if ($this->photoWeekends->contains($weekend)) {
             $this->photoWeekends->removeElement($weekend);
-            $weekend->removePhotos($this);
+            $weekend->removePhoto($this);
+
         }
     }
 
