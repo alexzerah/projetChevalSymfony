@@ -51,6 +51,9 @@ class EventsController extends Controller
             $photoGallery = null;
         }
 
+        /*dump($photoGallery);
+        die;*/
+
         return $this->render('site\event.html.twig', [
             'party' => $theParty,
             'weekend' => $theWeekend,
@@ -73,7 +76,11 @@ class EventsController extends Controller
      */
     public function getWeather(request $response)
     {
-        $apiWeather = 'http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=a60f4c70672119a8c5b03f7592382596&';
+        $apiVille = 'Paris,fr';
+        $apiunits = 'metric';
+        $apiAppID =  'a60f4c70672119a8c5b03f7592382596&';
+
+        $apiWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' . $apiVille . '&units=' . $apiunits . '&APPID=' . $apiAppID;
         $client = new Client();
         $res = $client->request('GET', $apiWeather, [
         ]);
