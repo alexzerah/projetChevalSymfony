@@ -21,9 +21,9 @@ Si ne marche pas : `mkdir -p /usr/local/bin`
 Installer [git](https://git-scm.com/downloads)
 
 
-`Cd {MonDossierOuLeProjetSeraInstallé} `  
-`Git clone https://github.com/alexzerah/projetChevalSymfony.git`  
-`Cd {NomDuDossierContenantLeProjet}`   
+`cd {MonDossierOuLeProjetSeraInstallé} `
+`git clone https://github.com/alexzerah/projetChevalSymfony.git`
+`cd {NomDuDossierContenantLeProjet}`
 
 `composer Install`
 
@@ -31,9 +31,9 @@ Dans .env modifié la Database `DATABASE_URL=mysql://db_user:db_password@127.0.0
 
 Démarrer SQL
 
-`Php bin/console doctrine:database:create`  
-`Php bin/console doctrine:database:update —force`  
-`Php bin/console doctrine:fixtures:load`  
+`php bin/console doctrine:database:create`
+`php bin/console doctrine:database:update —force`
+`php bin/console doctrine:fixtures:load`
 
 `php bin/console ckeditor:install`  
 
