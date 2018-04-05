@@ -99,6 +99,9 @@
                                                 <td>
                                                     {{ user.firstName }} {{ user.lastName }}
                                                 </td>
+                                                <td>
+                                                    <img src="{{ asset_base }}{{ asset(user.avatar) }}" alt="{{ user.username }}" class="avatar">
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                     {% elseif eventType == 'party' %}
@@ -117,6 +120,9 @@
                                             <tr>
                                                 <td>
                                                     {{ user.firstName }} {{ user.lastName }}
+                                                </td>
+                                                <td>
+                                                    <img src="{{ asset_base }}{{ asset(user.avatar) }}" alt="{{ user.username }}" class="avatar">
                                                 </td>
                                             </tr>
                                         {% endfor %}
